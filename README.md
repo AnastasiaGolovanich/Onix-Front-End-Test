@@ -1,7 +1,7 @@
 # Onix front-end test project
 
-**Create web page with design based on mockup.**
-
+**Create web page with design based on mockup. Clone project and open index.html in your browser**
+ 
 **Requirements**
 1. Use HTML5/CSS
 2. Use pure javascript without jQuery
