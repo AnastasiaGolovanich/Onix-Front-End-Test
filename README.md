@@ -4,7 +4,8 @@
  
 **Requirements**
 1. Use HTML5/CSS
-2. Use pure javascript without jQuery
+2. Use pure javascript without jQuery. 
+ (Add "active" class on click event for tabs ("Tabs", "Kanban", "Activity", "Calendar", "Files"). The "active" class must be removed when another tab was clicked.) 
 3. Use FlexBox layout 
 4. Make it responsible 
 5. Make it supported by browsers (Google Chrome, Firefox, Opera)
