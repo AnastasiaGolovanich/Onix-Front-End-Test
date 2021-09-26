@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+}
+.main-page{
+    display: flex;
+    /*flex-direction: column;*/
+}
+aside{
+    width: 18.7%;
+    min-width: 350px;
+    background: #000000;
+    flex-direction: column;
+}
+aside .top-side-panel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 42px 20px 0 38px;
+}
+aside .top-side-panel h2{
+    text-transform: uppercase;
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 24px;
+    margin: 0 110px 0 15px;
+}
+aside .top-side-panel button{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    width: 16px;
+    height: 16px;
+}
+aside .user-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background: #202020;
+    padding: 22px 20px 22px 40px;
+}
+aside .user-info img{
+    border-radius: 50px;
+}
+aside .user-info div{
+    display: flex;
+    flex-direction: column;
+    margin-right: 35px;
+}
+aside .user-info div h2{
+    font-family: Helvetica, sans-serif;
+    font-size: 17px;
+    color: #FFFFFF;
+    margin: 10px 20px 5px 20px;
+}
+aside .user-info div p{
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    color: #9B9B9B;
+    margin: 0 20px 10px 20px;
+}
+aside .user-info button ul{
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+aside .user-info button{
+    background: rgba(155, 155, 155, 0);
+    border: none;
+}
+aside .user-info button ul li{
+    background: #9B9B9B;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 3px 0 0;
+}
+aside .user-statistic{
+    display: flex;
+    flex-direction: row;
+    padding: 30px 40px 27px 40px;
+}
+aside .user-statistic .count{
+    font-family: Helvetica, sans-serif;
+    font-size: 27px;
+    color: #FFFFFF;
+    margin: 0 105px 5px 0;
+}
+aside .user-statistic .title{
+    opacity: 0.5;
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin: 0;
+}
+aside nav{
+    display: flex;
+    flex-direction: column;
+    padding: 22px 0 0 40px;
+}
+aside nav li{
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
+    line-height: 22px;
+    list-style-type: none;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: row;
+
+}
+aside nav li:first-child{
+    text-transform: uppercase;
+}
+aside nav li .counter{
+    width: 23px;
+    height: 23px;
+    border-radius: 20px;
+    background: #FFC200;
+    margin-left: 20px;
+}
+aside nav li .counter p{
+    margin: 0;
+    color: #0F0F0F;
+    text-align: center;
+    font-size: 18px;
+}
+aside nav li:hover{
+    color: #878787;
+}

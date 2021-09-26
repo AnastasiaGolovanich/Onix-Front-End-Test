@@ -1,0 +1,96 @@
+.right-block {
+    display: flex;
+    flex-direction: column;
+    width: 81.3%;
+}
+
+.right-block .news {
+    background: rgba(231, 231, 231, 0.73);
+}
+
+.right-block .news .current-page {
+    width: 62%;
+    left: 0;
+    right: 0;
+    margin: 38px auto 155px;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 52px 38px;
+    box-sizing: border-box;
+}
+
+.right-block .news .current-page .title {
+    text-transform: uppercase;
+    opacity: 0.5;
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    color: #131313;
+}
+
+.right-block .news .current-page ul {
+    list-style-type: none;
+    margin-top: 46px;
+}
+
+.right-block .news .current-page ul li {
+    display: flex;
+    flex-direction: row;
+    color: #0F0F0F;
+    margin-bottom: 40px;
+}
+.right-block .news .current-page ul li .fas {
+    padding: 18px;
+    border-radius: 40px;
+    margin-right: 26px;
+    max-height: 16px;
+}
+.right-block .news .current-page ul li .fa-check {
+    background: #CEF9C6;
+}
+.right-block .news .current-page ul li .fa-comment-alt {
+    background: #FFF8DD;
+}
+.right-block .news .current-page ul li .fa-download {
+    background: #E3EFFF;
+}
+
+.right-block .news .current-page ul li .message {
+    font-family: Helvetica, sans-serif;
+    font-size: 22px;
+    color: #131313;
+    line-height: 26px;
+    margin-right: 116px;
+}
+.right-block .news .current-page ul li .sub-message{
+    font-family: Helvetica, sans-serif;
+    font-size: 21px;
+    color: #131313;
+    line-height: 26px;
+    margin-right: 8px;
+    margin-top: 27px;
+    background-color: #e7e7e7;
+    border-radius: 12px;
+    padding: 27px 40px 38px;
+}
+
+.right-block .news .current-page ul li .time {
+    opacity: 0.7;
+    font-family: Helvetica, sans-serif;
+    font-size: 19px;
+    color: #131313;
+    text-align: right;
+    line-height: 20px;
+    white-space: nowrap;
+}
+.right-block .news .current-page .sub-image{
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+.right-block .news .current-page .sub-image img{
+    border-radius: 10px;
+    margin-right: 14px;
+}
