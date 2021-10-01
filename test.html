@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Redesign</title>
     <link rel="stylesheet" href="css_components/reset.css">
-    <!--    <link rel="stylesheet" href="css_components/solid-icons.css">-->
     <link rel="stylesheet" href="css_components/import-components.css">
 </head>
 <body>
@@ -83,11 +82,11 @@
             </div>
             <nav>
                 <ul>
-                    <li>Tasks</li>
-                    <li>Kanban</li>
-                    <li>Activity</li>
-                    <li>Calendar</li>
-                    <li>Files</li>
+                    <li class="active">Tasks</li>
+                    <li class="active">Kanban</li>
+                    <li class="active">Activity</li>
+                    <li class="active">Calendar</li>
+                    <li class="active">Files</li>
                 </ul>
             </nav>
         </header>
@@ -144,5 +143,28 @@
     </section>
 
 </div>
+<script>
+
+    let active = document.getElementsByClassName("active");
+    let isClicked = false;
+    let index;
+
+    for (let i = 0; i < active.length; i++) {
+        active[i].onclick = function() {
+            if(isClicked){
+                removeBorder(index);
+            }
+
+            active[i].style.borderBottom = "2px solid orange";
+            index = i;
+            isClicked = true;
+        }
+        function removeBorder(index) {
+            active[index].style.borderBottom = "none";
+        }
+    }
+
+
+</script>
 </body>
 </html>
