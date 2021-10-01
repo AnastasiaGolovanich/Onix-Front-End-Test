@@ -91,7 +91,7 @@
     }
 
     header {
-        padding: 39px 30px 2px 30px;
+        padding: 39px 30px 0 30px;
     }
 
     header div .left-side img {
@@ -144,7 +144,8 @@
     }
 
     header nav ul li {
-        margin: 23px 30px 13px 0;
+        margin: 23px 30px 0 0;
+        padding-bottom: 15px;
     }
 
     .right-block .news .current-page {
@@ -292,7 +293,7 @@
         font-size: 13px;
     }
     header nav ul li {
-        margin: 13px 15px 13px 0;
+        margin: 13px 15px 0 0;
     }
     .right-side{
         display: none;
