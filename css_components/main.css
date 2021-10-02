@@ -39,12 +39,14 @@
     flex-direction: row;
     color: #0F0F0F;
     margin-bottom: 40px;
+
 }
 .right-block .news .current-page ul li .fas {
     padding: 18px;
     border-radius: 40px;
     margin-right: 26px;
     max-height: 16px;
+    font-size: 14px;
 }
 .right-block .news .current-page ul li .fa-check {
     background: #CEF9C6;
@@ -93,4 +95,5 @@
 .right-block .news .current-page .sub-image img{
     border-radius: 10px;
     margin-right: 14px;
+    cursor: pointer;
 }

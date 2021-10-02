@@ -8,7 +8,7 @@
         padding: 30px 20px 0 30px;
     }
 
-    aside .top-side-panel img {
+    aside .top-side-panel img, aside .top-side-panel .logo {
         width: 21px;
         height: 25px;
     }
@@ -24,7 +24,7 @@
     }
 
     aside .user-info {
-        padding: 16px 10px 13px 30px;
+        padding: 14px 10px 15px 30px;
     }
 
     aside .user-info img {
@@ -104,7 +104,7 @@
         font-family: Helvetica, sans-serif;
         font-size: 30px;
         color: #131313;
-        margin: 0px 10px 0 20px;
+        margin: 0 12px 0 20px;
     }
 
     header div button ul li {
@@ -130,8 +130,8 @@
     }
 
     header div .share {
-        margin-left: 8px;
-        margin-right: 18px;
+        margin-left: 10px;
+        margin-right: 16px;
         padding: 8px 15px;
     }
 
@@ -144,8 +144,8 @@
     }
 
     header nav ul li {
-        margin: 23px 30px 0 0;
-        padding-bottom: 15px;
+        padding: 23px 0 13px 0;
+        margin-right: 28px;
     }
 
     .right-block .news .current-page {
@@ -159,16 +159,16 @@
     }
 
     .right-block .news .current-page ul {
-        margin-top: 30px;
+        margin-top: 32px;
     }
 
     .right-block .news .current-page ul li {
-        margin-bottom: 28px;
+        margin-bottom: 27px;
     }
 
     .right-block .news .current-page ul li .fas {
         padding: 13px;
-        margin-right: 19px;
+        margin-right: 21px;
     }
 
     .right-block .news .current-page ul li .message {
@@ -209,7 +209,7 @@
     }
 }
 
-@media (max-width: 863px) {
+@media (max-width: 865px) {
     header div h2 {
         font-size: 25px;
     }
@@ -261,7 +261,8 @@
         display: none;
     }
 }
-@media (max-width: 480px) {
+/*640*/
+@media (max-width: 500px) {
     .main-page {
         flex-direction: column;
     }
@@ -282,6 +283,9 @@
     aside .user-info button {
         margin: 0;
     }
+    aside nav li {
+        font-size: 14px;
+    }
     header div .chat img{
         display: flex;
     }
@@ -293,7 +297,8 @@
         font-size: 13px;
     }
     header nav ul li {
-        margin: 13px 15px 0 0;
+        padding: 15px 0 13px 0;
+        margin-right: 10px;
     }
     .right-side{
         display: none;

@@ -12,7 +12,7 @@
 <div class="main-page">
     <aside>
         <section class="top-side-panel">
-            <img src="assets/Logo@3x.svg" width="33" height="28" alt="Logo">
+            <a href="#" class="logo"> <img src="assets/Logo@3x.svg" width="33" height="28" alt="Logo"></a>
             <h2>Projectus</h2>
             <button aria-label="Search button">
                 <img src="assets/Search@3x.svg" width="20" height="20" alt="Logo">
@@ -80,13 +80,13 @@
                     </button>
                 </div>
             </div>
-            <nav>
+            <nav id="footer-nav">
                 <ul>
-                    <li class="active">Tasks</li>
-                    <li class="active">Kanban</li>
-                    <li class="active">Activity</li>
-                    <li class="active">Calendar</li>
-                    <li class="active">Files</li>
+                    <li>Tasks</li>
+                    <li>Kanban</li>
+                    <li>Activity</li>
+                    <li>Calendar</li>
+                    <li>Files</li>
                 </ul>
             </nav>
         </header>
@@ -145,7 +145,8 @@
 </div>
 <script>
 
-    let active = document.getElementsByClassName("active");
+    let nav = document.getElementById("footer-nav");
+    let active = nav.getElementsByTagName("LI");
     let isClicked = false;
     let index;
 
@@ -154,14 +155,13 @@
             if(isClicked){
                 removeBorder(index);
             }
-            active[i].style.paddingBottom = "9px";
-            active[i].style.borderBottom = "2px solid orange";
+            active[i].classList.add('active');
 
             index = i;
             isClicked = true;
         }
         function removeBorder(index) {
-            active[index].style.borderBottom = "none";
+            active[index].classList.remove('active')
         }
     }
 

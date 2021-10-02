@@ -1,40 +1,48 @@
-header{
+header {
     /*width: 81.3%;*/
     background: #FFFFFF;
     padding: 52px 45px 0 40px;
     display: flex;
     flex-direction: column;
 }
-header div{
+
+header div {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
-header div .left-side img{
+
+header div .left-side img {
     background-color: #FFC200;
     border-radius: 15px;
+    cursor: pointer;
 }
-header div h2{
-    font-family: Helvetica,sans-serif;
+
+header div h2 {
+    font-family: Helvetica, sans-serif;
     font-size: 40px;
     color: #131313;
     margin: 0 20px 0 20px;
 }
-header div button ul{
+
+header div button ul {
     display: flex;
     flex-direction: row;
 }
-header div button{
+
+header div button {
     border: none;
     padding: 18px 10px;
     background: rgba(155, 155, 155, 0.39);
     border-radius: 35px;
-    font-family: Helvetica,sans-serif;
+    font-family: Helvetica, sans-serif;
     font-size: 19px;
     color: #131313;
+    cursor: pointer;
 }
-header div button ul li{
+
+header div button ul li {
     background: #9B9B9B;
     width: 5px;
     height: 5px;
@@ -43,34 +51,45 @@ header div button ul li{
     padding: 0;
     margin: 0 3px 0 0;
 }
-header div button ul li:last-child{
+
+header div button ul li:last-child {
     margin-right: 0;
 }
-header div .round{
+
+header div .round {
     border-radius: 35px;
     margin-right: 5px;
+    cursor: pointer;
 }
-header div .chat{
+
+header div .chat {
     background-color: #FFF8DD;
     padding: 10px 20px;
     color: #FFC200;
 }
-header div .share{
+
+header div .share {
     margin-left: 15px;
     margin-right: 20px;
     padding: 10px 20px;
 }
-header nav ul{
+
+header nav ul {
     display: flex;
     flex-direction: row;
     opacity: 0.7;
-    font-family: Helvetica,sans-serif;
+    font-family: Helvetica, sans-serif;
     font-size: 22px;
     color: #131313;
 
 }
-header nav ul li{
-    margin: 30px 40px 0 0;
-    padding-bottom: 22px;
 
+header nav ul li {
+    padding: 30px 0 20px 0;
+    margin-right: 40px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+.active {
+    border-color: orange;
 }
