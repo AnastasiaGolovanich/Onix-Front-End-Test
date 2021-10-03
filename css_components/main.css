@@ -24,7 +24,7 @@
 .right-block .news .current-page .title {
     text-transform: uppercase;
     opacity: 0.5;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     color: #131313;
 }
@@ -59,14 +59,14 @@
 }
 
 .right-block .news .current-page ul li .message {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 22px;
     color: #131313;
     line-height: 26px;
     margin-right: 116px;
 }
 .right-block .news .current-page ul li .sub-message{
-    font-family: Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 21px;
     color: #131313;
     line-height: 26px;
@@ -79,7 +79,7 @@
 
 .right-block .news .current-page ul li .time {
     opacity: 0.7;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 19px;
     color: #131313;
     text-align: right;

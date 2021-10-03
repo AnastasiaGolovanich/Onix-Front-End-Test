@@ -7,6 +7,11 @@
     <title>Redesign</title>
     <link rel="stylesheet" href="css_components/reset.css">
     <link rel="stylesheet" href="css_components/import-components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="main-page">
@@ -43,11 +48,11 @@
             </div>
         </section>
         <nav>
+            <p class="menu">Menu</p>
             <ul>
-                <li>Menu</li>
                 <li>Home</li>
                 <li>My Tasks</li>
-                <li>Notification
+                <li>Notifications
                     <div class="counter">
                         <p>3</p>
                     </div>
@@ -71,20 +76,18 @@
                 </div>
                 <div class="right-side">
                     <img src="assets/user-photo.jpg" width="40" height="40" alt="photo" class="round">
-                    <img src="assets/user-photo.jpg" width="40" height="40" alt="photo" class="round">
-                    <img src="assets/user-photo.jpg" width="40" height="40" alt="photo" class="round">
+                    <img src="assets/user-photo-2.jpg" width="40" height="40" alt="photo" class="round">
+                    <img src="assets/user-photo-3.jpg" width="40" height="40" alt="photo" class="round">
                     <button class="share">Share</button>
                     <button class="chat">
-                        <img src="assets/Combined%20Shape@1x.svg" width="16" height="16">
-                        Chat
-                    </button>
+                        <img src="assets/Combined%20Shape@1x.svg" width="16" height="16">Chat</button>
                 </div>
             </div>
             <nav id="footer-nav">
                 <ul>
                     <li>Tasks</li>
                     <li>Kanban</li>
-                    <li>Activity</li>
+                    <li class="active">Activity</li>
                     <li>Calendar</li>
                     <li>Files</li>
                 </ul>
@@ -147,8 +150,8 @@
 
     let nav = document.getElementById("footer-nav");
     let active = nav.getElementsByTagName("LI");
-    let isClicked = false;
-    let index;
+    let isClicked = true;
+    let index = 2;
 
     for (let i = 0; i < active.length; i++) {
         active[i].onclick = function() {
@@ -162,6 +165,7 @@
         }
         function removeBorder(index) {
             active[index].classList.remove('active')
+            isClicked = false;
         }
     }
 
