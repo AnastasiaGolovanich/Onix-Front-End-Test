@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Redesign</title>
-    <link rel="stylesheet" href="css_components/reset.css">
     <link rel="stylesheet" href="css_components/import-components.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -17,27 +14,27 @@
 <div class="main-page">
     <aside>
         <section class="top-side-panel">
-            <a href="#" class="logo"> <img src="assets/Logo@3x.svg" width="33" height="28" alt="Logo"></a>
+            <a href="#" class="logo"> <img src="assets/Logo3x.svg" width="33" height="28" alt="Logo"></a>
             <h2>Projectus</h2>
             <button aria-label="Search button">
-                <img src="assets/Search@3x.svg" width="20" height="20" alt="Logo">
+                <img src="assets/Search3x.svg" width="20" height="20" alt="Logo">
             </button>
         </section>
         <section class="user-info">
+            <h2 class="visually-hidden">User Info</h2>
             <img src="assets/user-photo.jpg" alt="user photo" width="64" height="64">
             <div>
                 <h2>Jean Gonzales</h2>
                 <p>Product Owner</p>
             </div>
             <button aria-label="see-more button">
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
+                <div></div>
+                <div></div>
+                <div></div>
             </button>
         </section>
         <section class="user-statistic">
+            <h2 class="visually-hidden">User Statistic</h2>
             <div class="completed-task">
                 <p class="count">372</p>
                 <p class="title">Completed Tasks</p>
@@ -61,17 +58,16 @@
         </nav>
     </aside>
     <section class="right-block">
+        <h2 class="visually-hidden">Main Information</h2>
         <header>
             <div>
                 <div class="left-side">
-                    <img src="assets/Shapes@2x.png" width="54" height="54" alt="Logo Website Redesign">
+                    <img src="assets/Shapes2x.png" width="54" height="54" alt="Logo Website Redesign">
                     <h2>Website Redesign</h2>
                     <button class="see-more" aria-label="see-more button">
-                        <ul>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </button>
                 </div>
                 <div class="right-side">
@@ -80,7 +76,8 @@
                     <img src="assets/user-photo-3.jpg" width="40" height="40" alt="photo" class="round">
                     <button class="share">Share</button>
                     <button class="chat">
-                        <img src="assets/Combined%20Shape@1x.svg" width="16" height="16">Chat</button>
+                        <img src="assets/Combined_Shape1x.svg" width="16" height="16" alt="Chat-icon">Chat
+                    </button>
                 </div>
             </div>
             <nav id="footer-nav">
@@ -94,6 +91,7 @@
             </nav>
         </header>
         <section class="news">
+            <h2 class="visually-hidden">News</h2>
             <div class="current-page">
                 <p class="title">Today</p>
                 <ul>
@@ -146,30 +144,6 @@
     </section>
 
 </div>
-<script>
-
-    let nav = document.getElementById("footer-nav");
-    let active = nav.getElementsByTagName("LI");
-    let isClicked = true;
-    let index = 2;
-
-    for (let i = 0; i < active.length; i++) {
-        active[i].onclick = function() {
-            if(isClicked){
-                removeBorder(index);
-            }
-            active[i].classList.add('active');
-
-            index = i;
-            isClicked = true;
-        }
-        function removeBorder(index) {
-            active[index].classList.remove('active')
-            isClicked = false;
-        }
-    }
-
-
-</script>
+<script src="add-active-class.js"></script>
 </body>
 </html>

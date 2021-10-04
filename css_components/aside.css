@@ -1,24 +1,27 @@
 body {
     margin: 0;
 }
-.main-page{
+
+.main-page {
     display: flex;
-    /*flex-direction: column;*/
 }
-aside{
+
+aside {
     width: 18.7%;
     min-width: 350px;
     background: #000000;
     flex-direction: column;
 }
-aside .top-side-panel{
+
+aside .top-side-panel {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 40px;
     padding: 42px 20px 0 38px;
 }
-aside .top-side-panel h2{
+
+aside .top-side-panel h2 {
     text-transform: uppercase;
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
@@ -26,14 +29,16 @@ aside .top-side-panel h2{
     line-height: 24px;
     margin: 0 110px 0 15px;
 }
-aside .top-side-panel button{
+
+aside .top-side-panel button {
     background-color: rgba(255, 255, 255, 0);
     border: none;
     width: 20px;
     height: 20px;
     cursor: pointer;
 }
-aside .user-info{
+
+aside .user-info {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,38 +46,42 @@ aside .user-info{
     background: #202020;
     padding: 22px 20px 22px 40px;
 }
-aside .user-info img{
+
+aside .user-info img {
     border-radius: 50px;
     cursor: pointer;
 }
-aside .user-info div{
+
+aside .user-info div {
     display: flex;
     flex-direction: column;
-    margin-right: 30px;
+    margin-right: 37px;
 }
-aside .user-info div h2{
+
+aside .user-info div h2 {
     font-family: 'Open Sans', sans-serif;
     font-size: 17px;
     color: #FFFFFF;
     margin: 10px 20px 5px 20px;
 }
-aside .user-info div p{
+
+aside .user-info div p {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #9B9B9B;
     margin: 0 20px 10px 20px;
 }
-aside .user-info button ul{
+
+aside .user-info button {
     display: flex;
     flex-direction: row;
     padding: 0;
-}
-aside .user-info button{
     background: rgba(155, 155, 155, 0);
     border: none;
     cursor: pointer;
 }
-aside .user-info button ul li{
+
+aside .user-info button div {
     background: #9B9B9B;
     width: 5px;
     height: 5px;
@@ -81,19 +90,22 @@ aside .user-info button ul li{
     padding: 0;
     margin: 0 3px 0 0;
 }
-aside .user-statistic{
+
+aside .user-statistic {
     display: flex;
     flex-direction: row;
     padding: 30px 40px 27px 40px;
 }
-aside .user-statistic .count{
+
+aside .user-statistic .count {
     font-family: 'Open Sans', sans-serif;
     font-size: 27px;
     color: #FFFFFF;
     margin: 0 105px 5px 0;
     cursor: pointer;
 }
-aside .user-statistic .title{
+
+aside .user-statistic .title {
     opacity: 0.5;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
@@ -101,12 +113,14 @@ aside .user-statistic .title{
     margin: 0;
     cursor: pointer;
 }
-aside nav{
+
+aside nav {
     display: flex;
     flex-direction: column;
     padding: 22px 0 0 0;
 }
-aside nav li, aside nav .menu{
+
+aside nav li, aside nav .menu {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     color: #FFFFFF;
@@ -121,27 +135,40 @@ aside nav li, aside nav .menu{
     outline: 2px solid rgba(32, 32, 32, 0);
     outline-offset: -2px;
 }
-aside nav .menu{
+
+aside nav .menu {
     text-transform: uppercase;
     color: #878787;
 }
-aside nav li .counter{
+
+aside nav li .counter {
     width: 23px;
     height: 23px;
     border-radius: 20px;
     background: #FFC200;
     margin-left: 20px;
 }
-aside nav li .counter p{
+
+aside nav li .counter p {
     margin: 0;
     color: #0F0F0F;
     text-align: center;
     font-size: 18px;
 }
-aside nav li:hover{
+
+aside nav li:hover {
     color: #878787;
-    /*outline: 2px solid #202020;*/
-    /*outline-offset: -2px;*/
     outline-color: #202020;
     transition: outline-color 0.3s;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0)
 }

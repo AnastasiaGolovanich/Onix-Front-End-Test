@@ -41,6 +41,7 @@
     margin-bottom: 40px;
 
 }
+
 .right-block .news .current-page ul li .fas {
     padding: 18px;
     border-radius: 40px;
@@ -48,12 +49,15 @@
     max-height: 16px;
     font-size: 14px;
 }
+
 .right-block .news .current-page ul li .fa-check {
     background: #CEF9C6;
 }
+
 .right-block .news .current-page ul li .fa-comment-alt {
     background: #FFF8DD;
 }
+
 .right-block .news .current-page ul li .fa-download {
     background: #E3EFFF;
 }
@@ -65,7 +69,8 @@
     line-height: 26px;
     margin-right: 116px;
 }
-.right-block .news .current-page ul li .sub-message{
+
+.right-block .news .current-page ul li .sub-message {
     font-family: 'Open Sans', sans-serif;
     font-size: 21px;
     color: #131313;
@@ -86,13 +91,15 @@
     line-height: 20px;
     white-space: nowrap;
 }
-.right-block .news .current-page .sub-image{
+
+.right-block .news .current-page .sub-image {
     display: flex;
     flex-direction: row;
     margin-top: 25px;
     flex-wrap: wrap;
 }
-.right-block .news .current-page .sub-image img{
+
+.right-block .news .current-page .sub-image img {
     border-radius: 10px;
     margin-right: 14px;
     cursor: pointer;
