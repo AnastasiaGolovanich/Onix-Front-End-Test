@@ -1,6 +1,6 @@
 header {
     background: #FFFFFF;
-    padding: 52px 45px 0 40px;
+    padding: 39px 30px 0 30px;
     display: flex;
     flex-direction: column;
 }
@@ -14,25 +14,25 @@ header div {
 
 header div .left-side img {
     background-color: #FFC200;
-    border-radius: 15px;
-    width: 54px;
-    height: 54px;
+    width: 40px;
+    height: 42px;
+    border-radius: 9px;
     cursor: pointer;
 }
 
 
 header div h2 {
     font-family: 'Open Sans', sans-serif;
-    font-size: 40px;
+    font-size: 33px;
     color: #131313;
-    margin: 0 20px 0 20px;
+    margin: -5px 12px 0 16px;
 
 }
 
 header div .see-more {
     width: 30px;
     height: 30px;
-    padding: 20px;
+    padding: 14px 8px;
     position: relative;
 }
 
@@ -40,9 +40,11 @@ header div .see-more:after {
     position: absolute;
     font-family: "Font Awesome 5 Free", sans-serif;
     font-weight: 900;
-    content: '\f141';
+    font-size: 4px;
+    letter-spacing: 2px;
+    content: '\f111 \f111 \f111';
     color: #9B9B9B;
-    top: 9px;
+    top: 13px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -55,7 +57,7 @@ header div button {
     background: rgba(155, 155, 155, 0.39);
     border-radius: 35px;
     font-family: 'Open Sans', sans-serif;
-    font-size: 19px;
+    font-size: 14px;
     color: #131313;
     cursor: pointer;
 }
@@ -65,23 +67,9 @@ header div button:hover {
     transition-duration: 2s;
 }
 
-header div .see-more div {
-    background: #9B9B9B;
-    width: 5px;
-    height: 5px;
-    border-radius: 5px;
-    list-style-type: none;
-    padding: 0;
-    margin: 0 3px 0 0;
-}
-
-header div .see-more div:last-child {
-    margin-right: 0;
-}
-
 header div .round {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 35px;
     margin-right: 5px;
     cursor: pointer;
@@ -89,7 +77,7 @@ header div .round {
 
 header div .chat {
     background-color: #FFF8DD;
-    padding: 10px 20px;
+    padding: 6px 15px;
     color: #FFC200;
     position: relative;
 }
@@ -109,7 +97,7 @@ header div .chat span:before {
     bottom: 0;
     left: 0;
     right: 0;
-    margin: auto 20px;
+    margin: auto 13px;
 }
 
 header div .chat:hover {
@@ -117,14 +105,11 @@ header div .chat:hover {
     transition-duration: 2s;
 }
 
-/*header div .chat img {*/
-/*    margin-right: 4px;*/
-/*}*/
 
 header div .share {
-    margin-left: 15px;
-    margin-right: 20px;
-    padding: 10px 20px;
+    margin-left: 10px;
+    margin-right: 16px;
+    padding: 5px 15px;
 }
 
 header nav ul {
@@ -132,14 +117,14 @@ header nav ul {
     flex-direction: row;
     opacity: 0.7;
     font-family: 'Open Sans', sans-serif;
-    font-size: 22px;
+    font-size: 17px;
     color: #131313;
 
 }
 
 header nav ul li {
-    padding: 30px 0 20px 0;
-    margin-right: 40px;
+    padding: 23px 0 13px 0;
+    margin-right: 30px;
     cursor: pointer;
     border-bottom: 2px solid transparent;
 }
