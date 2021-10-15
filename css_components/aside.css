@@ -73,14 +73,30 @@ aside .user-info div p {
 }
 
 aside .user-info button {
+    width: 30px;
+    height: 30px;
     display: flex;
     flex-direction: row;
     padding: 0;
     background: rgba(155, 155, 155, 0);
     border: none;
     cursor: pointer;
+    position: relative;
 }
-
+aside .user-info button:after{
+    position: absolute;
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    font-size: 6px;
+    letter-spacing: 2px;
+    content: '\f111 \f111 \f111';
+    color:  #D8D8D8;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 12px auto;
+}
 aside .user-info button div {
     background: #9B9B9B;
     width: 5px;
@@ -136,24 +152,25 @@ aside nav li, aside nav .menu {
     outline-offset: -2px;
 }
 
-aside nav .menu {
-    text-transform: uppercase;
-    color: #878787;
-}
-
-aside nav li .counter {
+aside nav li:last-child:after {
+    content: "3";
+    color: #0F0F0F;
+    text-align: center;
+    font-size: 18px;
     width: 23px;
     height: 23px;
     border-radius: 20px;
     background: #FFC200;
-    margin-left: 20px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
 }
 
-aside nav li .counter p {
-    margin: 0;
-    color: #0F0F0F;
-    text-align: center;
-    font-size: 18px;
+aside nav .menu {
+    text-transform: uppercase;
+    color: #878787;
 }
 
 aside nav li:hover {

@@ -39,28 +39,31 @@
     flex-direction: row;
     color: #0F0F0F;
     margin-bottom: 40px;
-
 }
-
-.right-block .news .current-page ul li .fas {
+.right-block .news .current-page ul .icons:before{
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
     padding: 18px;
     border-radius: 40px;
-    margin-right: 26px;
+    margin-right: 21px;
     max-height: 16px;
     font-size: 14px;
 }
 
-.right-block .news .current-page ul li .fa-check {
+.right-block .news .current-page ul .icons:first-child:before {
+    content: '\f00c';
     background: #CEF9C6;
 }
-
-.right-block .news .current-page ul li .fa-comment-alt {
+.right-block .news .current-page ul .icons:nth-child(2):before {
+    content: '\f27a';
     background: #FFF8DD;
 }
 
-.right-block .news .current-page ul li .fa-download {
+.right-block .news .current-page ul .icons:nth-child(3):before {
+    content: '\f019';
     background: #E3EFFF;
 }
+
 
 .right-block .news .current-page ul li .message {
     font-family: 'Open Sans', sans-serif;
@@ -81,6 +84,7 @@
     border-radius: 12px;
     padding: 27px 40px 38px;
 }
+
 
 .right-block .news .current-page ul li .time {
     opacity: 0.7;
