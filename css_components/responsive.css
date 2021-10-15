@@ -13,9 +13,13 @@
         height: 25px;
     }
 
+    aside .top-side-panel a:after {
+        top: 2px;
+    }
+
     aside .top-side-panel h2 {
         font-size: 16px;
-        margin: 0 80px 0 15px;
+        margin: 0 86px 0 26px;
     }
 
     aside .top-side-panel button img {
@@ -295,6 +299,7 @@
         width: 0;
         height: 0;
     }
+
     header div .see-more {
         padding: 14px 14px;
     }

@@ -21,6 +21,22 @@ aside .top-side-panel {
     padding: 42px 20px 0 38px;
 }
 
+aside .top-side-panel a {
+    width: 33px;
+    height: 28px;
+    position: relative;
+}
+
+aside .top-side-panel a:after {
+    position: absolute;
+    content: "";
+    width: 33px;
+    height: 28px;
+    background-image: url("../assets/Logo3x.svg");
+    background-repeat: no-repeat;
+    top: 4px;
+}
+
 aside .top-side-panel h2 {
     text-transform: uppercase;
     font-family: 'Open Sans', sans-serif;
@@ -32,6 +48,8 @@ aside .top-side-panel h2 {
 
 aside .top-side-panel button {
     background-color: rgba(255, 255, 255, 0);
+    background-image: url("../assets/Search3x.svg");
+    background-repeat: no-repeat;
     border: none;
     width: 20px;
     height: 20px;
@@ -48,6 +66,8 @@ aside .user-info {
 }
 
 aside .user-info img {
+    width: 64px;
+    height: 64px;
     border-radius: 50px;
     cursor: pointer;
 }
@@ -83,20 +103,22 @@ aside .user-info button {
     cursor: pointer;
     position: relative;
 }
-aside .user-info button:after{
+
+aside .user-info button:after {
     position: absolute;
     font-family: "Font Awesome 5 Free", sans-serif;
     font-weight: 900;
     font-size: 6px;
     letter-spacing: 2px;
     content: '\f111 \f111 \f111';
-    color:  #D8D8D8;
+    color: #D8D8D8;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: 12px auto;
 }
+
 aside .user-info button div {
     background: #9B9B9B;
     width: 5px;

@@ -15,19 +15,21 @@ header div {
 header div .left-side img {
     background-color: #FFC200;
     border-radius: 15px;
+    width: 54px;
+    height: 54px;
     cursor: pointer;
 }
+
 
 header div h2 {
     font-family: 'Open Sans', sans-serif;
     font-size: 40px;
     color: #131313;
     margin: 0 20px 0 20px;
+
 }
 
 header div .see-more {
-    /*display: flex;*/
-    /*flex-direction: row;*/
     width: 30px;
     height: 30px;
     padding: 20px;
@@ -48,7 +50,6 @@ header div .see-more:after {
 }
 
 header div button {
-
     border: none;
     padding: 18px 10px;
     background: rgba(155, 155, 155, 0.39);
@@ -79,6 +80,8 @@ header div .see-more div:last-child {
 }
 
 header div .round {
+    width: 40px;
+    height: 40px;
     border-radius: 35px;
     margin-right: 5px;
     cursor: pointer;

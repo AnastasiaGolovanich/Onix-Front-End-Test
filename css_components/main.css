@@ -40,7 +40,8 @@
     color: #0F0F0F;
     margin-bottom: 40px;
 }
-.right-block .news .current-page ul .icons:before{
+
+.right-block .news .current-page ul .icons:before {
     font-family: "Font Awesome 5 Free", sans-serif;
     font-weight: 900;
     padding: 18px;
@@ -54,6 +55,7 @@
     content: '\f00c';
     background: #CEF9C6;
 }
+
 .right-block .news .current-page ul .icons:nth-child(2):before {
     content: '\f27a';
     background: #FFF8DD;
@@ -104,6 +106,8 @@
 }
 
 .right-block .news .current-page .sub-image img {
+    width: 131px;
+    height: 131px;
     border-radius: 10px;
     margin-right: 14px;
     cursor: pointer;
