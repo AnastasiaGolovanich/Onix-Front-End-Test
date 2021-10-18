@@ -29,12 +29,12 @@
         </section>
         <section class="user-statistic">
             <h2 class="visually-hidden">User Statistic</h2>
-            <div class="completed-task">
-                <p class="count">372</p>
+            <div>
+                <p class="count" id="completed-task">372</p>
                 <p class="title">Completed Tasks</p>
             </div>
-            <div class="open-task">
-                <p class="count">11</p>
+            <div>
+                <p class="count" id="open-task">11</p>
                 <p class="title">Open Tasks</p>
             </div>
         </section>
@@ -43,7 +43,7 @@
             <ul>
                 <li>Home</li>
                 <li>My Tasks</li>
-                <li>Notifications</li>
+                <li id="notification" data-after="3">Notifications</li>
             </ul>
         </nav>
     </aside>
@@ -109,13 +109,7 @@
                                 An option to search in current projects
                                 or in all projects
                             </p>
-
-                            <ul class="sub-image">
-                                <li><img src="assets/comment-1.jpg" alt="project-1"></li>
-                                <li><img src="assets/comment-2.jpg" alt="project-2"></li>
-                                <li><img src="assets/comment-3.jpg" alt="project-3"></li>
-                                <li><img src="assets/comment-4.jpg" alt="project-4"></li>
-                            </ul>
+                            <div class="sub-image" id="images-in-comment"></div>
                         </div>
                         <p class="time">6:02 PM</p>
                     </li>
@@ -125,6 +119,8 @@
     </section>
 
 </div>
-<script src="add-active-class.js"></script>
+<script src="js/add-active-class.js"></script>
+<script src="js/completed-tasks.js"></script>
+<script src="js/notification.js"></script>
 </body>
 </html>

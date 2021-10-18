@@ -182,9 +182,8 @@ aside nav .menu {
     line-height: 13px;
     margin-bottom: 10px;
 }
-
-aside nav li:last-child:after {
-    content: "3";
+aside nav #notification:after{
+    content: attr(data-after);
     color: #0F0F0F;
     text-align: center;
     font-size: 12px;
@@ -194,7 +193,6 @@ aside nav li:last-child:after {
     background: #FFC200;
     margin-left: 9px;
 }
-
 aside nav .menu {
     text-transform: uppercase;
     color: #878787;
