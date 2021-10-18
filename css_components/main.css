@@ -1,15 +1,16 @@
 .right-block {
     display: flex;
     flex-direction: column;
-    width: 81.3%;
+    width: 100%;
 }
 
 .right-block .news {
     background: rgba(231, 231, 231, 0.73);
+    height: 100%;
 }
 
 .right-block .news .current-page {
-    width: 62%;
+    width: 730px;
     left: 0;
     right: 0;
     margin: 30px auto 121px;

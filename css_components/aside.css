@@ -4,11 +4,11 @@ body {
 
 .main-page {
     display: flex;
+    min-height: 100vh;
 }
 
 aside {
-    width: 18.7%;
-    min-width: 270px;
+    width: 270px;
     background: #000000;
     flex-direction: column;
 }
