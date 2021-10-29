@@ -18,7 +18,7 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    padding: 40px 27px;
+    padding: 40px 29px 68px;
     box-sizing: border-box;
 }
 
@@ -34,15 +34,18 @@
     list-style-type: none;
     margin-top: 32px;
 }
-
+.right-block .news .current-page ul .fixed-time {
+    display: flex;
+}
 .right-block .news .current-page ul li {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     color: #0F0F0F;
     margin-bottom: 28px;
 }
 
-.right-block .news .current-page ul .icons:before {
+.right-block .news .current-page ul .icons {
     font-family: "Font Awesome 5 Free", sans-serif;
     font-weight: 900;
     padding: 13px;
@@ -50,20 +53,21 @@
     margin-right: 21px;
     max-height: 16px;
     font-size: 14px;
+    background: #E3EFFF;
 }
 
-.right-block .news .current-page ul .icons:first-child:before {
-    content: '\f00c';
+.right-block .news .current-page ul .mark,
+.right-block .news .current-page ul .install {
     background: #CEF9C6;
 }
 
-.right-block .news .current-page ul .icons:nth-child(2):before {
-    content: '\f27a';
+.right-block .news .current-page ul .comment,
+.right-block .news .current-page ul .theory {
     background: #FFF8DD;
 }
 
-.right-block .news .current-page ul .icons:nth-child(3):before {
-    content: '\f019';
+.right-block .news .current-page ul .upload,
+.right-block .news .current-page ul .practice {
     background: #E3EFFF;
 }
 
@@ -85,6 +89,7 @@
     margin-top: 18px;
     background-color: #e7e7e7;
     border-radius: 12px;
+    padding: 21px 30px 28px;
     padding: 21px 30px 28px;
 }
 

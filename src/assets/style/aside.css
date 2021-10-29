@@ -32,7 +32,7 @@ aside .top-side-panel a:after {
     content: "";
     width: 33px;
     height: 28px;
-    background-image: url("../assets/Logo3x.svg");
+    background-image: url("../Logo3x.svg");
     background-repeat: no-repeat;
     top: 2px;
 }
@@ -48,7 +48,7 @@ aside .top-side-panel h2 {
 
 aside .top-side-panel button {
     background-color: rgba(255, 255, 255, 0);
-    background-image: url("../assets/Search3x.svg");
+    background-image: url("../Search3x.svg");
     background-repeat: no-repeat;
     border: none;
     width: 20px;
