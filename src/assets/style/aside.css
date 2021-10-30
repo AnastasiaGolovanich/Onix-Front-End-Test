@@ -1,0 +1,216 @@
+body {
+    margin: 0;
+}
+
+.main-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+aside {
+    width: 270px;
+    background: #000000;
+    flex-direction: column;
+}
+
+aside .top-side-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 26px;
+    padding: 30px 20px 0 30px;
+}
+
+aside .top-side-panel a {
+    width: 33px;
+    height: 28px;
+    position: relative;
+}
+
+aside .top-side-panel a:after {
+    position: absolute;
+    content: "";
+    width: 33px;
+    height: 28px;
+    background-image: url("../Logo3x.svg");
+    background-repeat: no-repeat;
+    top: 2px;
+}
+
+aside .top-side-panel h2 {
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    color: #FFFFFF;
+    line-height: 24px;
+    font-size: 16px;
+    margin: 0 86px 0 26px;
+}
+
+aside .top-side-panel button {
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url("../Search3x.svg");
+    background-repeat: no-repeat;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+aside .user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background: #202020;
+    padding: 14px 10px 15px 30px;
+}
+
+aside .user-info img {
+    border-radius: 50px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+
+aside .user-info div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 37px;
+}
+
+aside .user-info div h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #FFFFFF;
+    margin: 8px 16px 5px 15px;
+}
+
+aside .user-info div p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #9B9B9B;
+    margin: 2px 10px 10px 13px;
+}
+
+aside .user-info button {
+    width: 25px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    background: rgba(155, 155, 155, 0);
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+aside .user-info button:after {
+    position: absolute;
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    font-size: 4px;
+    letter-spacing: 2px;
+    content: '\f111 \f111 \f111';
+    color: #D8D8D8;
+    top: 0;
+    bottom: 0;
+    left: -10px;
+    right: 0;
+    margin: 12px auto;
+}
+
+aside .user-info button div {
+    background: #9B9B9B;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 3px 0 0;
+}
+
+aside .user-statistic {
+    display: flex;
+    flex-direction: row;
+    padding: 25px 30px 27px 30px;
+}
+
+aside .user-statistic .count {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin: 0 80px 5px 0;
+    cursor: pointer;
+}
+
+aside .user-statistic .title {
+    opacity: 0.5;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #FFFFFF;
+    margin: 0;
+    cursor: pointer;
+}
+
+aside nav {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0 0 0;
+}
+
+aside nav li, aside nav .menu {
+    font-family: 'Open Sans', sans-serif;
+    color: #FFFFFF;
+    line-height: 22px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    padding: 5px 0 5px 30px;
+
+    outline: 2px solid rgba(32, 32, 32, 0);
+    outline-offset: -2px;
+}
+
+aside nav li {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+aside nav .menu {
+    font-size: 12px;
+    line-height: 13px;
+    margin-bottom: 10px;
+}
+aside nav #notification:after{
+    content: attr(data-after);
+    color: #0F0F0F;
+    text-align: center;
+    font-size: 12px;
+    width: 19px;
+    height: 19px;
+    border-radius: 20px;
+    background: #FFC200;
+    margin-left: 9px;
+}
+aside nav .menu {
+    text-transform: uppercase;
+    color: #878787;
+}
+
+aside nav li:hover {
+    color: #878787;
+    outline-color: #202020;
+    transition: outline-color 0.3s;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0)
+}

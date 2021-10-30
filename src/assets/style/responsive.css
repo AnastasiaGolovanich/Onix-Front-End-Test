@@ -1,0 +1,173 @@
+@media (min-width: 1440px){
+    .container-xxl {
+        width: 730px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    header div .round {
+        display: none;
+    }
+
+    .right-block .news .current-page {
+        width: 85%;
+    }
+}
+
+@media (max-width: 865px) {
+    header div h2 {
+        font-size: 25px;
+    }
+
+    header div button {
+        font-size: 10px;
+        min-height: 30px;
+    }
+
+    header div .see-more:after {
+        top: 12px;
+    }
+}
+
+@media (max-width: 780px) {
+    aside {
+        min-width: 175px;
+    }
+
+    aside .top-side-panel {
+        margin-bottom: 29px;
+        padding: 15px 5px 0 10px;
+    }
+
+    aside .top-side-panel h2 {
+        margin: 0 10px 0 15px;
+    }
+
+    aside .user-info {
+        padding: 16px 10px 13px 10px;
+        flex-direction: column;
+    }
+
+    aside .user-statistic .title {
+        font-size: 13px;
+    }
+
+    aside .user-info div {
+        margin-right: 0;
+    }
+
+    aside .user-info div h2,
+    aside .user-info div p,
+    aside .user-info button {
+        margin: 5px auto;
+    }
+
+    aside .user-statistic .count {
+        margin: 0 40px 5px 0;
+    }
+
+    header div button {
+        font-size: 15px;
+    }
+
+    header div .see-more:after {
+        top: 12px;
+    }
+
+    .right-block .news .current-page ul li .message {
+        margin-right: 30px;
+    }
+}
+
+@media (max-width: 730px) {
+    header div .chat span:before {
+        content: "";
+    }
+
+    header div .chat span {
+        margin-left: 0;
+    }
+
+    header div .chat span:before {
+        width: 0;
+        height: 0;
+    }
+
+    header div .see-more {
+        padding: 14px 14px;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-page {
+        flex-direction: column;
+    }
+
+    aside, .right-block {
+        width: 100%;
+    }
+
+    aside .top-side-panel {
+        margin-bottom: 10px;
+        padding: 15px 10px 0 10px;
+        justify-content: space-around;
+    }
+
+    aside .user-info, aside .user-statistic {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 5px 10px;
+    }
+
+    aside .user-info button {
+        margin: 0;
+    }
+
+    aside nav li {
+        font-size: 14px;
+        padding: 5px 15px;
+    }
+
+    aside nav .menu {
+        display: none;
+    }
+
+    header div .chat img {
+        display: flex;
+    }
+
+    nav ul, header nav ul {
+        display: inline-flex;
+        justify-content: space-around;
+    }
+
+    header nav ul {
+        font-size: 13px;
+    }
+
+    header nav ul li {
+        padding: 15px 0 13px 0;
+        margin-right: 10px;
+    }
+
+    .right-side {
+        display: none;
+    }
+
+    .right-block .news .current-page {
+        width: 100%;
+    }
+
+    .right-block .news .current-page ul li .message {
+        margin-right: 10px;
+    }
+
+    .right-block .news .current-page ul li .sub-message {
+        padding: 10px;
+    }
+
+    .right-block .news .current-page {
+        margin: 30px auto;
+    }
+}

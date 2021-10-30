@@ -1,0 +1,139 @@
+header {
+    background: #FFFFFF;
+    padding: 39px 30px 0 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header div .left-side img {
+    background-color: #FFC200;
+    width: 40px;
+    height: 42px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+
+header div h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 33px;
+    color: #131313;
+    margin: -5px 12px 0 16px;
+
+}
+
+header div .see-more {
+    width: 30px;
+    height: 30px;
+    padding: 14px 8px;
+    position: relative;
+}
+
+header div .see-more:after {
+    position: absolute;
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    font-size: 4px;
+    letter-spacing: 2px;
+    content: '\f111 \f111 \f111';
+    color: #9B9B9B;
+    top: 13px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+header div button {
+    border: none;
+    padding: 18px 10px;
+    background: rgba(155, 155, 155, 0.39);
+    border-radius: 35px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #131313;
+    cursor: pointer;
+}
+
+header div button:hover {
+    box-shadow: inset 0 0 0 50px rgba(166, 176, 203, 0.71);
+    transition-duration: 2s;
+}
+
+header div .round {
+    width: 30px;
+    height: 30px;
+    border-radius: 35px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+header div .chat {
+    background-color: #FFF8DD;
+    padding: 6px 15px;
+    color: #FFC200;
+    position: relative;
+}
+
+header div .chat span {
+    margin-left: 20px;
+}
+
+header div .chat span:before {
+    content: "";
+    background-image: url("../Combined_Shape1x.svg");
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    /*margin-left: -20px;*/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto 13px;
+}
+
+header div .chat:hover {
+    box-shadow: inset 0 0 0 50px rgba(255, 203, 31, 0.37);
+    transition-duration: 2s;
+}
+
+
+header div .share {
+    margin-left: 10px;
+    margin-right: 16px;
+    padding: 5px 15px;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    opacity: 0.7;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+    color: #131313;
+
+}
+
+header nav ul li {
+    padding: 23px 0 13px 0;
+    margin-right: 30px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+header nav ul li a {
+    text-decoration: none;
+    padding: 23px 0 13px 0;
+    color: #131313;
+}
+
+.active {
+    border-color: orange;
+}
