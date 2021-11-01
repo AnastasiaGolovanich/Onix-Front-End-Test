@@ -1,8 +1,7 @@
-<template>
-  <Home></Home>
+<template lang="pug">
+Home
 </template>
-<script>
-
+<script lang="ts">
 import Home from '@/views/Home.vue'
 
 export default ({

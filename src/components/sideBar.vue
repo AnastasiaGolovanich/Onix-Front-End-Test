@@ -1,53 +1,42 @@
-<template>
-  <aside>
-    <section class="top-side-panel">
-      <a href="#" class="logo"></a>
-      <h2>Projectus</h2>
-      <button aria-label="Search button"></button>
-    </section>
-    <section class="user-info">
-      <h2 class="visually-hidden">User Info</h2>
-      <img :src="userImage" alt="user photo">
-      <div>
-        <h2>{{ userName }}</h2>
-        <p>{{ userWork }}</p>
-      </div>
-      <button aria-label="see-more button"></button>
-    </section>
-    <section class="user-statistic">
-      <h2 class="visually-hidden">User Statistic</h2>
-      <div>
-        <p class="count" v-on:click="addTask">{{ completedTaskCount }}</p>
-        <p class="title">Completed Tasks</p>
-      </div>
-      <div>
-        <p class="count">{{ openTaskCount }}</p>
-        <p class="title">Open Tasks</p>
-      </div>
-    </section>
-    <nav>
-      <p class="menu">Menu</p>
-      <ul>
-        <li>Home</li>
-        <li>My Tasks</li>
-        <li id="notification"
-            v-bind:data-after="notification"
-        >Notifications</li>
-      </ul>
-    </nav>
-  </aside>
+<template lang="pug">
+aside
+  section(class="top-side-panel")
+    a(href="#" class="logo")
+    h2 Projectus
+    button(aria-label="Search button")
+  section(class="user-info")
+    h2(class="visually-hidden") User Info
+    img(:src="userImage" alt="user photo")
+    div
+      h2 {{ userName }}
+      p {{ userWork }}
+    button(aria-label="see-more button")
+  section(class="user-statistic")
+    h2(class="visually-hidden") User Statistic
+    div
+      p(class="count" v-on:click="addTask") {{ completedTaskCount }}
+      p(class="title") Completed Tasks
+    div
+      p(class="count") {{ openTaskCount }}
+      p(class="title") Open Tasks
+  nav
+    p(class="menu") Menu
+    ul
+      li Home
+      li My Tasks
+      li(id="notification" v-bind:data-after="notification") Notifications
 </template>
 
-<script>
-import userImage from '../assets/user-photo.jpg'
-export default ({
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   props: ['notification'],
-  model: {
-    event: 'sendNotification'
-  },
   data () {
+    let completedTaskCount: number
+    let openTaskCount: number
     return {
-      userImage,
+      userImage: require('@/assets/user-photo.jpg'),
       userName: 'Jean Gonzales',
       userWork: 'Product Owner',
       completedTaskCount: 372,
@@ -65,20 +54,11 @@ export default ({
           alert('You have no open tasks.')
         }
       }
-    },
-    onEnlargeText () {
-      console.log('enlarging text')
-    },
-    test (e) {
-      console.log(e)
     }
+    // test (e: number) {
+    //   console.log(e)
+    // }
 
   }
-  // mounted () {
-  //   this.$on('new-user-question', function () {
-  //     console.log('hey')
-  //   })
-  // }
-
 })
 </script>

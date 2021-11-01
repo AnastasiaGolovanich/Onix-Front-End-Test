@@ -1,13 +1,11 @@
-<template>
-  <div class="main-page">
-    <sideBar :notification="notification" @notification="test($event)"></sideBar>
-    <section class="right-block" id="right-block">
-      <Header></Header>
-      <router-view :notification="notification" @notification="test($event)"/>
-    </section>
-  </div>
+<template lang="pug">
+div(class="main-page")
+  sideBar(:notification="notification" @notification="test($event)")
+  section(class="right-block" id="right-block")
+    Header
+    router-view(:notification="notification" @notification="test($event)")/
 </template>
-<script>
+<script lang="ts">
 import sideBar from '@/components/sideBar.vue'
 import Header from '@/components/Header.vue'
 
@@ -17,12 +15,14 @@ export default ({
     Header
   },
   data () {
+    let notification: number
     return {
       notification: 3
     }
   },
   methods: {
-    test (e) {
+    test (e: number) : void{
+      console.log(e)
       this.notification = e
     }
   }
