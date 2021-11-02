@@ -13,6 +13,8 @@ section(class="news")
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
+
 interface Messages {
   type: string
   icon: string
@@ -21,7 +23,7 @@ interface Messages {
   comment: string
   time: string
 }
-export default ({
+export default defineComponent({
   data () {
     return {
       messages: [

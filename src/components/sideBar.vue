@@ -28,10 +28,12 @@ aside
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-  props: ['notification'],
+  props: {
+    notification: { type: Object as PropType<number>, required: true }
+  },
   data () {
     let completedTaskCount: number
     let openTaskCount: number
@@ -55,10 +57,6 @@ export default defineComponent({
         }
       }
     }
-    // test (e: number) {
-    //   console.log(e)
-    // }
-
   }
 })
 </script>

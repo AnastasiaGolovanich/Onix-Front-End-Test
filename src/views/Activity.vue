@@ -12,11 +12,13 @@ section(class="news")
           p(class="message") {{message.description}}
           p(class="sub-message" v-if="message.comment") {{message.comment}}
           div(class="sub-image" v-if="message.attachments.length")
-            img(v-for="(attachment, index) in message.attachments" :key="attachment" :src="attachment" @click="$emit('notification', index)")
+            img(v-for="(attachment, index) in message.attachments" :key="attachment" :src="attachment" @click="addNotification(index)")
         p(class="time") {{message.time}}
 </template>
 
 <script lang="ts">
+
+import { defineComponent } from 'vue'
 
 interface Messages {
   type: string
@@ -26,7 +28,7 @@ interface Messages {
   comment: string | null
   time: string
 }
-export default ({
+export default defineComponent({
   data () {
     return {
       messages: [
@@ -56,12 +58,11 @@ export default ({
         } as Messages
       ]
     }
+  },
+  methods: {
+    addNotification (index: number) {
+      this.$emit('indexImg', index)
+    }
   }
-  // props: ['notification']
-  // methods: {
-  //   addNotification (index: number) {
-  //     this.$emit('notification', index)
-  //   }
-  // }
 })
 </script>
