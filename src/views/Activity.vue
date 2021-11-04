@@ -56,7 +56,7 @@ export default defineComponent({
           comment: null,
           time: '6:02 PM'
         }
-      ] as unknown as Messages
+      ] as Messages[]
     }
   },
   methods: {
