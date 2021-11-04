@@ -32,20 +32,20 @@ export default defineComponent({
           icon: 'file-upload',
           description: 'Install Node.js and Vue CLI on PC',
           time: '10:00 AM'
-        } as Messages,
+        },
         {
           type: 'theory',
           icon: 'book-open',
           description: 'Read the theory at the link',
           time: '1:00 PM'
-        } as Messages,
+        },
         {
           type: 'practice',
           icon: 'magic',
           description: 'Translate the current project to Vue. Add Task page',
           time: '7:00 PM'
-        } as Messages
-      ]
+        }
+      ] as Messages[]
     }
   }
 })
