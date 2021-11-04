@@ -39,7 +39,7 @@ export default defineComponent({
           attachments: [],
           comment: null,
           time: '8:40 PM'
-        } as Messages,
+        },
         {
           type: 'comment',
           icon: 'comment-alt',
@@ -47,7 +47,7 @@ export default defineComponent({
           attachments: [],
           comment: 'During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes',
           time: '7:32 PM'
-        } as Messages,
+        },
         {
           type: 'upload',
           icon: 'download',
@@ -55,8 +55,8 @@ export default defineComponent({
           attachments: [require('@/assets/comment-1.jpg'), require('@/assets/comment-2.jpg'), require('@/assets/comment-3.jpg'), require('@/assets/comment-4.jpg')],
           comment: null,
           time: '6:02 PM'
-        } as Messages
-      ]
+        }
+      ] as unknown as Messages
     }
   },
   methods: {
