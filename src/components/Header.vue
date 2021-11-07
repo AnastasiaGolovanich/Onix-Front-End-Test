@@ -6,9 +6,7 @@ header
       h2 Website Redesign
       button(class="see-more" aria-label="see-more button")
     div(class="right-side")
-      img(:src="images[0]" alt="photo" class="round")
-      img(:src="images[1]" alt="photo" class="round")
-      img(:src="images[2]" alt="photo" class="round")
+      avatar(v-for="image in images" :key="image" :image="image")
       button(class="share") Share
       button(class="chat")
         span Chat
@@ -20,8 +18,10 @@ header
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Avatar from '@/components/Avatar.vue'
 
 export default defineComponent({
+  components: { Avatar },
   data () {
     return {
       selected: 2,

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Activity from '../views/Activity.vue'
+import Activity from '../views/Content.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {

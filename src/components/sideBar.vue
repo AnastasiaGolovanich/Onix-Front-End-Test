@@ -4,13 +4,7 @@ aside
     a(href="#" class="logo")
     h2 Projectus
     button(aria-label="Search button")
-  section(class="user-info")
-    h2(class="visually-hidden") User Info
-    img(:src="userImage" alt="user photo")
-    div
-      h2 {{ userName }}
-      p {{ userWork }}
-    button(aria-label="see-more button")
+  user-profile
   section(class="user-statistic")
     h2(class="visually-hidden") User Statistic
     div
@@ -29,8 +23,10 @@ aside
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import UserProfile from '@/components/UserProfile.vue'
 
 export default defineComponent({
+  components: { UserProfile },
   props: {
     notification: { type: Object as PropType<number>, required: true }
   },
