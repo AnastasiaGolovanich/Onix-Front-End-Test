@@ -6,7 +6,7 @@ div(class="main-page")
     router-view(@index-img="changeNotification($event)")/
 </template>
 <script lang="ts">
-import sideBar from '@/components/sideBar.vue'
+import sideBar from '@/components/SideBar.vue'
 import Header from '@/components/Header.vue'
 import { defineComponent } from 'vue'
 
