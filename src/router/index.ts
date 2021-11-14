@@ -13,27 +13,27 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/kanban',
     name: 'Kanban',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ComingSoon.vue')
+    component: () => import(/* webpackChunkName: "Kanban" */ '../views/ComingSoon.vue')
   },
   {
     path: '/activity',
     name: 'Activity',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Content.vue')
+    component: () => import(/* webpackChunkName: "Activity" */ '../views/Content.vue')
   },
   {
     path: '/calendar',
     name: 'Calendar',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ComingSoon.vue')
+    component: () => import(/* webpackChunkName: "Calendar" */ '../views/ComingSoon.vue')
   },
   {
     path: '/files',
     name: 'Files',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ComingSoon.vue')
+    component: () => import(/* webpackChunkName: "Files" */ '../views/ComingSoon.vue')
   },
   {
     path: '/404',
     name: 'NotFound',
-    component: () => import(/* webpackChunkName: "about" */ '../views/NotFound.vue')
+    component: () => import(/* webpackChunkName: "NotFound" */ '../views/NotFound.vue')
   },
   {
     path: '/:catchAll(.*)',
