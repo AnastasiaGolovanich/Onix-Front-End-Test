@@ -10,44 +10,20 @@ header
       button(class="share") Share
       button(class="chat")
         span Chat
-  nav(id="footer-nav")
-    ul
-      li(v-for="(link, index) in links" :key="link.navName" @click="selected = index" :class="{active:selected == index}")
-        router-link(:to="link.navLink") {{ link.navName }}
+  TheNavigation
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import Avatar from '@/components/Avatar.vue'
+import TheNavigation from '@/components/TheNavigation.vue'
 
 export default defineComponent({
-  components: { Avatar },
+  components: { TheNavigation, Avatar },
   data () {
     return {
       selected: 0,
-      images: [require('@/assets/user-photo.jpg'), require('@/assets/user-photo-2.jpg'), require('@/assets/user-photo-3.jpg')],
-      links: [
-        {
-          navName: 'Tasks',
-          navLink: '/tasks'
-        },
-        {
-          navName: 'Kanban',
-          navLink: '/kanban'
-        },
-        {
-          navName: 'Activity',
-          navLink: '/activity'
-        },
-        {
-          navName: 'Calendar',
-          navLink: '/calendar'
-        },
-        {
-          navName: 'Files',
-          navLink: '/files'
-        }
-      ]
+      images: [require('@/assets/user-photo.jpg'), require('@/assets/user-photo-2.jpg'), require('@/assets/user-photo-3.jpg')]
     }
   }
 })
