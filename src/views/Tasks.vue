@@ -36,7 +36,7 @@ export default defineComponent({
         {
           type: 'theory',
           icon: 'book-open',
-          description: 'Read the theory at the link',
+          description: 'Read the theory',
           time: '1:00 PM'
         },
         {

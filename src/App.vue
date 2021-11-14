@@ -7,7 +7,6 @@ import Home from '@/components/Layout.vue'
 export default ({
   components: {
     Home
-    // home
   }
 })
 </script>

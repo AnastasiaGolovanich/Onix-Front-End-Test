@@ -17,14 +17,14 @@ header
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Avatar from '@/components/Avatar.vue'
 
 export default defineComponent({
   components: { Avatar },
   data () {
     return {
-      selected: 2,
+      selected: 0,
       images: [require('@/assets/user-photo.jpg'), require('@/assets/user-photo-2.jpg'), require('@/assets/user-photo-3.jpg')],
       links: [
         {
@@ -37,7 +37,7 @@ export default defineComponent({
         },
         {
           navName: 'Activity',
-          navLink: '/'
+          navLink: '/activity'
         },
         {
           navName: 'Calendar',

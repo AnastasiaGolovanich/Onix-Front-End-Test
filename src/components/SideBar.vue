@@ -1,7 +1,7 @@
 <template lang="pug">
 aside
   section(class="top-side-panel")
-    a(href="#" class="logo")
+    router-link(to="/" class="logo")
     h2 Projectus
     button(aria-label="Search button")
   user-profile
@@ -9,10 +9,10 @@ aside
     h2(class="visually-hidden") User Statistic
     div
       p(class="count" v-on:click="addTask") {{ completedTaskCount }}
-      p(class="title") Completed Tasks
+      router-link(to="" class="title") Completed Tasks
     div
       p(class="count") {{ openTaskCount }}
-      p(class="title") Open Tasks
+      router-link(to="/tasks" class="title" @click="addActiveClass(0)") Open Tasks
   nav
     p(class="menu") Menu
     ul
@@ -52,6 +52,9 @@ export default defineComponent({
           alert('You have no open tasks.')
         }
       }
+    },
+    addActiveClass (index: number) {
+      this.$emit('activeClassIndex', index)
     }
   }
 })
