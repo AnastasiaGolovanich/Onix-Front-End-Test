@@ -31,8 +31,8 @@ export default defineComponent({
     notification: { type: Object as PropType<number>, required: true }
   },
   data () {
-    let completedTaskCount: number
-    let openTaskCount: number
+    // let completedTaskCount: number
+    // let openTaskCount: number
     return {
       userImage: require('@/assets/user-photo.jpg'),
       userName: 'Jean Gonzales',
