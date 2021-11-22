@@ -4,21 +4,12 @@ section(class="news")
   div(class="current-page")
     p(class="title") Today
     form(v-on:submit.prevent="addNewTask")
-      p(v-if="errors.length" class="error-title") Please correct the indicated errors:
-      ul
-        li(v-for="error in errors" class="error-message") {{ error }}
-      div(class="row")
-        div(class="col-left")
-          label(for="new-task-name") Name
-        div(class="col-right")
-          input(v-model="newTaskName" id="new-task-name" placeholder="Task Name" type="text")
-      div(class="row")
-        div(class="col-left")
-          label(for="new-task-description") Description
-        div(class="col-right")
-          input(v-model="newTaskDescription" id="new-task-description" placeholder="Task Description" type="text")
-      div(class="row-add")
-        input(type="submit" value="Add")
+      input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
+      input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
+      input(type="submit" value="Add")
+    p(v-if="errors.length" class="error-title") Please correct the indicated errors:
+    ul(class="error-ul")
+      li(v-for="error in errors" class="error-message") {{ error }}
     ul
       li(v-for="(task, index) in tasks" v-bind:key="task.id")
         div(class="fixed-time")
@@ -33,12 +24,14 @@ section(class="news")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import AddTaskForm from '@/components/AddTaskForm.vue'
 interface Tasks {
   id: number
   name: string
   description: string
 }
 export default defineComponent({
+  components: { AddTaskForm },
   data () {
     return {
       errors: [] as Array<string>,
@@ -110,79 +103,3 @@ export default defineComponent({
   }
 })
 </script>
-<style scoped>
-.error-title {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  color: #da0707;
-  line-height: 21px;
-  margin-top: 10px;
-  font-weight: bold;
-}
-.right-block .news .current-page .error-message {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  color: #da0707;
-  line-height: 21px;
-  margin-bottom: 5px;
-}
-.right-block .news .current-page form ul {
-  margin-top: 5px;
-}
-.row {
-  display: flex;
-  flex-direction: row;
-}
-.row-add {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: -70px;
-}
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  color: #131313;
-  line-height: 21px;
-}
-
-input[type=text] {
-  background-color: #E3EFFF;
-  padding: 12px 20px;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  cursor: pointer;
-  min-width: 75vh;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  color: #131313;
-  line-height: 21px;
-}
-
-input:hover, input[type=submit]:hover{
-  border: 2px solid #9a9a9a;
-}
-
-.col-left {
-  width: 25%;
-  margin-top: 6px;
-}
-
-.col-right {
-  width: 75%;
-  margin-top: 6px;
-}
-input[type=submit] {
-  background-color: #E3EFFF;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  color: #131313;
-  padding: 12px 20px;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  cursor: pointer;
-  float: right;
-}
-</style>

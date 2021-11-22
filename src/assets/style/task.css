@@ -1,0 +1,56 @@
+.error-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #da0707;
+    line-height: 21px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.right-block .news .current-page .error-message {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #d33c3c;
+    line-height: 21px;
+    margin-bottom: 5px;
+}
+.right-block .news .current-page form ul {
+    margin-top: 5px;
+}
+form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.right-block .news .current-page .error-ul {
+    margin-top: 0;
+}
+input[type=text] {
+    background-color: #E3EFFF;
+    padding: 12px 20px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #131313;
+    line-height: 21px;
+    flex: 1 1 10ch;
+    margin: .5rem;
+}
+
+input:hover, input[type=submit]:hover{
+    border: 2px solid #9a9a9a;
+}
+input[type=submit] {
+    background-color: #E3EFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #131313;
+    padding: 12px 20px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    flex: 1 1 10ch;
+    margin: .5rem;
+}

@@ -1,6 +1,7 @@
 <template lang="pug">
 section(class="news")
   div(class="current-page")
+    img(src="../assets/404.png" alt="page not found")
     h1(class="not-found") Not Found
     p(class="not-found") Oops we couldn't find that page. Try going
       |
@@ -24,4 +25,8 @@ export default defineComponent({
   color: #131313;
   text-align: center;
 }
+img {
+  opacity: 0.7;
+}
+
 </style>
