@@ -2,7 +2,7 @@
 Home
 </template>
 <script lang="ts">
-import Home from '@/components/Layout.vue'
+import Home from '@/components/TheLayout.vue'
 
 export default ({
   components: {

@@ -90,7 +90,7 @@
     background-color: #e7e7e7;
     border-radius: 12px;
     padding: 21px 30px 28px;
-    padding: 21px 30px 28px;
+    min-width: 98vh;
 }
 
 

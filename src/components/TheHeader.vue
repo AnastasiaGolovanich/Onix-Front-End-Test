@@ -14,7 +14,7 @@ header
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import Avatar from '@/components/Avatar.vue'
 import TheNavigation from '@/components/TheNavigation.vue'
 
