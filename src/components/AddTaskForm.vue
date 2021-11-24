@@ -1,10 +1,8 @@
 <template lang="pug">
 form(v-on:submit.prevent="addNewTask")
-  label(for="new-task-name") Task Name
-  input(v-model="newTaskName" id="new-task-name" placeholder="Task Name")
-  label(for="new-task-description") Task Description
-  input(v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
-  button Add
+  input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
+  input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
+  input(type="submit" value="Add")
 ul
   li(v-for="(task, index) in tasks" v-bind:key="task.id") {{task.id}}: {{task.name}}: {{task.description}}
     buttom(v-on:click="removeTask(index)") Remove
@@ -46,5 +44,16 @@ export default {
 </script>
 
 <style scoped>
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+input {
+  flex: 1 1 10ch;
+  margin: .5rem;
+}
 
+input[type="email"] {
+   flex: 3 1 30ch;
+ }
 </style>
