@@ -24,14 +24,12 @@ section(class="news")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AddTaskForm from '@/components/AddTaskForm.vue'
 interface Tasks {
   id: number
   name: string
   description: string
 }
 export default defineComponent({
-  components: { AddTaskForm },
   data () {
     return {
       errors: [] as Array<string>,

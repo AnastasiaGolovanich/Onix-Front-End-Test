@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Tasks from '../views/Tasks.vue'
+import RouteNames from '../constants/routeNames'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,27 +14,27 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/kanban',
     name: 'Kanban',
-    component: () => import(/* webpackChunkName: "Kanban" */ '../views/ComingSoon.vue')
+    component: RouteNames.KANBAN
   },
   {
     path: '/activity',
     name: 'Activity',
-    component: () => import(/* webpackChunkName: "Activity" */ '../views/Activity.vue')
+    component: RouteNames.ACTIVITY
   },
   {
     path: '/calendar',
     name: 'Calendar',
-    component: () => import(/* webpackChunkName: "Calendar" */ '../views/ComingSoon.vue')
+    component: RouteNames.CALENDAR
   },
   {
     path: '/files',
     name: 'Files',
-    component: () => import(/* webpackChunkName: "Files" */ '../views/ComingSoon.vue')
+    component: RouteNames.FILES
   },
   {
     path: '/404',
     name: 'NotFound',
-    component: () => import(/* webpackChunkName: "NotFound" */ '../views/NotFound.vue')
+    component: RouteNames.NOT_FOUND
   },
   {
     path: '/:catchAll(.*)',
