@@ -22,17 +22,18 @@ aside
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import UserProfile from '@/components/UserProfile.vue'
 
 export default defineComponent({
   components: { UserProfile },
   props: {
-    notification: { type: Object as PropType<number>, required: true }
+    notification: {
+      type: Number,
+      required: true
+    }
   },
   data () {
-    // let completedTaskCount: number
-    // let openTaskCount: number
     return {
       userImage: require('@/assets/user-photo.jpg'),
       userName: 'Jean Gonzales',

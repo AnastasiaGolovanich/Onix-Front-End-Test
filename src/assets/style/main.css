@@ -32,7 +32,7 @@
 
 .right-block .news .current-page ul {
     list-style-type: none;
-    margin-top: 32px;
+    margin-top: 27px;
 }
 .right-block .news .current-page ul .fixed-time {
     display: flex;
@@ -42,7 +42,8 @@
     flex-direction: row;
     justify-content: space-between;
     color: #0F0F0F;
-    margin-bottom: 28px;
+    margin-bottom: 18px;
+    padding: 5px 0;
     flex: 1 1 10ch
 }
 

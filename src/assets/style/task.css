@@ -54,3 +54,34 @@ input[type=submit] {
     flex: 1 1 10ch;
     margin: .5rem;
 }
+.remove-button {
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    padding: 13px;
+    border-radius: 40px;
+    max-height: 16px;
+    font-size: 14px;
+    background: #E3EFFF;
+}
+.task-font-change {
+    font-size: 24px;
+    animation-name: change-font-size;
+    animation-duration: 1.5s;
+}
+@keyframes change-font-size {
+    0%   {font-size: 16px;}
+    50%  {font-size: 20px;}
+    100% {font-size: 16px;}
+}
+.task-flicker {
+    border-radius: 5px;
+    background-color: #ffffff;
+    animation-name: flicker-effect;
+    animation-duration: 1s;
+    animation-iteration-count: 3;
+}
+@keyframes flicker-effect {
+    0%   {background-color: #ffffff;}
+    40%  {background-color: rgba(239, 239, 239, 0.73);}
+    100% {background-color: #ffffff;}
+}
