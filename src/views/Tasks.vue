@@ -11,80 +11,83 @@ section(class="news")
     ul(class="error-ul")
       li(v-for="error in errors" class="error-message") {{ error }}
     ul
-      li(v-for="(task, index) in tasks" v-bind:key="task.id")
+      li(v-for="(task, index) in tasks" :key="task.id" :id="task.id")
         div(class="fixed-time")
           p(class="icons")
             fa(:icon="['fas', 'asterisk']")/
           div
-            p(class="message") {{task.name}}
-            p(class="sub-message") {{task.description}}
-        buttom(v-on:click="removeTask(index)" class="icons")
+            p(class="message" :style="task.delay") {{task.name}}
+            p(class="sub-message" :style="task.delay") {{task.description}}
+        div(@click="removeTask(index)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AddTaskForm from '@/components/AddTaskForm.vue'
 interface Tasks {
   id: number
   name: string
   description: string
+  delay:string
 }
 export default defineComponent({
-  components: { AddTaskForm },
   data () {
     return {
       errors: [] as Array<string>,
       newTaskName: '',
       newTaskDescription: '',
-      tasks: [
-        {
-          id: 1,
-          name: 'Install programs',
-          description: 'Install Node.js and Vue CLI on PC'
-        },
-        {
-          id: 2,
-          name: 'Read the theory',
-          description: 'Working with forms'
-        },
-        {
-          id: 3,
-          name: 'Practice',
-          description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task. Both fields must be required. At the bottom of the form, place the Add button, by clicking on which a new task should be added to the list. In this case, the form fields should be cleared.\n' +
-            'Add a delete button next to each task. When clicked, remove the task from the array.'
-        }
-      ] as Tasks[],
-      nextTaskId: 4
+      tasks: [] as Tasks[],
+      nextTaskId: 4,
+      newTaskId: 3
+    }
+  },
+  created () {
+    this.tasks = [
+      {
+        id: 1,
+        name: 'Install programs',
+        description: 'Install Node.js and Vue CLI on PC',
+        delay: 'animation-delay:0s'
+      },
+      {
+        id: 2,
+        name: 'Read the theory',
+        description: 'Working with forms',
+        delay: 'animation-delay:1s'
+      },
+      {
+        id: 3,
+        name: 'Practice',
+        description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
+        delay: 'animation-delay:2s'
+      }
+    ] as Tasks[]
+  },
+  mounted () {
+    const messageClass = document.getElementsByClassName('message')
+    const subMessageClass = document.getElementsByClassName('sub-message')
+    for (let i = 0; i < messageClass.length; i++) {
+      this.$nextTick().then(() => messageClass[i].classList.add('task-font-change'))
+      this.$nextTick().then(() => subMessageClass[i].classList.add('task-font-change'))
+    }
+  },
+  updated () {
+    const index = this.newTaskId
+    const taskFlicker = document.getElementById(index as unknown as string)
+    if (taskFlicker != null && index > 3) {
+      this.$nextTick().then(() => taskFlicker.classList.add('task-flicker'))
     }
   },
   methods: {
-    checkForm: function (e : any) {
-      console.log('checkForm')
-      console.log(this.newTaskName)
-      console.log(this.newTaskDescription)
-      if (this.newTaskName && this.newTaskDescription) {
-        console.log('here')
-        return true
-      }
-      this.errors = []
-      if (!this.newTaskName) {
-        console.log('Add Task Name')
-        this.errors.push('Add Task Name')
-      }
-      if (!this.newTaskDescription) {
-        console.log('Add Task Description')
-        this.errors.push('Add Task Description')
-      }
-      e.preventDefault()
-    },
     addNewTask: function () {
       if (this.newTaskName !== '' && this.newTaskDescription !== '') {
         this.tasks.push({
           id: this.nextTaskId++,
           name: this.newTaskName,
-          description: this.newTaskDescription
+          description: this.newTaskDescription,
+          delay: 'animation-delay:0s'
         })
+        this.newTaskId++
         this.newTaskName = ''
         this.newTaskDescription = ''
         this.errors = []
