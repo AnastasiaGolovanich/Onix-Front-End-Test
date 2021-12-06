@@ -1,40 +1,39 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Tasks from '../views/Tasks.vue'
 import RouteNames from '../constants/routeNames'
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/', redirect: '/tasks'
   },
   {
     path: '/tasks',
-    name: 'Tasks',
+    name: RouteNames.TASKS,
     component: Tasks
   },
   {
     path: '/kanban',
-    name: 'Kanban',
-    component: RouteNames.KANBAN
+    name: RouteNames.KANBAN,
+    component: () => import(/* webpackChunkName: "Kanban" */ '../views/ComingSoon.vue')
   },
   {
     path: '/activity',
-    name: 'Activity',
-    component: RouteNames.ACTIVITY
+    name: RouteNames.ACTIVITY,
+    component: () => import(/* webpackChunkName: "Activity" */'../views/Activity.vue')
   },
   {
     path: '/calendar',
-    name: 'Calendar',
-    component: RouteNames.CALENDAR
+    name: RouteNames.CALENDAR,
+    component: () => import(/* webpackChunkName: "Calendar" */ '../views/ComingSoon.vue')
   },
   {
     path: '/files',
-    name: 'Files',
-    component: RouteNames.FILES
+    name: RouteNames.FILES,
+    component: () => import(/* webpackChunkName: "Files" */ '../views/ComingSoon.vue')
   },
   {
     path: '/404',
-    name: 'NotFound',
-    component: RouteNames.NOT_FOUND
+    name: RouteNames.NOT_FOUND,
+    component: () => import(/* webpackChunkName: "NotFound" */ '../views/NotFound.vue')
   },
   {
     path: '/:catchAll(.*)',

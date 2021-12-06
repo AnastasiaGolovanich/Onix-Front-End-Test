@@ -16,9 +16,10 @@ section(class="news")
           p(class="icons")
             fa(:icon="['fas', 'asterisk']")/
           div
-            p(class="message" :style="task.delay") {{task.name}}
-            p(class="sub-message" :style="task.delay") {{task.description}}
-        div(@click="removeTask(index)" class="remove-button")
+            //p(ref="message" class="message" :style="task.delay") {{task.name}}
+            p(:ref="'message'+task.id" class="message" :style="task.delay") {{task.name}}
+            p(:ref="'sub-message'+task.id" class="sub-message" :style="task.delay") {{task.description}}
+        button(@click="removeTask(index)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
 </template>
 
@@ -28,7 +29,7 @@ interface Tasks {
   id: number
   name: string
   description: string
-  delay:string
+  delay: string
 }
 export default defineComponent({
   data () {
@@ -64,11 +65,16 @@ export default defineComponent({
     ] as Tasks[]
   },
   mounted () {
-    const messageClass = document.getElementsByClassName('message')
-    const subMessageClass = document.getElementsByClassName('sub-message')
-    for (let i = 0; i < messageClass.length; i++) {
-      this.$nextTick().then(() => messageClass[i].classList.add('task-font-change'))
-      this.$nextTick().then(() => subMessageClass[i].classList.add('task-font-change'))
+    for (let i = 0; i < this.tasks.length; i++) {
+      const messageClass = this.$refs['message' + this.tasks[i].id]
+      const subMessageClass = this.$refs['sub-message' + this.tasks[i].id]
+      console.log('messageClass: ', messageClass)
+      console.log('subMessageClass: ', typeof subMessageClass)
+      if (messageClass) {
+        console.log('messageClass: ', messageClass)
+        this.$nextTick().then(() => messageClass.classList.add('task-font-change'))
+      }
+      //   this.$nextTick().then(() => subMessageClass.classList.add('task-font-change'))
     }
   },
   updated () {
