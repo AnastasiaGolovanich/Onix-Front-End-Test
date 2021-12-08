@@ -3,7 +3,7 @@ nav(id="footer-nav")
   router-link(v-for="link in links" :key="link.navName" :to="link.navLink") {{ link.navName }}
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'TheNavigation',
   data () {

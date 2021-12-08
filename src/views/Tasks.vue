@@ -10,15 +10,15 @@ section(class="news")
     p(v-if="errors.length" class="error-title") Please correct the indicated errors:
     ul(class="error-ul")
       li(v-for="error in errors" class="error-message") {{ error }}
-    ul
-      li(v-for="(task, index) in tasks" :key="task.id" :id="task.id")
+    ul(ref="tasks")
+      li(v-for="(task, index) in tasks" :key="task.id" :id="task.id" :ref="setItemRef")
         div(class="fixed-time")
           p(class="icons")
             fa(:icon="['fas', 'asterisk']")/
           div
             p(class="message" :style="task.delay") {{task.name}}
             p(class="sub-message" :style="task.delay") {{task.description}}
-        div(@click="removeTask(index)" class="remove-button")
+        button(@click="removeTask(index)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
 </template>
 
@@ -28,17 +28,18 @@ interface Tasks {
   id: number
   name: string
   description: string
-  delay:string
+  delay: string
 }
 export default defineComponent({
-  data () {
+  data: function () {
     return {
       errors: [] as Array<string>,
       newTaskName: '',
       newTaskDescription: '',
       tasks: [] as Tasks[],
       nextTaskId: 4,
-      newTaskId: 3
+      newTaskId: 3,
+      itemRefs: [] as HTMLElement[]
     }
   },
   created () {
@@ -63,13 +64,19 @@ export default defineComponent({
       }
     ] as Tasks[]
   },
-  mounted () {
-    const messageClass = document.getElementsByClassName('message')
-    const subMessageClass = document.getElementsByClassName('sub-message')
-    for (let i = 0; i < messageClass.length; i++) {
-      this.$nextTick().then(() => messageClass[i].classList.add('task-font-change'))
-      this.$nextTick().then(() => subMessageClass[i].classList.add('task-font-change'))
+  mounted: function () {
+    for (let i = 0; i < this.itemRefs.length; i++) {
+      const taskBlock = this.itemRefs[i].firstElementChild
+      if (taskBlock) {
+        const taskBlockChildren = taskBlock.children
+        for (let j = 0; j < taskBlockChildren.length; j++) {
+          taskBlockChildren[1].children[j].classList.add('task-font-change')
+        }
+      }
     }
+  },
+  beforeUpdate () {
+    this.itemRefs = []
   },
   updated () {
     const index = this.newTaskId
@@ -77,6 +84,7 @@ export default defineComponent({
     if (taskFlicker != null && index > 3) {
       this.$nextTick().then(() => taskFlicker.classList.add('task-flicker'))
     }
+    console.log(this.itemRefs)
   },
   methods: {
     addNewTask: function () {
@@ -102,6 +110,11 @@ export default defineComponent({
     },
     removeTask: function (index : number) {
       this.tasks.splice(index, 1)
+    },
+    setItemRef (el: HTMLElement) {
+      if (el) {
+        this.itemRefs.push(el)
+      }
     }
   }
 })
