@@ -6,6 +6,7 @@ section(class="news")
     form(v-on:submit.prevent="addNewTask")
       input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
       input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
+      input(type="text" v-model="newTaskEndDate" id="new-task-end-date" placeholder="End Date")
       input(type="submit" value="Add")
     p(v-if="errors.length" class="error-title") Please correct the indicated errors:
     ul(class="error-ul")
@@ -24,11 +25,18 @@ section(class="news")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+enum Status {
+  todo = 'todo',
+  inprogress = 'inprogress',
+  done = 'done'
+}
 interface Tasks {
   id: number
   name: string
   description: string
+  date: string
   delay: string
+  status: Status
 }
 export default defineComponent({
   data: function () {
@@ -36,6 +44,7 @@ export default defineComponent({
       errors: [] as Array<string>,
       newTaskName: '',
       newTaskDescription: '',
+      newTaskEndDate: '',
       tasks: [] as Tasks[],
       nextTaskId: 4,
       newTaskId: 3,
@@ -48,21 +57,28 @@ export default defineComponent({
         id: 1,
         name: 'Install programs',
         description: 'Install Node.js and Vue CLI on PC',
-        delay: 'animation-delay:0s'
+        date: '12/31/2021',
+        delay: 'animation-delay:0s',
+        status: 'todo'
       },
       {
         id: 2,
         name: 'Read the theory',
         description: 'Working with forms',
-        delay: 'animation-delay:1s'
+        delay: 'animation-delay:1s',
+        date: '12/31/2021',
+        status: 'todo'
       },
       {
         id: 3,
         name: 'Practice',
         description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
-        delay: 'animation-delay:2s'
+        delay: 'animation-delay:2s',
+        date: '12/31/2021',
+        status: 'todo'
       }
     ] as Tasks[]
+    this.$emit('checkTasks', this.tasks)
   },
   mounted: function () {
     for (let i = 0; i < this.itemRefs.length; i++) {
@@ -84,7 +100,6 @@ export default defineComponent({
     if (taskFlicker != null && index > 3) {
       this.$nextTick().then(() => taskFlicker.classList.add('task-flicker'))
     }
-    console.log(this.itemRefs)
   },
   methods: {
     addNewTask: function () {
@@ -93,11 +108,14 @@ export default defineComponent({
           id: this.nextTaskId++,
           name: this.newTaskName,
           description: this.newTaskDescription,
-          delay: 'animation-delay:0s'
+          date: this.newTaskEndDate,
+          delay: 'animation-delay:0s',
+          status: Status.todo
         })
         this.newTaskId++
         this.newTaskName = ''
         this.newTaskDescription = ''
+        this.newTaskEndDate = ''
         this.errors = []
       } else {
         if (this.newTaskName === '') {
