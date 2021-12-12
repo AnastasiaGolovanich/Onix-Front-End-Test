@@ -6,73 +6,49 @@ section(class="news")
     table
       tr
         th(v-for="headline in headlines" :key="headline" ) {{headline}}
-      template(v-for="task in tasks" :key="task.id")
-        tr(v-if="task.status === 'todo'")
-           td {{task.name}} - {{task.date}}
-           td
-           td
-        tr(v-if="task.status === 'inprogress'")
-          td
-          td {{task.name}} - {{task.date}}
-          td
-        tr(v-if="task.status === 'done'")
-          td
-          td
-          td {{task.name}} - {{task.date}}
-
+      tr(v-for="items in generateTable" :key="items.id")
+        td(v-for="item in items")
+           template(v-if="item" ) {{item.name}} - {{item.date}}
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-enum Status {
-  todo = 'todo',
-  inprogress = 'inprogress',
-  done = 'done'
-}
-interface Tasks {
-  id: number
-  name: string
-  description: string
-  date: string
-  delay: string
-  status: Status
-}
+import { Tasks } from '@/views/Tasks.vue'
+
 export default defineComponent({
   name: 'Kanban',
+  props: ['tasks'],
   data: function () {
     return {
-      headlines: [] as Array<string>,
-      tasks: [] as Tasks[]
+      headlines: [] as Array<string>
     }
   },
   created () {
     this.headlines = ['To Do', 'In Progress', 'Done']
-    this.tasks = [
-      {
-        id: 1,
-        name: 'Install programs',
-        description: 'Install Node.js and Vue CLI on PC',
-        date: '12/31/2021',
-        delay: 'animation-delay:0s',
-        status: 'todo'
-      },
-      {
-        id: 2,
-        name: 'Read the theory',
-        description: 'Working with forms',
-        delay: 'animation-delay:1s',
-        date: '12/31/2021',
-        status: 'todo'
-      },
-      {
-        id: 3,
-        name: 'Practice',
-        description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
-        delay: 'animation-delay:2s',
-        date: '12/31/2021',
-        status: 'done'
+  },
+  computed: {
+    generateTable () {
+      const tasksInToDo = [] as Tasks []
+      const tasksInProgress = [] as Tasks []
+      const tasksInDone = [] as Tasks []
+      this.tasks.forEach(function (task : Tasks) {
+        if (task.status === 'todo') {
+          tasksInToDo.push(task)
+        }
+        if (task.status === 'inprogress') {
+          tasksInProgress.push(task)
+        }
+        if (task.status === 'done') {
+          tasksInDone.push(task)
+        }
+      })
+      const maxLength = Math.max(tasksInToDo.length, tasksInProgress.length, tasksInDone.length)
+      const tableData = []
+      for (let i = 0; i < maxLength; i++) {
+        tableData[i] = [tasksInToDo[i], tasksInProgress[i], tasksInDone[i]]
       }
-    ] as Tasks[]
+      return tableData
+    }
   }
 })
 </script>

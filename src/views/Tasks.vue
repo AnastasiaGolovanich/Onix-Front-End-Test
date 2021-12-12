@@ -7,12 +7,12 @@ section(class="news")
       input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
       input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
       input(type="text" v-model="newTaskEndDate" id="new-task-end-date" placeholder="End Date")
-      input(type="submit" value="Add")
+      input(type="submit" value="Add" @click="isClickButton = true")
     p(v-if="errors.length" class="error-title") Please correct the indicated errors:
     ul(class="error-ul")
       li(v-for="error in errors" class="error-message") {{ error }}
-    ul(ref="tasks")
-      li(v-for="(task, index) in tasks" :key="task.id" :id="task.id" :ref="setItemRef")
+    ul
+      li(v-for="(task, index) in tasksUpdate" :key="task.id" :id="task.id" :ref="setItemRef")
         div(class="fixed-time")
           p(class="icons")
             fa(:icon="['fas', 'asterisk']")/
@@ -25,12 +25,12 @@ section(class="news")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-enum Status {
+export enum Status {
   todo = 'todo',
   inprogress = 'inprogress',
   done = 'done'
 }
-interface Tasks {
+export interface Tasks {
   id: number
   name: string
   description: string
@@ -39,48 +39,23 @@ interface Tasks {
   status: Status
 }
 export default defineComponent({
+  emits: ['sync-tasks'],
+  props: ['tasks'],
   data: function () {
     return {
       errors: [] as Array<string>,
       newTaskName: '',
       newTaskDescription: '',
       newTaskEndDate: '',
-      tasks: [] as Tasks[],
       nextTaskId: 4,
       newTaskId: 3,
-      itemRefs: [] as HTMLElement[]
+      itemRefs: [] as HTMLElement[],
+      tasksUpdate: [] as Tasks[],
+      isClickButton: false
     }
   },
-  created () {
-    this.tasks = [
-      {
-        id: 1,
-        name: 'Install programs',
-        description: 'Install Node.js and Vue CLI on PC',
-        date: '12/31/2021',
-        delay: 'animation-delay:0s',
-        status: 'todo'
-      },
-      {
-        id: 2,
-        name: 'Read the theory',
-        description: 'Working with forms',
-        delay: 'animation-delay:1s',
-        date: '12/31/2021',
-        status: 'todo'
-      },
-      {
-        id: 3,
-        name: 'Practice',
-        description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
-        delay: 'animation-delay:2s',
-        date: '12/31/2021',
-        status: 'todo'
-      }
-    ] as Tasks[]
-    this.$emit('checkTasks', this.tasks)
-  },
   mounted: function () {
+    this.tasksUpdate = this.tasks
     for (let i = 0; i < this.itemRefs.length; i++) {
       const taskBlock = this.itemRefs[i].firstElementChild
       if (taskBlock) {
@@ -95,16 +70,19 @@ export default defineComponent({
     this.itemRefs = []
   },
   updated () {
-    const index = this.newTaskId
-    const taskFlicker = document.getElementById(index as unknown as string)
-    if (taskFlicker != null && index > 3) {
-      this.$nextTick().then(() => taskFlicker.classList.add('task-flicker'))
+    const index = this.itemRefs.length - 1
+    if (this.isClickButton) {
+      const taskBlock = this.itemRefs[index]
+      if (taskBlock) {
+        taskBlock.classList.add('task-flicker')
+      }
+      this.isClickButton = false
     }
   },
   methods: {
     addNewTask: function () {
       if (this.newTaskName !== '' && this.newTaskDescription !== '') {
-        this.tasks.push({
+        this.tasksUpdate.push({
           id: this.nextTaskId++,
           name: this.newTaskName,
           description: this.newTaskDescription,
@@ -127,7 +105,7 @@ export default defineComponent({
       }
     },
     removeTask: function (index : number) {
-      this.tasks.splice(index, 1)
+      this.tasksUpdate.splice(index, 1)
     },
     setItemRef (el: HTMLElement) {
       if (el) {
