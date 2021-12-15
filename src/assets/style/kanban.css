@@ -1,0 +1,28 @@
+.tasks-table {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.tasks-column {
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 29%;
+    background-color: #E3EFFF;
+    box-shadow: 5px 5px 10px #c4cad9;
+}
+.tasks-column:nth-child(2) {
+    background-color: #FFF8DD;
+}
+.tasks-column:nth-child(3) {
+    background-color: #CEF9C6;
+}
+.col-headline {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    color: #131313;
+    margin-bottom: 10px;
+}
