@@ -1,8 +1,10 @@
 <template lang="pug">
 section(class="news")
-  h2(class="visually-hidden") Tasks
+  h2(class="visually-hidden") ITasks
   div(class="current-page")
     p(class="title") Today
+    //button(сlass="show-modal-button" @click="show") Показать модальное окно
+    form-modal(ref="modal" v-if="showModal" @close="showModal = false")
     form(v-on:submit.prevent="addNewTask")
       input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
       input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
@@ -25,20 +27,12 @@ section(class="news")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-export enum Status {
-  todo = 'todo',
-  inprogress = 'inprogress',
-  done = 'done'
-}
-export interface Tasks {
-  id: number
-  name: string
-  description: string
-  date: string
-  delay: string
-  status: Status
-}
+import FormModal from '@/components/FormModal.vue'
+import { Status } from '@/constants/Status'
+import { ITasks } from '@/types/ITasks'
+
 export default defineComponent({
+  components: { FormModal },
   emits: ['sync-tasks'],
   props: ['tasks'],
   data: function () {
@@ -50,8 +44,9 @@ export default defineComponent({
       nextTaskId: 4,
       newTaskId: 3,
       itemRefs: [] as HTMLElement[],
-      tasksUpdate: [] as Tasks[],
-      isClickButton: false
+      tasksUpdate: [] as ITasks[],
+      isClickButton: false,
+      showModal: false
     }
   },
   mounted: function () {
@@ -111,7 +106,24 @@ export default defineComponent({
       if (el) {
         this.itemRefs.push(el)
       }
+    },
+    show: function () {
+      this.showModal = true
     }
   }
 })
 </script>
+<style lang="scss">
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+</style>

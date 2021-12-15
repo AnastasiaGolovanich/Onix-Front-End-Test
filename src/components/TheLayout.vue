@@ -9,19 +9,9 @@ div(class="main-page")
 import sideBar from '@/components/TheSideBar.vue'
 import Header from '@/components/TheHeader.vue'
 import { defineComponent } from 'vue'
-enum Status {
-  todo = 'todo',
-  inprogress = 'inprogress',
-  done = 'done'
-}
-interface Tasks {
-  id: number
-  name: string
-  description: string
-  date: string
-  delay: string
-  status: Status
-}
+import { Status } from '@/constants/Status'
+import { ITasks } from '@/types/ITasks'
+
 export default defineComponent({
   components: {
     sideBar,
@@ -30,7 +20,7 @@ export default defineComponent({
   data: function () {
     return {
       notification: 3,
-      tasks: [] as Tasks[]
+      tasks: [] as ITasks[]
     }
   },
   created () {
@@ -41,7 +31,7 @@ export default defineComponent({
         description: 'Install Node.js and Vue CLI on PC',
         date: '12/31/2021',
         delay: 'animation-delay:0s',
-        status: 'done'
+        status: Status.done
       },
       {
         id: 2,
@@ -49,17 +39,17 @@ export default defineComponent({
         description: 'Working with forms',
         delay: 'animation-delay:1s',
         date: '12/31/2021',
-        status: 'todo'
+        status: Status.todo
       },
       {
         id: 3,
         name: 'Practice',
-        description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
+        description: 'On the ITasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
         delay: 'animation-delay:2s',
         date: '12/31/2021',
-        status: 'todo'
+        status: Status.todo
       }
-    ] as Tasks[]
+    ] as ITasks[]
     this.$emit('sync-tasks', this.tasks)
   },
   methods: {

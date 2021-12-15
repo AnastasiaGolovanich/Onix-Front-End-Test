@@ -3,70 +3,55 @@ section(class="news")
   h2(class="visually-hidden") Kanban
   div(class="current-page")
     p(class="title") Today
-    table
-      tr
-        th(v-for="headline in headlines" :key="headline" ) {{headline}}
-      tr(v-for="items in generateTable" :key="items.id")
-        td(v-for="item in items")
-           template(v-if="item" ) {{item.name}} - {{item.date}}
+    div(class="tasks-table")
+      div(class="tasks-column" v-for="col in tableCol" :key="col.status")
+        p(class="col-headline") {{col.headline}}
+        div(v-for="item in generateTable(col.status)")
+          task-item(:name="item.name" :date="item.date")
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Tasks } from '@/views/Tasks.vue'
+import { ITasks } from '@/types/ITasks'
+import { ITableCol } from '@/types/ITableCol'
+import TaskItem from '@/components/TaskItem.vue'
+import { Status } from '@/constants/Status'
 
 export default defineComponent({
   name: 'Kanban',
+  components: { TaskItem },
   props: ['tasks'],
   data: function () {
     return {
-      headlines: [] as Array<string>
+      tableCol: [] as unknown as ITableCol
     }
   },
   created () {
-    this.headlines = ['To Do', 'In Progress', 'Done']
+    this.tableCol = [
+      {
+        headline: 'To Do',
+        status: Status.todo
+      },
+      {
+        headline: 'In Progress',
+        status: Status.inprogress
+      },
+      {
+        headline: 'Done',
+        status: Status.done
+      }
+    ] as unknown as ITableCol
   },
-  computed: {
-    generateTable () {
-      const tasksInToDo = [] as Tasks []
-      const tasksInProgress = [] as Tasks []
-      const tasksInDone = [] as Tasks []
-      this.tasks.forEach(function (task : Tasks) {
-        if (task.status === 'todo') {
-          tasksInToDo.push(task)
-        }
-        if (task.status === 'inprogress') {
-          tasksInProgress.push(task)
-        }
-        if (task.status === 'done') {
-          tasksInDone.push(task)
+  methods: {
+    generateTable (taskStatus : Status) {
+      const tasksInStatus = [] as ITasks []
+      this.tasks.forEach(function (task : ITasks) {
+        if (task.status === taskStatus) {
+          tasksInStatus.push(task)
         }
       })
-      const maxLength = Math.max(tasksInToDo.length, tasksInProgress.length, tasksInDone.length)
-      const tableData = []
-      for (let i = 0; i < maxLength; i++) {
-        tableData[i] = [tasksInToDo[i], tasksInProgress[i], tasksInDone[i]]
-      }
-      return tableData
+      return tasksInStatus
     }
   }
 })
 </script>
-
-<style scoped>
-table {
-  margin-top: 20px;
-  border: rgba(154, 154, 154, 0.95) 1px solid;
-}
-th {
-  background-color: #E3EFFF;
-  border: #9a9a9a 1px solid;
-}
-td, tr, th {
-  border: #d9d9d9 1px solid;
-  padding: 5px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  color: #131313;
-}
-</style>

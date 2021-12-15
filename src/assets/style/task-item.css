@@ -1,0 +1,17 @@
+.task-item {
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    background-color: white;
+}
+.task-item .task-name, .task-item .task-date {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #131313;
+    line-height: 20px;
+}
+.task-item .task-date {
+    font-size: 12px;
+    text-align: right;
+}
