@@ -9,15 +9,15 @@ aside
     h2(class="visually-hidden") User Statistic
     div
       p(class="count" v-on:click="addTask") {{ completedTaskCount }}
-      router-link(to="" class="title") Completed ITasks
+      router-link(to="" class="title") Completed ITask
     div
       p(class="count") {{ openTaskCount }}
-      router-link(to="/tasks" class="title" @click="addActiveClass(0)") Open ITasks
+      router-link(to="/tasks" class="title" @click="addActiveClass(0)") Open ITask
   nav
     p(class="menu") Menu
     ul
       li Home
-      li My ITasks
+      li My Task
       li(id="notification" v-bind:data-after="notification") Notifications
 </template>
 

@@ -1,91 +1,89 @@
 <template lang="pug">
-div(v-if="show" class="modal-shadow" @click.self="closeModal")
+div(class="modal-shadow" @click.self="close")
   div(class="modal")
-    div(class="modal-close" @click="closeModal")
+    div(class="modal-close" @click="close") x
     slot(name="title")
-      h3(class="modal-title") Заголовок
+      h3(class="modal-title") Add New Task
     slot(name="body")
-      div(class="modal-content") Дефолтный контент модального окна
+      div(class="modal-content")
+        form(v-on:submit.prevent="addNewTask")
+          input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
+          input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
+          input(class="input-date" type="date" v-model="newTaskEndDate" id="new-task-end-date" placeholder="End Date")
+          input(type="submit" value="Add" @click="isClickButton = true")
+        p(v-if="errors.length" class="error-title") Please correct the indicated errors:
+        ul(class="error-ul")
+          li(v-for="error in errors" class="error-message") {{ error }}
     slot(name="footer")
       div(class="modal-footer")
-        button(class="modal-footer-button" @click="closeModal") Ok
+        button(class="modal-footer-button" @click="close") Cancel
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { Status } from '@/constants/Status'
+import { ITask } from '@/types/ITask'
 
 export default defineComponent({
   name: 'FormModal',
+  props: ['tasks'],
   data: function () {
     return {
-      show: true
+      errors: [] as Array<string>,
+      newTaskName: '',
+      newTaskDescription: '',
+      newTaskEndDate: '',
+      nextTaskId: 4,
+      newTaskId: 3,
+      tasksUpdate: [] as ITask[],
+      isClickButton: false
     }
   },
   methods: {
-    closeModal: function () {
-      this.show = false
+    addNewTask: function () {
+      this.tasksUpdate = this.tasks
+      if (this.newTaskName !== '' && this.newTaskDescription !== '' && new Date(this.newTaskEndDate) >= new Date()) {
+        this.tasksUpdate.push({
+          id: this.nextTaskId++,
+          name: this.newTaskName,
+          description: this.newTaskDescription,
+          date: this.newTaskEndDate,
+          delay: 'animation-delay:0s',
+          status: Status.todo
+        })
+        this.newTaskId++
+        this.newTaskName = ''
+        this.newTaskDescription = ''
+        this.newTaskEndDate = ''
+        this.errors = []
+        this.$emit('close')
+      } else {
+        if (this.newTaskName === '') {
+          this.errors.push('Add Task Name')
+        }
+        if (this.newTaskDescription === '') {
+          this.errors.push('Add Task Description')
+        }
+        if (this.newTaskEndDate < Date()) {
+          this.errors.push('Chose correct date')
+        }
+        console.log(this.errors)
+      }
+    },
+    close () {
+      this.$emit('close')
+      this.errors = []
+    },
+    isCorrectDate: function () {
+      if (this.newTaskEndDate < Date()) {
+        return false
+      }
+      return true
     }
   }
 })
 </script>
 
-<style scoped
-       lang="scss">
-.modal-shadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.39);
-}
-
-.modal {
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px;
-  min-width: 420px;
-  max-width: 480px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  &-close {
-    border-radius: 50%;
-    color: #fff;
-    background: #2a4cc7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-
-  &-title {
-    color: #0971c7;
-  }
-
-  &-content {
-    margin-bottom: 20px
-  }
-
-  &-footer {
-    &-button {
-      background-color: #0971c7;
-      color: #fff;
-      border: none;
-      text-align: center;
-      padding: 8px;
-      font-size: 17px;
-      font-weight: 500;
-      border-radius: 8px;
-      min-width: 150px;
-    }
-  }
-}
+<style>
+@import "../assets/style/modal.module.css";
 </style>

@@ -12,3 +12,6 @@ export default defineComponent({
   props: ['name', 'date']
 })
 </script>
+<style>
+@import "../assets/style/task-item.module.css";
+</style>
