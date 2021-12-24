@@ -11,6 +11,7 @@
     min-width: 29%;
     background-color: #E3EFFF;
     box-shadow: 5px 5px 10px #c4cad9;
+    margin: 5px;
 }
 .tasks-column:nth-child(2) {
     background-color: #FFF8DD;

@@ -4,6 +4,7 @@
     padding: 5px;
     margin: 5px;
     background-color: white;
+    cursor: pointer;
 }
 .task-item .task-name, .task-item .task-date {
     font-family: 'Open Sans', sans-serif;

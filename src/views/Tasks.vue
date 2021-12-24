@@ -1,21 +1,13 @@
 <template lang="pug">
 section(class="news")
-  h2(class="visually-hidden") ITasks
+  h2(class="visually-hidden") ITask
   div(class="current-page")
     p(class="title") Today
-    //button(сlass="show-modal-button" @click="show") Показать модальное окно
-    form-modal(ref="modal" v-if="showModal" @close="showModal = false")
-    form(v-on:submit.prevent="addNewTask")
-      input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
-      input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
-      input(type="text" v-model="newTaskEndDate" id="new-task-end-date" placeholder="End Date")
-      input(type="submit" value="Add" @click="isClickButton = true")
-    p(v-if="errors.length" class="error-title") Please correct the indicated errors:
-    ul(class="error-ul")
-      li(v-for="error in errors" class="error-message") {{ error }}
+    button(class="show-modal-button" @click="showModal") Add New Task
+    form-modal(v-show="isModalVisible" @close="closeModal" :tasks="tasks" @click="isClickButton = true")
     ul
       li(v-for="(task, index) in tasksUpdate" :key="task.id" :id="task.id" :ref="setItemRef")
-        div(class="fixed-time")
+        div(class="fixed-time" @click="showTaskDetails(task.id)")
           p(class="icons")
             fa(:icon="['fas', 'asterisk']")/
           div
@@ -23,30 +15,27 @@ section(class="news")
             p(class="sub-message" :style="task.delay") {{task.description}}
         button(@click="removeTask(index)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
+      task-details-modal(v-if="isModalTaskDetails" @close="closeModal" :tasks="tasks" :id="taskIndex" @save-changes="saveChanges($event)")
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import FormModal from '@/components/FormModal.vue'
-import { Status } from '@/constants/Status'
-import { ITasks } from '@/types/ITasks'
+import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
+import { ITask } from '@/types/ITask.ts'
 
 export default defineComponent({
-  components: { FormModal },
-  emits: ['sync-tasks'],
+  components: { FormModal, TaskDetailsModal },
+  emits: ['sync-tasks', 'save-changes'],
   props: ['tasks'],
   data: function () {
     return {
-      errors: [] as Array<string>,
-      newTaskName: '',
-      newTaskDescription: '',
-      newTaskEndDate: '',
-      nextTaskId: 4,
-      newTaskId: 3,
       itemRefs: [] as HTMLElement[],
-      tasksUpdate: [] as ITasks[],
+      tasksUpdate: [] as ITask[],
       isClickButton: false,
-      showModal: false
+      isModalVisible: false,
+      isModalTaskDetails: false,
+      taskIndex: 0
     }
   },
   mounted: function () {
@@ -75,55 +64,33 @@ export default defineComponent({
     }
   },
   methods: {
-    addNewTask: function () {
-      if (this.newTaskName !== '' && this.newTaskDescription !== '') {
-        this.tasksUpdate.push({
-          id: this.nextTaskId++,
-          name: this.newTaskName,
-          description: this.newTaskDescription,
-          date: this.newTaskEndDate,
-          delay: 'animation-delay:0s',
-          status: Status.todo
-        })
-        this.newTaskId++
-        this.newTaskName = ''
-        this.newTaskDescription = ''
-        this.newTaskEndDate = ''
-        this.errors = []
-      } else {
-        if (this.newTaskName === '') {
-          this.errors.push('Add Task Name')
-        }
-        if (this.newTaskDescription === '') {
-          this.errors.push('Add Task Description')
-        }
-      }
-    },
     removeTask: function (index : number) {
       this.tasksUpdate.splice(index, 1)
+      this.$emit('sync-tasks', this.tasksUpdate)
     },
     setItemRef (el: HTMLElement) {
       if (el) {
         this.itemRefs.push(el)
       }
     },
-    show: function () {
-      this.showModal = true
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
+      this.isModalTaskDetails = false
+    },
+    showTaskDetails (index: number) {
+      this.taskIndex = index
+      this.isModalTaskDetails = true
+    },
+    saveChanges (data: ITask) {
+      this.$emit('save-changes', data)
     }
   }
 })
 </script>
-<style lang="scss">
-body {
-  font-family: 'Source Sans Pro', sans-serif;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-}
-
-.page {
-  position: relative;
-  width: 100%;
-  min-height: 100%;
-}
+<style>
+@import "../assets/style/modal-form.module.css";
+@import "../assets/style/task.module.css";
 </style>

@@ -1,7 +1,6 @@
 import { Status } from '@/constants/Status'
 
-export  interface ITableCol {
-  id: number,
-  headline: string,
+export  interface IChangeStatus {
+  taskId: number
   status: Status
 }
