@@ -67,7 +67,6 @@ export default defineComponent({
         if (this.newTaskEndDate < Date()) {
           this.errors.push('Chose correct date')
         }
-        console.log(this.errors)
       }
     },
     close () {

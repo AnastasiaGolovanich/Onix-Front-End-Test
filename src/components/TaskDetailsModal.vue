@@ -87,7 +87,7 @@ export default defineComponent({
     this.newDescription = this.currentTask.description
     this.newDate = this.currentTask.date
     this.newStatus = this.currentTask.status
-    if (index === 2) {
+    if (this.newStatus === Status.done) {
       this.showEditButton = false
     }
   },
@@ -105,7 +105,7 @@ export default defineComponent({
       this.isChange = true
     },
     saveChanges () {
-      if (this.newName !== '' && this.newDescription !== '' && new Date(this.newDate) >= new Date()) {
+      if (this.checkCorrectnessData) {
         const changeTask = {
           id: this.currentTask.id,
           name: this.newName,
@@ -118,6 +118,17 @@ export default defineComponent({
       } else {
         this.isChangeCorrect = false
       }
+    }
+  },
+  computed: {
+    checkCorrectnessData () : boolean {
+      const date1 = Date.now()
+      const date2 = Date.parse(this.newDate)
+      const difference = (date2 - date1) / 86400000
+      if (this.newName !== '' && this.newDescription !== '' && (difference > -1 || this.newDate === this.currentTask.date)) {
+        return true
+      }
+      return false
     }
   }
 })

@@ -16,3 +16,33 @@
     font-size: 12px;
     text-align: right;
 }
+.toDo-task-item {
+    border-color: #1E95EA;
+}
+.inProgress-task-item {
+    border-color: yellow;
+}
+.done-task-item {
+    border-color: green;
+}
+.overdue-task-item {
+    background-color: #eeb7b7;
+}
+.one-day-overdue-task-item {
+    background-color: #f5d39c;
+}
+@media (max-width: 840px) {
+    .task-item .task-name, .task-item .task-date {
+        font-size: 12px;
+    }
+}
+@media (max-width: 700px) {
+    .task-item .task-name, .task-item .task-date {
+        font-size: 11px;
+    }
+}
+@media (max-width: 650px) {
+    .task-item .task-name, .task-item .task-date {
+        font-size: 13px;
+    }
+}
