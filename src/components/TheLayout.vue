@@ -30,7 +30,7 @@ export default defineComponent({
         id: 1,
         name: 'Install programs',
         description: 'Install Node.js and Vue CLI on PC',
-        date: '2021-12-31',
+        date: '2022-01-25',
         delay: 'animation-delay:0s',
         status: Status.todo
       },
@@ -39,7 +39,7 @@ export default defineComponent({
         name: 'Read the theory',
         description: 'Working with forms',
         delay: 'animation-delay:1s',
-        date: '2021-12-31',
+        date: '2021-12-25',
         status: Status.todo
       },
       {
@@ -47,7 +47,7 @@ export default defineComponent({
         name: 'Practice',
         description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
         delay: 'animation-delay:2s',
-        date: '2021-12-31',
+        date: '2021-12-30',
         status: Status.done
       }
     ] as ITask[]

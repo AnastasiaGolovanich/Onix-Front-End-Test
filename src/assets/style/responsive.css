@@ -6,6 +6,41 @@
 }
 
 @media (max-width: 1024px) {
+    aside {
+        min-width: 200px;
+    }
+
+    aside .top-side-panel {
+        margin-bottom: 29px;
+        padding: 15px 5px 0 10px;
+    }
+
+    aside .top-side-panel h2 {
+        margin: 0 10px 0 15px;
+    }
+
+    aside .user-info {
+        padding: 16px 10px 13px 10px;
+        flex-direction: column;
+    }
+
+    aside .user-statistic .title {
+        font-size: 13px;
+    }
+
+    aside .user-info div {
+        margin-right: 0;
+    }
+
+    aside .user-info div h2,
+    aside .user-info div p,
+    aside .user-info button {
+        margin: 5px auto;
+    }
+
+    aside .user-statistic .count {
+        margin: 0 40px 5px 0;
+    }
     header div .round {
         display: none;
     }
@@ -82,6 +117,13 @@
     .right-block .news .current-page ul li .message {
         margin-right: 30px;
     }
+    .tasks-column {
+        min-width: 28%;
+    }
+    .search-box input {
+        padding: 12px 15px;
+        min-width: 24%;
+    }
 }
 
 @media (max-width: 730px) {
@@ -102,10 +144,22 @@
         padding: 14px 14px;
     }
 }
+@media (max-width: 650px) {
+    .main-page {
+        flex-direction: column;
+    }
+
+    aside {
+        display: none;
+    }
+}
 
 @media (max-width: 500px) {
     .main-page {
         flex-direction: column;
+    }
+    aside {
+        display: none;
     }
 
     aside, .right-block {
