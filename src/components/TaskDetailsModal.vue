@@ -125,7 +125,7 @@ export default defineComponent({
       const date1 = Date.now()
       const date2 = Date.parse(this.newDate)
       const difference = (date2 - date1) / 86400000
-      if (this.newName !== '' && this.newDescription !== '' && (difference > -1 || this.newDate === this.currentTask.date)) {
+      if (this.newName && this.newDescription && (difference > -1 || this.newDate === this.currentTask.date)) {
         return true
       }
       return false

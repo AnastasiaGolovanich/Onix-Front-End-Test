@@ -22,7 +22,7 @@ section(class="news")
 import { defineComponent } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
-import { ITask } from '@/types/ITask.ts'
+import { ITask } from '@/types/ITask'
 
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },
