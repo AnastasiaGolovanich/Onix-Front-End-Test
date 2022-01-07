@@ -17,7 +17,7 @@ section(class="news")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ITask } from '@/types/ITask.ts'
+import { ITask } from '@/types/ITask'
 import { ITableCol } from '@/types/ITableCol'
 import { IChangeStatus } from '@/types/IChangeStatus'
 import TaskItem from '@/components/TaskItem.vue'
@@ -66,12 +66,7 @@ export default defineComponent({
   },
   methods: {
     generateTable (taskStatus : Status) {
-      const tasksInStatus = [] as ITask []
-      this.tasks.forEach(function (task : ITask) {
-        if (task.status === taskStatus) {
-          tasksInStatus.push(task)
-        }
-      })
+      const tasksInStatus = this.tasks.filter((task: ITask) => task.status === taskStatus) as ITask []
       return tasksInStatus.filter(task => {
         return task.name.toLowerCase().includes(this.search.toLowerCase()) && this.dateBetween(task.date)
       })
@@ -83,7 +78,7 @@ export default defineComponent({
           maxDate = task.date
         }
       })
-      if (this.dateTo !== '') {
+      if (this.dateTo) {
         return taskDate >= this.dateFrom && taskDate <= this.dateTo
       } else {
         return taskDate >= this.dateFrom && taskDate <= maxDate

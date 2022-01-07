@@ -42,7 +42,7 @@ export default defineComponent({
   methods: {
     addNewTask: function () {
       this.tasksUpdate = this.tasks
-      if (this.newTaskName !== '' && this.newTaskDescription !== '' && new Date(this.newTaskEndDate) >= new Date()) {
+      if (this.newTaskName && this.newTaskDescription && new Date(this.newTaskEndDate) >= new Date()) {
         this.tasksUpdate.push({
           id: this.nextTaskId++,
           name: this.newTaskName,

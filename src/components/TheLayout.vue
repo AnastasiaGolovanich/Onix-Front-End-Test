@@ -10,7 +10,7 @@ import sideBar from '@/components/TheSideBar.vue'
 import Header from '@/components/TheHeader.vue'
 import { defineComponent } from 'vue'
 import { Status } from '@/constants/Status'
-import { ITask } from '@/types/ITask.ts'
+import { ITask } from '@/types/ITask'
 import { IChangeStatus } from '@/types/IChangeStatus'
 
 export default defineComponent({
@@ -57,7 +57,7 @@ export default defineComponent({
     changeNotification (e: number) : void {
       this.notification = e
     },
-    sync (data: any) {
+    sync (data: ITask[]) {
       this.tasks = data
     },
     changeStatus (data: IChangeStatus) {
