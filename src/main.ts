@@ -5,9 +5,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VCalendar from 'v-calendar'
 
 library.add(fas)
 
 createApp(App)
   .component('fa', FontAwesomeIcon)
-  .use(store).use(router).mount('#app')
+  .use(router).use(store).use(VCalendar).mount('#app')

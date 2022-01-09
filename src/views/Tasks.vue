@@ -1,12 +1,12 @@
 <template lang="pug">
 section(class="news")
-  h2(class="visually-hidden") ITask
+  h2(class="visually-hidden") Task
   div(class="current-page")
     p(class="title") Today
     button(class="show-modal-button" @click="showModal") Add New Task
     form-modal(v-show="isModalVisible" @close="closeModal" :tasks="tasks" @click="isClickButton = true")
     ul
-      li(v-for="(task, index) in tasksUpdate" :key="task.id" :id="task.id" :ref="setItemRef")
+      li(v-for="(task, index) in tasks" :key="task.id" :id="task.id" :ref="setItemRef")
         div(class="fixed-time" @click="showTaskDetails(task.id)")
           p(class="icons")
             fa(:icon="['fas', 'asterisk']")/
@@ -15,23 +15,19 @@ section(class="news")
             p(class="sub-message" :style="task.delay") {{task.description}}
         button(@click="removeTask(index)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
-      task-details-modal(v-if="isModalTaskDetails" @close="closeModal" :tasks="tasks" :id="taskIndex" @save-changes="saveChanges($event)")
+      task-details-modal(v-if="isModalTaskDetails" @close="closeModal" :tasks="tasks" :id="taskIndex")
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
-import { ITask } from '@/types/ITask'
 
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },
-  emits: ['sync-tasks', 'save-changes'],
-  props: ['tasks'],
   data: function () {
     return {
       itemRefs: [] as HTMLElement[],
-      tasksUpdate: [] as ITask[],
       isClickButton: false,
       isModalVisible: false,
       isModalTaskDetails: false,
@@ -39,7 +35,6 @@ export default defineComponent({
     }
   },
   mounted: function () {
-    this.tasksUpdate = this.tasks
     for (let i = 0; i < this.itemRefs.length; i++) {
       const taskBlock = this.itemRefs[i].firstElementChild
       if (taskBlock) {
@@ -63,10 +58,14 @@ export default defineComponent({
       this.isClickButton = false
     }
   },
+  computed: {
+    tasks () : any {
+      return this.$store.state.tasks
+    }
+  },
   methods: {
     removeTask: function (index : number) {
-      this.tasksUpdate.splice(index, 1)
-      this.$emit('sync-tasks', this.tasksUpdate)
+      this.$store.commit('removeTask', index)
     },
     setItemRef (el: HTMLElement) {
       if (el) {
@@ -83,9 +82,6 @@ export default defineComponent({
     showTaskDetails (index: number) {
       this.taskIndex = index
       this.isModalTaskDetails = true
-    },
-    saveChanges (data: ITask) {
-      this.$emit('save-changes', data)
     }
   }
 })

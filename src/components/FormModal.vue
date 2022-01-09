@@ -7,9 +7,9 @@ div(class="modal-shadow" @click.self="close")
     slot(name="body")
       div(class="modal-content")
         form(v-on:submit.prevent="addNewTask")
-          input(type="text" v-model="newTaskName" id="new-task-name" placeholder="Task Name")
-          input(type="text" v-model="newTaskDescription" id="new-task-description" placeholder="Task Description")
-          input(class="input-date" type="date" v-model="newTaskEndDate" id="new-task-end-date" placeholder="End Date")
+          input(type="text" v-model="newTask.name" id="new-task-name" placeholder="Task Name")
+          input(type="text" v-model="newTask.description" id="new-task-description" placeholder="Task Description")
+          input(class="input-date" type="date" v-model="newTask.date" id="new-task-end-date" placeholder="End Date")
           input(type="submit" value="Add" @click="isClickButton = true")
         p(v-if="errors.length" class="error-title") Please correct the indicated errors:
         ul(class="error-ul")
@@ -21,50 +21,51 @@ div(class="modal-shadow" @click.self="close")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Status } from '@/constants/Status'
 import { ITask } from '@/types/ITask'
 
 export default defineComponent({
   name: 'FormModal',
-  props: ['tasks'],
   data: function () {
     return {
       errors: [] as Array<string>,
-      newTaskName: '',
-      newTaskDescription: '',
-      newTaskEndDate: '',
       nextTaskId: 4,
-      newTaskId: 3,
-      tasksUpdate: [] as ITask[],
-      isClickButton: false
+      isClickButton: false,
+      newTask: {
+        id: 4,
+        name: '',
+        description: '',
+        date: ''
+      } as ITask
+    }
+  },
+  computed: {
+    tasks () : any {
+      return this.$store.state.tasks
+    },
+    addCreateDate () {
+      console.log(new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate())
+      return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
     }
   },
   methods: {
     addNewTask: function () {
-      this.tasksUpdate = this.tasks
-      if (this.newTaskName && this.newTaskDescription && new Date(this.newTaskEndDate) >= new Date()) {
-        this.tasksUpdate.push({
-          id: this.nextTaskId++,
-          name: this.newTaskName,
-          description: this.newTaskDescription,
-          date: this.newTaskEndDate,
-          delay: 'animation-delay:0s',
-          status: Status.todo
-        })
-        this.newTaskId++
-        this.newTaskName = ''
-        this.newTaskDescription = ''
-        this.newTaskEndDate = ''
+      if (this.newTask.name && this.newTask.description && new Date(this.newTask.date) >= new Date()) {
+        this.newTask.createDate = this.addCreateDate
+        this.$store.commit('addNewTask', this.newTask)
+        this.newTask.id++
+        this.newTask.name = ''
+        this.newTask.description = ''
+        this.newTask.date = ''
         this.errors = []
         this.$emit('close')
       } else {
-        if (this.newTaskName === '') {
+        if (!this.newTask.name) {
           this.errors.push('Add Task Name')
         }
-        if (this.newTaskDescription === '') {
+        if (!this.newTask.description) {
           this.errors.push('Add Task Description')
         }
-        if (this.newTaskEndDate < Date()) {
+        if (this.newTask.date < Date()) {
           this.errors.push('Chose correct date')
         }
       }
@@ -74,7 +75,7 @@ export default defineComponent({
       this.errors = []
     },
     isCorrectDate: function () {
-      if (this.newTaskEndDate < Date()) {
+      if (this.newTask.date < Date()) {
         return false
       }
       return true

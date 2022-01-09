@@ -23,12 +23,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/calendar',
     name: RouteNames.CALENDAR,
-    component: () => import(/* webpackChunkName: "Calendar" */ '../views/ComingSoon.vue')
+    component: () => import(/* webpackChunkName: "Calendar" */ '../views/Calendar.vue')
   },
   {
     path: '/files',
     name: RouteNames.FILES,
-    component: () => import(/* webpackChunkName: "Files" */ '../views/ComingSoon.vue')
+    component: () => import(/* webpackChunkName: "Files" */ '../views/Files.vue')
   },
   {
     path: '/404',
