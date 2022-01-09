@@ -12,7 +12,7 @@ section(class="news")
         p(class="col-headline") {{col.headline}} - {{countTasksByStatus(col.status)}}
         div(v-for="item in generateTable(col.status)" :key="item.id" @dragstart="onDragStart($event, item)" draggable="true")
           task-item(:name="item.name" :date="item.date" :status="item.status" @click="showTaskDetails(item.id)")
-          task-details-modal(v-if="isModalVisible" @close="closeModal" :tasks="tasks" :id="taskIndex" @save-changes="saveChanges($event)")
+          task-details-modal(v-if="isModalVisible" @close="closeModal" :tasks="tasks" :id="taskIndex")
 </template>
 
 <script lang="ts">
@@ -27,8 +27,6 @@ import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
 export default defineComponent({
   name: 'Kanban',
   components: { TaskDetailsModal, TaskItem },
-  emits: ['change-status', 'save-changes'],
-  props: ['tasks'],
   data: function () {
     return {
       tableCol: [] as ITableCol[],
@@ -64,6 +62,11 @@ export default defineComponent({
       }
     ] as ITableCol[]
   },
+  computed: {
+    tasks () : any {
+      return this.$store.state.tasks
+    }
+  },
   methods: {
     generateTable (taskStatus : Status) {
       const tasksInStatus = this.tasks.filter((task: ITask) => task.status === taskStatus) as ITask []
@@ -98,7 +101,7 @@ export default defineComponent({
           taskId: itemId,
           status: catedoryId
         }
-        this.$emit('change-status', this.changeStatus)
+        this.$store.commit('changeStatus', this.changeStatus)
       }
     },
     showTaskDetails (index: number) {
@@ -107,9 +110,6 @@ export default defineComponent({
     },
     closeModal () {
       this.isModalVisible = false
-    },
-    saveChanges (data: ITask) {
-      this.$emit('save-changes', data)
     },
     countTasksByStatus (taskStatus : Status) {
       let count = 0 as number

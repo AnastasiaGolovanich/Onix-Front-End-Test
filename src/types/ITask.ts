@@ -4,6 +4,7 @@ export  interface ITask {
   name: string
   description: string
   date: string
+  createDate: string
   delay: string
   status: Status
 }

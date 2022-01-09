@@ -12,7 +12,7 @@ aside
       router-link(to="" class="title") Completed ITask
     div
       p(class="count") {{ openTaskCount }}
-      router-link(to="/tasks" class="title" @click="addActiveClass(0)") Open ITask
+      router-link(to="/tasks" class="title") Open ITask
   nav
     p(class="menu") Menu
     ul
@@ -27,12 +27,6 @@ import UserProfile from '@/components/UserProfile.vue'
 
 export default defineComponent({
   components: { UserProfile },
-  props: {
-    notification: {
-      type: Number,
-      required: true
-    }
-  },
   data () {
     return {
       userImage: require('@/assets/user-photo.jpg'),
@@ -53,9 +47,11 @@ export default defineComponent({
           alert('You have no open tasks.')
         }
       }
-    },
-    addActiveClass (index: number) {
-      this.$emit('activeClassIndex', index)
+    }
+  },
+  computed: {
+    notification () : any {
+      return this.$store.state.notification
     }
   }
 })

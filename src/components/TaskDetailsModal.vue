@@ -51,7 +51,7 @@ import { Status } from '@/constants/Status'
 
 export default defineComponent({
   name: 'TaskDetailsModal',
-  props: ['tasks', 'id'],
+  props: ['id', 'isEdit'],
   data: function () {
     return {
       isClickEdit: false,
@@ -87,7 +87,7 @@ export default defineComponent({
     this.newDescription = this.currentTask.description
     this.newDate = this.currentTask.date
     this.newStatus = this.currentTask.status
-    if (this.newStatus === Status.done) {
+    if (this.newStatus === Status.done || this.isEdit) {
       this.showEditButton = false
     }
   },
@@ -113,7 +113,7 @@ export default defineComponent({
           date: this.newDate,
           status: this.newStatus
         } as ITask
-        this.$emit('save-changes', changeTask)
+        this.$store.commit('saveChanges', changeTask)
         this.$emit('close')
       } else {
         this.isChangeCorrect = false
@@ -129,6 +129,9 @@ export default defineComponent({
         return true
       }
       return false
+    },
+    tasks () : any {
+      return this.$store.state.tasks
     }
   }
 })
