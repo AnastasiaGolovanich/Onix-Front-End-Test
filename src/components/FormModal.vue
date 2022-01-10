@@ -39,11 +39,10 @@ export default defineComponent({
     }
   },
   computed: {
-    tasks () : any {
+    tasks () : ITask[] {
       return this.$store.state.tasks
     },
     addCreateDate () {
-      console.log(new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate())
       return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
     }
   },
@@ -74,11 +73,8 @@ export default defineComponent({
       this.$emit('close')
       this.errors = []
     },
-    isCorrectDate: function () {
-      if (this.newTask.date < Date()) {
-        return false
-      }
-      return true
+    isCorrectDate: function () : boolean {
+      return this.newTask.date > Date()
     }
   }
 })
