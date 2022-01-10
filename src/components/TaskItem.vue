@@ -27,6 +27,7 @@ export default defineComponent({
   methods: {
     addClassByStatus: function () {
       const taskItem = this.$refs.task as HTMLElement
+      taskItem.classList.remove('overdue-task-item', 'one-day-overdue-task-item')
       if (this.status === Status.todo) {
         taskItem.classList.add('toDo-task-item')
       }
@@ -48,7 +49,7 @@ export default defineComponent({
       const date1 = Date.now()
       const date2 = Date.parse(this.date)
       const difference = (date2 - date1) / 86400000
-      if (difference < -1) {
+      if (difference < 0) {
         return true
       }
       return false
@@ -57,7 +58,7 @@ export default defineComponent({
       const date1 = Date.now()
       const date2 = Date.parse(this.date)
       const difference = (date2 - date1) / 86400000
-      if (difference < 0 && difference > -1) {
+      if (difference < 1 && difference > -1) {
         return true
       }
       return false

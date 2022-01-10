@@ -15,7 +15,7 @@ export default createStore({
         id: 1,
         name: 'Install programs',
         description: 'Install Node.js and Vue CLI on PC',
-        date: '2022-01-25',
+        date: '2022-01-11',
         delay: 'animation-delay:0s',
         status: Status.todo,
         createDate: '2022-01-25'
@@ -25,7 +25,7 @@ export default createStore({
         name: 'Read the theory',
         description: 'Working with forms',
         delay: 'animation-delay:1s',
-        date: '2021-12-25',
+        date: '2022-01-09',
         status: Status.todo,
         createDate: '2022-01-20'
       },
@@ -34,7 +34,7 @@ export default createStore({
         name: 'Practice',
         description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
         delay: 'animation-delay:2s',
-        date: '2022-01-30',
+        date: '2022-01-12',
         status: Status.done,
         createDate: '2022-01-15'
       }
@@ -121,6 +121,6 @@ export default createStore({
   actions: {
   },
   modules: {
-  },
-  plugins: [vuexLocal.plugin]
+  }
+  // plugins: [vuexLocal.plugin]
 })
