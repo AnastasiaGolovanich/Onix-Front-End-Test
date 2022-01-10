@@ -1,4 +1,4 @@
-import { createLogger, createStore } from 'vuex'
+import { createStore } from 'vuex'
 import VuexPersistence from 'vuex-persist'
 import { Status } from '@/constants/Status'
 import { ITask } from '@/types/ITask'
@@ -116,6 +116,9 @@ export default createStore({
         }
       })
       return attachments
+    },
+    getTaskById: state => (id: number) => {
+      return state.tasks.find(task => task.id === id)
     }
   },
   actions: {

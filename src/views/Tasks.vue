@@ -4,7 +4,7 @@ section(class="news")
   div(class="current-page")
     p(class="title") Today
     button(class="show-modal-button" @click="showModal") Add New Task
-    form-modal(v-show="isModalVisible" @close="closeModal" :tasks="tasks" @click="isClickButton = true")
+    form-modal(v-show="isModalVisible" @close="closeModal" @click="isClickButton = true")
     ul
       li(v-for="(task, index) in tasks" :key="task.id" :id="task.id" :ref="setItemRef")
         div(class="fixed-time" @click="showTaskDetails(task.id)")
@@ -15,13 +15,14 @@ section(class="news")
             p(class="sub-message" :style="task.delay") {{task.description}}
         button(@click="removeTask(index)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
-      task-details-modal(v-if="isModalTaskDetails" @close="closeModal" :tasks="tasks" :id="taskIndex")
+      task-details-modal(v-if="isModalTaskDetails" @close="closeModal" :id="taskIndex")
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
+import { ITask } from '@/types/ITask'
 
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },
@@ -59,7 +60,7 @@ export default defineComponent({
     }
   },
   computed: {
-    tasks () : any {
+    tasks () : ITask[] {
       return this.$store.state.tasks
     }
   },
