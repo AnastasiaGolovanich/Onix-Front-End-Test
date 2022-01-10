@@ -121,6 +121,6 @@ export default createStore({
   actions: {
   },
   modules: {
-  }
-  // plugins: [vuexLocal.plugin]
+  },
+  plugins: [vuexLocal.plugin]
 })
