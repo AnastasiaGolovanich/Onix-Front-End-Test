@@ -1,4 +1,4 @@
-export interface Messages {
+export interface IMessages {
   type: string
   icon: string
   description: string

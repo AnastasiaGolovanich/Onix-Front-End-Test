@@ -28,10 +28,10 @@ export default defineComponent({
   data: function () {
     return {
       errors: [] as Array<string>,
-      nextTaskId: 4,
+      nextTaskId: 0,
       isClickButton: false,
       newTask: {
-        id: 4,
+        id: 0,
         name: '',
         description: '',
         date: ''
@@ -44,10 +44,14 @@ export default defineComponent({
     },
     addCreateDate () {
       return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
+    },
+    getLastId () : number {
+      return this.$store.getters.getLastId
     }
   },
   methods: {
     addNewTask: function () {
+      this.newTask.id = this.getLastId + 1
       if (this.newTask.name && this.newTask.description && new Date(this.newTask.date) >= new Date()) {
         this.newTask.createDate = this.addCreateDate
         this.$store.commit('addNewTask', this.newTask)

@@ -9,16 +9,16 @@ div(class="modal-shadow" @click.self="close")
         div(class="modal-content")
           div(class="modal-row")
             p(class="task-title") Name:
-            p {{this.taskById().name}}
+            p {{taskById().name}}
           div(class="modal-row")
             p(class="task-title") Description:
-            p {{this.taskById().description}}
+            p {{taskById().description}}
           div(class="modal-row")
             p(class="task-title") End Date:
-            p {{this.taskById().date}}
+            p {{taskById().date}}
           div(class="modal-row")
             p(class="task-title") Status:
-            p {{this.taskById().status}}
+            p {{taskById().status}}
       slot(name="footer")
         div(class="modal-footer")
           button(class="modal-footer-button" @click="showTextArea" v-if="showEditButton") Edit
@@ -40,7 +40,6 @@ div(class="modal-shadow" @click.self="close")
         div(class="modal-footer")
           button(class="modal-footer-button" @click="close") Cancel
           button(class="modal-footer-button" v-show="isChange" @click="saveChanges") Save
-        //p(v-if="!isChangeCorrect" class="task-error") Please check the correctness of the entered data
         p(v-if="errors.length" class="error-title") Please correct the indicated errors:
         ul(class="error-ul")
           li(v-for="error in errors" class="error-message") {{ error }}
