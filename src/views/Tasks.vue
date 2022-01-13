@@ -23,6 +23,7 @@ import { defineComponent } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
 import { ITask } from '@/types/ITask'
+import { mapState } from 'vuex'
 
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },
@@ -60,9 +61,11 @@ export default defineComponent({
     }
   },
   computed: {
-    tasks () : ITask[] {
-      return this.$store.state.tasks
-    }
+    ...mapState({
+      tasks (state: any): any {
+        return state.tasks.tasks
+      }
+    })
   },
   methods: {
     removeTask: function (index : number) {

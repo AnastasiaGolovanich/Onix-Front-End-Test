@@ -9,16 +9,16 @@ div(class="modal-shadow" @click.self="close")
         div(class="modal-content")
           div(class="modal-row")
             p(class="task-title") Name:
-            p {{taskById().name}}
+            p {{getTaskById().name}}
           div(class="modal-row")
             p(class="task-title") Description:
-            p {{taskById().description}}
+            p {{getTaskById().description}}
           div(class="modal-row")
             p(class="task-title") End Date:
-            p {{taskById().date}}
+            p {{getTaskById().date}}
           div(class="modal-row")
             p(class="task-title") Status:
-            p {{taskById().status}}
+            p {{getTaskById().status}}
       slot(name="footer")
         div(class="modal-footer")
           button(class="modal-footer-button" @click="showTextArea" v-if="showEditButton") Edit
@@ -50,6 +50,7 @@ div(class="modal-shadow" @click.self="close")
 import { defineComponent } from 'vue'
 import { ITask } from '@/types/ITask'
 import { Status } from '@/constants/Status'
+import { mapGetters, mapState } from 'vuex'
 
 export default defineComponent({
   name: 'TaskDetailsModal',
@@ -69,10 +70,12 @@ export default defineComponent({
     }
   },
   mounted: function () {
-    this.newName = this.taskById().name
-    this.newDescription = this.taskById().description
-    this.newDate = this.taskById().date
-    this.newStatus = this.taskById().status
+    console.log(this.getTaskById())
+    console.log(this.taskById())
+    this.newName = this.getTaskById().name
+    this.newDescription = this.getTaskById().description
+    this.newDate = this.getTaskById().date
+    this.newStatus = this.getTaskById().status
     if (this.newStatus === Status.done || this.isEdit) {
       this.showEditButton = false
     }
@@ -83,7 +86,7 @@ export default defineComponent({
       this.isClickEdit = false
     },
     showTextArea () {
-      if (this.taskById().status !== Status.done) {
+      if (this.getTaskById().status !== Status.done) {
         this.isClickEdit = true
       }
     },
@@ -94,19 +97,22 @@ export default defineComponent({
     saveChanges () {
       if (this.checkCorrectness()) {
         const changeTask = {
-          id: this.taskById().id,
+          id: this.getTaskById().id,
           name: this.newName,
           description: this.newDescription,
           date: this.newDate,
           status: this.newStatus
         } as ITask
-        this.$store.commit('saveChanges', changeTask)
+        this.$store.commit('tasks/saveChanges', 'tasks/changeTask')
         this.$emit('close')
       }
       this.isChange = false
     },
+    ...mapGetters({
+      getTaskById: 'tasks/getTaskById'
+    }),
     taskById (): ITask {
-      return this.$store.getters.getTaskById(this.id)
+      return this.getTaskById()
     },
     checkCorrectness: function () : boolean {
       if (!this.checkCorrectnessDate) {
@@ -126,7 +132,7 @@ export default defineComponent({
       const date1 = Date.now()
       const date2 = Date.parse(this.newDate)
       const difference = (date2 - date1) / 86400000
-      if (difference > -1 || this.newDate === this.taskById().date) {
+      if (difference > -1 || this.newDate === this.getTaskById().date) {
         return true
       }
       return false
@@ -137,9 +143,11 @@ export default defineComponent({
     checkCorrectnessDescription () : boolean {
       return this.newDescription !== ''
     },
-    tasks () : ITask[] {
-      return this.$store.state.tasks
-    }
+    ...mapState({
+      tasks (state: any): any {
+        return state.tasks.tasks
+      }
+    })
   }
 })
 </script>

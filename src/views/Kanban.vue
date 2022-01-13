@@ -23,6 +23,7 @@ import { IChangeStatus } from '@/types/IChangeStatus'
 import TaskItem from '@/components/TaskItem.vue'
 import { Status } from '@/constants/Status'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
+import { mapState } from 'vuex'
 
 export default defineComponent({
   name: 'Kanban',
@@ -63,9 +64,11 @@ export default defineComponent({
     ] as ITableCol[]
   },
   computed: {
-    tasks () : any {
-      return this.$store.state.tasks
-    }
+    ...mapState({
+      tasks (state: any): any {
+        return state.tasks.tasks
+      }
+    })
   },
   methods: {
     generateTable (taskStatus : Status) {
