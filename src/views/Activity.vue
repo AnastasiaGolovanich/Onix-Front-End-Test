@@ -19,16 +19,20 @@ section(class="news")
 <script lang="ts">
 
 import { defineComponent } from 'vue'
+import { mapState } from 'vuex'
+import { IMessages } from '@/types/IMessages'
 
 export default defineComponent({
   computed: {
-    messages () {
-      return this.$store.state.messages
-    }
+    ...mapState({
+      messages (state: any) : IMessages {
+        return state.activity.messages
+      }
+    })
   },
   methods: {
     addNotification (index: number) {
-      this.$store.commit('addNotification', index)
+      this.$store.commit('activity/addNotification', index)
     }
   }
 })

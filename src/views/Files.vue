@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'Files',
   computed: {
     attachments () {
-      return this.$store.getters.getAttachments
+      return this.$store.getters['activity/getAttachments']
     }
   }
 })

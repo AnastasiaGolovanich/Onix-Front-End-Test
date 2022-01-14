@@ -23,6 +23,7 @@ import { IChangeStatus } from '@/types/IChangeStatus'
 import TaskItem from '@/components/TaskItem.vue'
 import { Status } from '@/constants/Status'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
+import { mapState } from 'vuex'
 
 export default defineComponent({
   name: 'Kanban',
@@ -63,9 +64,11 @@ export default defineComponent({
     ] as ITableCol[]
   },
   computed: {
-    tasks () : any {
-      return this.$store.state.tasks
-    }
+    ...mapState({
+      tasks (state: any): ITask[] {
+        return state.tasks.tasks
+      }
+    })
   },
   methods: {
     generateTable (taskStatus : Status) {
@@ -94,14 +97,14 @@ export default defineComponent({
         e.dataTransfer.setData('itemId', item.id.toString())
       }
     },
-    onDrop (e: DragEvent, catedoryId: Status) {
+    onDrop (e: DragEvent, categoryId: Status) {
       if (e.dataTransfer) {
         const itemId = parseInt(e.dataTransfer.getData('itemId'))
         this.changeStatus = {
           taskId: itemId,
-          status: catedoryId
+          status: categoryId
         }
-        this.$store.commit('changeStatus', this.changeStatus)
+        this.$store.commit('tasks/changeStatus', this.changeStatus)
       }
     },
     showTaskDetails (index: number) {

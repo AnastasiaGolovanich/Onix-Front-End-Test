@@ -16,6 +16,7 @@ import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
 import { IAttributes } from '@/types/IAttributes'
 import { defineComponent } from 'vue'
 import { ITask } from '@/types/ITask'
+import { mapState } from 'vuex'
 export default defineComponent({
   name: 'Calendar',
   components: { TaskDetailsModal },
@@ -43,9 +44,11 @@ export default defineComponent({
     this.takeAttr()
   },
   computed: {
-    tasks () {
-      return this.$store.state.tasks
-    }
+    ...mapState({
+      tasks (state: any): any {
+        return state.tasks.tasks
+      }
+    })
   },
   methods: {
     takeAttr () {

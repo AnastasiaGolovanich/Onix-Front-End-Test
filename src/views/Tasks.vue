@@ -22,6 +22,7 @@ section(class="news")
 import { defineComponent } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
+import { mapState } from 'vuex'
 import { ITask } from '@/types/ITask'
 
 export default defineComponent({
@@ -60,13 +61,15 @@ export default defineComponent({
     }
   },
   computed: {
-    tasks () : ITask[] {
-      return this.$store.state.tasks
-    }
+    ...mapState({
+      tasks (state: any): ITask {
+        return state.tasks.tasks
+      }
+    })
   },
   methods: {
     removeTask: function (index : number) {
-      this.$store.commit('removeTask', index)
+      this.$store.commit('tasks/removeTask', index)
     },
     setItemRef (el: HTMLElement) {
       if (el) {
