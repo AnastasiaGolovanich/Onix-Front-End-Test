@@ -24,6 +24,7 @@ aside
 <script lang="ts">
 import { defineComponent } from 'vue'
 import UserProfile from '@/components/UserProfile.vue'
+import { mapState } from 'vuex'
 
 export default defineComponent({
   components: { UserProfile },
@@ -50,9 +51,11 @@ export default defineComponent({
     }
   },
   computed: {
-    notification () : any {
-      return this.$store.state.notification
-    }
+    ...mapState({
+      notification (state: any): number {
+        return state.activity.notification
+      }
+    })
   }
 })
 </script>

@@ -22,7 +22,7 @@ div(class="modal-shadow" @click.self="close")
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { ITask } from '@/types/ITask'
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default defineComponent({
   name: 'FormModal',
@@ -41,24 +41,23 @@ export default defineComponent({
   },
   computed: {
     ...mapState({
-      tasks (state: any): any {
+      tasks (state: any): ITask {
         return state.tasks.tasks
       }
     }),
     addCreateDate () {
       return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
     },
-    // getLastId () : number {
-    //   return this.$store.getters.getLastId
-    // }
-    ...mapGetters(['getLastId'])
+    getLastId () : number {
+      return this.$store.getters['tasks/getLastId']
+    }
   },
   methods: {
     addNewTask: function () {
       this.newTask.id = this.getLastId + 1
       if (this.newTask.name && this.newTask.description && new Date(this.newTask.date) >= new Date()) {
         this.newTask.createDate = this.addCreateDate
-        this.$store.commit('addNewTask', this.newTask)
+        this.$store.commit('tasks/addNewTask', this.newTask)
         this.newTask.id++
         this.newTask.name = ''
         this.newTask.description = ''

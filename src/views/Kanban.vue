@@ -65,7 +65,7 @@ export default defineComponent({
   },
   computed: {
     ...mapState({
-      tasks (state: any): any {
+      tasks (state: any): ITask[] {
         return state.tasks.tasks
       }
     })
@@ -97,14 +97,14 @@ export default defineComponent({
         e.dataTransfer.setData('itemId', item.id.toString())
       }
     },
-    onDrop (e: DragEvent, catedoryId: Status) {
+    onDrop (e: DragEvent, categoryId: Status) {
       if (e.dataTransfer) {
         const itemId = parseInt(e.dataTransfer.getData('itemId'))
         this.changeStatus = {
           taskId: itemId,
-          status: catedoryId
+          status: categoryId
         }
-        this.$store.commit('changeStatus', this.changeStatus)
+        this.$store.commit('tasks/changeStatus', this.changeStatus)
       }
     },
     showTaskDetails (index: number) {

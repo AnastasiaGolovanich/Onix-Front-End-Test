@@ -1,6 +1,7 @@
 import { Module } from 'vuex'
 import { Status } from '@/constants/Status'
 import { ITask } from '@/types/ITask'
+import { IChangeStatus } from '@/types/IChangeStatus'
 
 const store: Module<any, any> = {
   namespaced: true,
@@ -10,7 +11,7 @@ const store: Module<any, any> = {
         id: 1,
         name: 'Install programs',
         description: 'Install Node.js and Vue CLI on PC',
-        date: '2022-01-11',
+        date: '2022-01-16',
         delay: 'animation-delay:0s',
         status: Status.todo,
         createDate: '2022-01-25'
@@ -20,7 +21,7 @@ const store: Module<any, any> = {
         name: 'Read the theory',
         description: 'Working with forms',
         delay: 'animation-delay:1s',
-        date: '2022-01-09',
+        date: '2022-01-15',
         status: Status.todo,
         createDate: '2022-01-20'
       },
@@ -29,17 +30,17 @@ const store: Module<any, any> = {
         name: 'Practice',
         description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
         delay: 'animation-delay:2s',
-        date: '2022-01-12',
+        date: '2022-01-14',
         status: Status.done,
         createDate: '2022-01-15'
       }
     ] as ITask[]
   },
   getters: {
-    getTaskById: state => (id: number) => {
+    getTaskById: (state: any) => (id: number) => {
       return state.tasks.find((task:ITask) => task.id === id)
     },
-    getLastId (state: any) {
+    getLastId (state: any) : number {
       return state.tasks[state.tasks.length - 1].id
     }
   },
@@ -65,6 +66,15 @@ const store: Module<any, any> = {
           task.description = changeTask.description
           task.date = changeTask.date
           task.status = changeTask.status
+        }
+      })
+    },
+    changeStatus (state, status: IChangeStatus) {
+      state.tasks.forEach(function (task : ITask) {
+        if (task.id === status.taskId) {
+          if (task.status !== Status.done) {
+            task.status = status.status
+          }
         }
       })
     }

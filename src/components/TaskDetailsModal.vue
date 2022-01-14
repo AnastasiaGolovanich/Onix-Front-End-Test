@@ -50,7 +50,7 @@ div(class="modal-shadow" @click.self="close")
 import { defineComponent } from 'vue'
 import { ITask } from '@/types/ITask'
 import { Status } from '@/constants/Status'
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default defineComponent({
   name: 'TaskDetailsModal',
@@ -70,8 +70,6 @@ export default defineComponent({
     }
   },
   mounted: function () {
-    console.log(this.getTaskById())
-    console.log(this.taskById())
     this.newName = this.getTaskById().name
     this.newDescription = this.getTaskById().description
     this.newDate = this.getTaskById().date
@@ -103,16 +101,13 @@ export default defineComponent({
           date: this.newDate,
           status: this.newStatus
         } as ITask
-        this.$store.commit('tasks/saveChanges', 'tasks/changeTask')
+        this.$store.commit('tasks/saveChanges', changeTask)
         this.$emit('close')
       }
       this.isChange = false
     },
-    ...mapGetters({
-      getTaskById: 'tasks/getTaskById'
-    }),
-    taskById (): ITask {
-      return this.getTaskById()
+    getTaskById (): ITask {
+      return this.$store.getters['tasks/getTaskById'](this.id)
     },
     checkCorrectness: function () : boolean {
       if (!this.checkCorrectnessDate) {
@@ -132,10 +127,7 @@ export default defineComponent({
       const date1 = Date.now()
       const date2 = Date.parse(this.newDate)
       const difference = (date2 - date1) / 86400000
-      if (difference > -1 || this.newDate === this.getTaskById().date) {
-        return true
-      }
-      return false
+      return difference > -1 || this.newDate === this.getTaskById().date
     },
     checkCorrectnessName () : boolean {
       return this.newName !== ''
@@ -144,7 +136,7 @@ export default defineComponent({
       return this.newDescription !== ''
     },
     ...mapState({
-      tasks (state: any): any {
+      tasks (state: any): ITask {
         return state.tasks.tasks
       }
     })
