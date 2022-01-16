@@ -19,73 +19,43 @@ section(class="news")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
-import { mapState } from 'vuex'
-import { ITask } from '@/types/ITask'
+import useTasks from '@/composables/useTasks'
 
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },
-  data: function () {
+  setup () {
+    const { tasks, isClickButton, itemRefs, addAnimation, addTaskFlickerAnimation, setItemRef, removeTask } = useTasks()
+    const isModalVisible = ref(false) // { value: boolean }
+    const isModalTaskDetails = ref(false) // { value: boolean }
+    const taskIndex = ref(0) // { value: number }
+    const showModal = () => {
+      isModalVisible.value = true
+    }
+    const closeModal = () => {
+      isModalVisible.value = false
+      isModalTaskDetails.value = false
+    }
+    const showTaskDetails = (index: number) => {
+      taskIndex.value = index
+      isModalTaskDetails.value = true
+    }
     return {
-      itemRefs: [] as HTMLElement[],
-      isClickButton: false,
-      isModalVisible: false,
-      isModalTaskDetails: false,
-      taskIndex: 0
-    }
-  },
-  mounted: function () {
-    for (let i = 0; i < this.itemRefs.length; i++) {
-      const taskBlock = this.itemRefs[i].firstElementChild
-      if (taskBlock) {
-        const taskBlockChildren = taskBlock.children
-        for (let j = 0; j < taskBlockChildren.length; j++) {
-          taskBlockChildren[1].children[j].classList.add('task-font-change')
-        }
-      }
-    }
-  },
-  beforeUpdate () {
-    this.itemRefs = []
-  },
-  updated () {
-    const index = this.itemRefs.length - 1
-    if (this.isClickButton) {
-      const taskBlock = this.itemRefs[index]
-      if (taskBlock) {
-        taskBlock.classList.add('task-flicker')
-      }
-      this.isClickButton = false
-    }
-  },
-  computed: {
-    ...mapState({
-      tasks (state: any): ITask {
-        return state.tasks.tasks
-      }
-    })
-  },
-  methods: {
-    removeTask: function (index : number) {
-      this.$store.commit('tasks/removeTask', index)
-    },
-    setItemRef (el: HTMLElement) {
-      if (el) {
-        this.itemRefs.push(el)
-      }
-    },
-    showModal () {
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
-      this.isModalTaskDetails = false
-    },
-    showTaskDetails (index: number) {
-      this.taskIndex = index
-      this.isModalTaskDetails = true
+      itemRefs,
+      isClickButton,
+      tasks,
+      addAnimation,
+      addTaskFlickerAnimation,
+      setItemRef,
+      removeTask,
+      isModalVisible,
+      isModalTaskDetails,
+      taskIndex,
+      showModal,
+      closeModal,
+      showTaskDetails
     }
   }
 })
