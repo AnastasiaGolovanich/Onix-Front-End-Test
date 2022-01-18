@@ -16,112 +16,39 @@ section(class="news")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { ITask } from '@/types/ITask'
-import { ITableCol } from '@/types/ITableCol'
-import { IChangeStatus } from '@/types/IChangeStatus'
+import { defineComponent, ref } from 'vue'
 import TaskItem from '@/components/TaskItem.vue'
-import { Status } from '@/constants/Status'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
-import { mapState } from 'vuex'
+import useFilterTable from '@/composables/useFilterTable'
+import useShowTable from '@/composables/useShowTable'
+import useMoveTasks from '@/composables/useMoveTasks'
+import useShowTaskDetails from '@/composables/useShowTaskDetails'
 
 export default defineComponent({
   name: 'Kanban',
   components: { TaskDetailsModal, TaskItem },
-  data: function () {
+  setup () {
+    const search = ref('')
+    const dateFrom = ref('')
+    const dateTo = ref('')
+    const { store, tasks, generateTable } = useFilterTable(search, dateFrom, dateTo)
+    const { countTasksByStatus, tableCol } = useShowTable(tasks)
+    const { onDragStart, onDrop } = useMoveTasks(store)
+    const { showTaskDetails, closeModal, taskIndex, isModalVisible } = useShowTaskDetails()
     return {
-      tableCol: [] as ITableCol[],
-      itemRefs: [] as HTMLElement[],
-      changeStatus: {
-        taskId: 0,
-        status: Status.todo
-      } as IChangeStatus,
-      isModalVisible: false,
-      taskIndex: 0,
-      count: 0 as number,
-      search: '',
-      dateFrom: '',
-      dateTo: ''
-    }
-  },
-  created: function () {
-    this.tableCol = [
-      {
-        id: 1,
-        headline: 'To Do',
-        status: Status.todo
-      },
-      {
-        id: 2,
-        headline: 'In Progress',
-        status: Status.inprogress
-      },
-      {
-        id: 3,
-        headline: 'Done',
-        status: Status.done
-      }
-    ] as ITableCol[]
-  },
-  computed: {
-    ...mapState({
-      tasks (state: any): ITask[] {
-        return state.tasks.tasks
-      }
-    })
-  },
-  methods: {
-    generateTable (taskStatus : Status) {
-      const tasksInStatus = this.tasks.filter((task: ITask) => task.status === taskStatus) as ITask []
-      return tasksInStatus.filter(task => {
-        return task.name.toLowerCase().includes(this.search.toLowerCase()) && this.dateBetween(task.date)
-      })
-    },
-    dateBetween (taskDate: string) {
-      let maxDate = '2021-12-31'
-      this.tasks.forEach(function (task : ITask) {
-        if (task.date > maxDate) {
-          maxDate = task.date
-        }
-      })
-      if (this.dateTo) {
-        return taskDate >= this.dateFrom && taskDate <= this.dateTo
-      } else {
-        return taskDate >= this.dateFrom && taskDate <= maxDate
-      }
-    },
-    onDragStart (e: DragEvent, item: ITask) {
-      if (e.dataTransfer) {
-        e.dataTransfer.dropEffect = 'move'
-        e.dataTransfer.effectAllowed = 'move'
-        e.dataTransfer.setData('itemId', item.id.toString())
-      }
-    },
-    onDrop (e: DragEvent, categoryId: Status) {
-      if (e.dataTransfer) {
-        const itemId = parseInt(e.dataTransfer.getData('itemId'))
-        this.changeStatus = {
-          taskId: itemId,
-          status: categoryId
-        }
-        this.$store.commit('tasks/changeStatus', this.changeStatus)
-      }
-    },
-    showTaskDetails (index: number) {
-      this.taskIndex = index
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
-    },
-    countTasksByStatus (taskStatus : Status) {
-      let count = 0 as number
-      this.tasks.forEach(function (task : ITask) {
-        if (task.status === taskStatus) {
-          count++
-        }
-      })
-      return count
+      tableCol,
+      tasks,
+      search,
+      dateTo,
+      dateFrom,
+      isModalVisible,
+      generateTable,
+      taskIndex,
+      onDragStart,
+      onDrop,
+      showTaskDetails,
+      closeModal,
+      countTasksByStatus
     }
   }
 })

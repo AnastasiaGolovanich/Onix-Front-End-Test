@@ -13,11 +13,13 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'UserProfile',
-  data () {
+  setup () {
+    const userName = 'Jean Gonzales'
+    const userWork = 'Product Owner'
     return {
       userImage: require('@/assets/user-photo.jpg'),
-      userName: 'Jean Gonzales',
-      userWork: 'Product Owner'
+      userName,
+      userWork
     }
   }
 })

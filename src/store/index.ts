@@ -11,6 +11,6 @@ export default createStore({
   modules: {
     activity: activityStore,
     tasks: tasksStore
-  },
-  plugins: [vuexPersist.plugin]
+  }
+  // plugins: [vuexPersist.plugin]
 })

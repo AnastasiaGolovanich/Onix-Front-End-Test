@@ -4,7 +4,7 @@ section(class="news")
   div(class="current-page")
     p(class="title") Today
     button(class="show-modal-button" @click="showModal") Add New Task
-    form-modal(v-show="isModalVisible" @close="closeModal" @click="isClickButton = true")
+    form-modal(v-show="isModalFormVisible" @close="closeModalForm" @click="isClickButton = true")
     ul
       li(v-for="(task, index) in tasks" :key="task.id" :id="task.id" :ref="setItemRef")
         div(class="fixed-time" @click="showTaskDetails(task.id)")
@@ -15,77 +15,41 @@ section(class="news")
             p(class="sub-message" :style="task.delay") {{task.description}}
         button(@click="removeTask(index)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
-      task-details-modal(v-if="isModalTaskDetails" @close="closeModal" :id="taskIndex")
+      task-details-modal(v-if="isModalVisible" @close="closeModal" :id="taskIndex")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
-import { mapState } from 'vuex'
-import { ITask } from '@/types/ITask'
+import useTasks from '@/composables/useTasks'
+import useModalForm from '@/composables/useModalForm'
+import useShowTaskDetails from '@/composables/useShowTaskDetails'
+import useTasksAnimation from '@/composables/useTasksAnimation'
 
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },
-  data: function () {
+  setup () {
+    const isClickButton = ref(false) // { value: boolean }
+    const { tasks, removeTask } = useTasks()
+    const { itemRefs, addAnimation, addTaskFlickerAnimation, setItemRef } = useTasksAnimation(isClickButton)
+    const { showModal, closeModalForm, isModalFormVisible } = useModalForm()
+    const { showTaskDetails, closeModal, taskIndex, isModalVisible } = useShowTaskDetails()
     return {
-      itemRefs: [] as HTMLElement[],
-      isClickButton: false,
-      isModalVisible: false,
-      isModalTaskDetails: false,
-      taskIndex: 0
-    }
-  },
-  mounted: function () {
-    for (let i = 0; i < this.itemRefs.length; i++) {
-      const taskBlock = this.itemRefs[i].firstElementChild
-      if (taskBlock) {
-        const taskBlockChildren = taskBlock.children
-        for (let j = 0; j < taskBlockChildren.length; j++) {
-          taskBlockChildren[1].children[j].classList.add('task-font-change')
-        }
-      }
-    }
-  },
-  beforeUpdate () {
-    this.itemRefs = []
-  },
-  updated () {
-    const index = this.itemRefs.length - 1
-    if (this.isClickButton) {
-      const taskBlock = this.itemRefs[index]
-      if (taskBlock) {
-        taskBlock.classList.add('task-flicker')
-      }
-      this.isClickButton = false
-    }
-  },
-  computed: {
-    ...mapState({
-      tasks (state: any): ITask {
-        return state.tasks.tasks
-      }
-    })
-  },
-  methods: {
-    removeTask: function (index : number) {
-      this.$store.commit('tasks/removeTask', index)
-    },
-    setItemRef (el: HTMLElement) {
-      if (el) {
-        this.itemRefs.push(el)
-      }
-    },
-    showModal () {
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
-      this.isModalTaskDetails = false
-    },
-    showTaskDetails (index: number) {
-      this.taskIndex = index
-      this.isModalTaskDetails = true
+      itemRefs,
+      isClickButton,
+      tasks,
+      addAnimation,
+      addTaskFlickerAnimation,
+      setItemRef,
+      removeTask,
+      isModalVisible,
+      isModalFormVisible,
+      taskIndex,
+      showModal,
+      closeModal,
+      closeModalForm,
+      showTaskDetails
     }
   }
 })

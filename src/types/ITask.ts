@@ -1,5 +1,5 @@
 import { Status } from '@/constants/Status'
-export  interface ITask {
+export interface ITask {
   id: number
   name: string
   description: string

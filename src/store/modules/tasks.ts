@@ -11,7 +11,7 @@ const store: Module<any, any> = {
         id: 1,
         name: 'Install programs',
         description: 'Install Node.js and Vue CLI on PC',
-        date: '2022-01-16',
+        date: '2022-01-19',
         delay: 'animation-delay:0s',
         status: Status.todo,
         createDate: '2022-01-25'
@@ -21,7 +21,7 @@ const store: Module<any, any> = {
         name: 'Read the theory',
         description: 'Working with forms',
         delay: 'animation-delay:1s',
-        date: '2022-01-15',
+        date: '2022-01-18',
         status: Status.todo,
         createDate: '2022-01-20'
       },
@@ -30,7 +30,7 @@ const store: Module<any, any> = {
         name: 'Practice',
         description: 'On the Tasks tab, create a form to add a new task. The form must contain 2 fields: title and description of the task.',
         delay: 'animation-delay:2s',
-        date: '2022-01-14',
+        date: '2022-01-17',
         status: Status.done,
         createDate: '2022-01-15'
       }
