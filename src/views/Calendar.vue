@@ -13,63 +13,24 @@ section(class="news")
 
 <script lang="ts">
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
-import { IAttributes } from '@/types/IAttributes'
 import { defineComponent } from 'vue'
-import { ITask } from '@/types/ITask'
-import { mapState } from 'vuex'
+import useCalendar from '@/composables/useCalendar'
+import useShowTaskDetails from '@/composables/useShowTaskDetails'
 export default defineComponent({
   name: 'Calendar',
   components: { TaskDetailsModal },
-  data () {
-    const month = new Date().getMonth()
-    const year = new Date().getFullYear()
-    const day = new Date().getDate()
+  setup () {
+    const { today, masks, tasks, attributes } = useCalendar()
+    const { isModalVisible, taskIndex, showTaskDetails, closeModal } = useShowTaskDetails()
     return {
-      today: new Date(year, month, day),
-      masks: {
-        weekdays: 'WWW'
-      },
-      attributes: [{
-        id: 0,
-        customData: {
-          title: ''
-        },
-        dates: ''
-      }] as IAttributes [],
-      isModalVisible: false,
-      taskIndex: 0
-    }
-  },
-  mounted () {
-    this.takeAttr()
-  },
-  computed: {
-    ...mapState({
-      tasks (state: any): any {
-        return state.tasks.tasks
-      }
-    })
-  },
-  methods: {
-    takeAttr () {
-      this.tasks.forEach((task: ITask) => {
-        this.attributes.push({
-          id: task.id,
-          customData: {
-            title: task.name,
-            key: task.id
-          },
-          dates: task.createDate
-        } as IAttributes
-        )
-      })
-    },
-    showTaskDetails (index: number) {
-      this.taskIndex = index
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
+      today,
+      masks,
+      tasks,
+      attributes,
+      isModalVisible,
+      taskIndex,
+      showTaskDetails,
+      closeModal
     }
   }
 })

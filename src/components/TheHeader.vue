@@ -20,10 +20,10 @@ import TheNavigation from '@/components/TheNavigation.vue'
 
 export default defineComponent({
   components: { TheNavigation, Avatar },
-  data () {
+  setup () {
+    const images = [require('@/assets/user-photo.jpg'), require('@/assets/user-photo-2.jpg'), require('@/assets/user-photo-3.jpg')]
     return {
-      selected: 0,
-      images: [require('@/assets/user-photo.jpg'), require('@/assets/user-photo-2.jpg'), require('@/assets/user-photo-3.jpg')]
+      images
     }
   }
 })

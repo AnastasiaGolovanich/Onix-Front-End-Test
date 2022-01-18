@@ -6,62 +6,16 @@ div(class="task-item" ref="task")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Status } from '@/constants/Status'
+import useTaskItem from '@/composables/useTaskItem'
 
 export default defineComponent({
   name: 'TaskItem',
   props: ['name', 'date', 'status'],
-  data: function () {
+  setup (props) {
+    const { task, addClassByStatus } = useTaskItem(props)
     return {
-      isOverdue: false,
-      taskDate: ''
-    }
-  },
-  mounted () {
-    this.addClassByStatus()
-    this.taskDate = this.date
-  },
-  updated () {
-    this.addClassByStatus()
-  },
-  methods: {
-    addClassByStatus: function () {
-      const taskItem = this.$refs.task as HTMLElement
-      taskItem.classList.remove('overdue-task-item', 'one-day-overdue-task-item')
-      if (this.status === Status.todo) {
-        taskItem.classList.add('toDo-task-item')
-      }
-      if (this.status === Status.inprogress) {
-        taskItem.classList.add('inProgress-task-item')
-      }
-      if (this.status === Status.done) {
-        taskItem.classList.add('done-task-item')
-      }
-      if (this.checkOverdue) {
-        taskItem.classList.add('overdue-task-item')
-      } else if (this.checkDaysBeforeOverdue) {
-        taskItem.classList.add('one-day-overdue-task-item')
-      }
-    }
-  },
-  computed: {
-    checkOverdue () : boolean {
-      const date1 = Date.now()
-      const date2 = Date.parse(this.date)
-      const difference = (date2 - date1) / 86400000
-      if (difference < 0) {
-        return true
-      }
-      return false
-    },
-    checkDaysBeforeOverdue () : boolean {
-      const date1 = Date.now()
-      const date2 = Date.parse(this.date)
-      const difference = (date2 - date1) / 86400000
-      if (difference < 1 && difference > -1) {
-        return true
-      }
-      return false
+      task,
+      addClassByStatus
     }
   }
 }

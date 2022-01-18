@@ -5,35 +5,14 @@ nav(id="footer-nav")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import useNavigationLinks from '@/composables/useNavigationLinks'
 
 export default defineComponent({
   name: 'TheNavigation',
-  data () {
+  setup () {
+    const { links } = useNavigationLinks()
     return {
-      selected: 0,
-      images: [require('@/assets/user-photo.jpg'), require('@/assets/user-photo-2.jpg'), require('@/assets/user-photo-3.jpg')],
-      links: [
-        {
-          navName: 'Tasks',
-          navLink: '/tasks'
-        },
-        {
-          navName: 'Kanban',
-          navLink: '/kanban'
-        },
-        {
-          navName: 'Activity',
-          navLink: '/activity'
-        },
-        {
-          navName: 'Calendar',
-          navLink: '/calendar'
-        },
-        {
-          navName: 'Files',
-          navLink: '/files'
-        }
-      ]
+      links
     }
   }
 })

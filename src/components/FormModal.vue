@@ -7,9 +7,9 @@ div(class="modal-shadow" @click.self="close")
     slot(name="body")
       div(class="modal-content")
         form(v-on:submit.prevent="addNewTask")
-          input(type="text" v-model="newTask.name" id="new-task-name" placeholder="Task Name")
-          input(type="text" v-model="newTask.description" id="new-task-description" placeholder="Task Description")
-          input(class="input-date" type="date" v-model="newTask.date" id="new-task-end-date" placeholder="End Date")
+          input(type="text" v-model="name" id="new-task-name" placeholder="Task Name")
+          input(type="text" v-model="description" id="new-task-description" placeholder="Task Description")
+          input(class="input-date" type="date" v-model="date" id="new-task-end-date" placeholder="End Date")
           input(type="submit" value="Add" @click="isClickButton = true")
         p(v-if="errors.length" class="error-title") Please correct the indicated errors:
         ul(class="error-ul")
@@ -20,68 +20,30 @@ div(class="modal-shadow" @click.self="close")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { ITask } from '@/types/ITask'
-import { mapState } from 'vuex'
+import { defineComponent, ref } from 'vue'
+import useNewTask from '@/composables/useNewTask'
+import useAddNewTask from '@/composables/useAddNewTask'
 
 export default defineComponent({
   name: 'FormModal',
-  data: function () {
+  setup: function (props, { emit }) {
+    const errors = ref<Array<string>>([])
+    const { id, name, description, date, createDate } = useNewTask()
+    const { tasks, isClickButton, addNewTask } = useAddNewTask(id, name, description, date, createDate, { emit }, errors)
+    const close = () => {
+      emit('close')
+      errors.value = []
+    }
     return {
-      errors: [] as Array<string>,
-      nextTaskId: 0,
-      isClickButton: false,
-      newTask: {
-        id: 0,
-        name: '',
-        description: '',
-        date: ''
-      } as ITask
-    }
-  },
-  computed: {
-    ...mapState({
-      tasks (state: any): ITask {
-        return state.tasks.tasks
-      }
-    }),
-    addCreateDate () {
-      return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
-    },
-    getLastId () : number {
-      return this.$store.getters['tasks/getLastId']
-    }
-  },
-  methods: {
-    addNewTask: function () {
-      this.newTask.id = this.getLastId + 1
-      if (this.newTask.name && this.newTask.description && new Date(this.newTask.date) >= new Date()) {
-        this.newTask.createDate = this.addCreateDate
-        this.$store.commit('tasks/addNewTask', this.newTask)
-        this.newTask.id++
-        this.newTask.name = ''
-        this.newTask.description = ''
-        this.newTask.date = ''
-        this.errors = []
-        this.$emit('close')
-      } else {
-        if (!this.newTask.name) {
-          this.errors.push('Add Task Name')
-        }
-        if (!this.newTask.description) {
-          this.errors.push('Add Task Description')
-        }
-        if (this.newTask.date < Date()) {
-          this.errors.push('Chose correct date')
-        }
-      }
-    },
-    close () {
-      this.$emit('close')
-      this.errors = []
-    },
-    isCorrectDate: function () : boolean {
-      return this.newTask.date > Date()
+      tasks,
+      addNewTask,
+      id,
+      name,
+      description,
+      date,
+      close,
+      isClickButton,
+      errors
     }
   }
 })

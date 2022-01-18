@@ -48,98 +48,31 @@ div(class="modal-shadow" @click.self="close")
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ITask } from '@/types/ITask'
-import { Status } from '@/constants/Status'
-import { mapState } from 'vuex'
+import useShowNewTask from '@/composables/useShowNewTask'
+import useSaveChanges from '@/composables/useSaveChanges'
 
 export default defineComponent({
   name: 'TaskDetailsModal',
   props: ['id', 'isEdit'],
-  data: function () {
+  setup (props, { emit }) {
+    const { newName, newDescription, newDate, newStatus, isClickEdit, showEditButton, showTextArea, close, getTaskById, Status, store } = useShowNewTask(props, { emit })
+    const { errors, isChange, isChangeField, saveChanges } = useSaveChanges(getTaskById, newName, newDescription, newDate, newStatus, store, { emit })
     return {
-      errors: [] as Array<string>,
-      isClickEdit: false,
-      newName: '' as string,
-      newDescription: '' as string,
-      newDate: '',
-      newStatus: '' as Status,
-      isChange: false,
-      showEditButton: true,
-      isChangeCorrect: true,
-      Status: Status
+      errors,
+      getTaskById,
+      newName,
+      newDescription,
+      newDate,
+      newStatus,
+      isClickEdit,
+      showEditButton,
+      isChange,
+      showTextArea,
+      close,
+      isChangeField,
+      saveChanges,
+      Status
     }
-  },
-  mounted: function () {
-    this.newName = this.getTaskById().name
-    this.newDescription = this.getTaskById().description
-    this.newDate = this.getTaskById().date
-    this.newStatus = this.getTaskById().status
-    if (this.newStatus === Status.done || this.isEdit) {
-      this.showEditButton = false
-    }
-  },
-  methods: {
-    close () {
-      this.$emit('close')
-      this.isClickEdit = false
-    },
-    showTextArea () {
-      if (this.getTaskById().status !== Status.done) {
-        this.isClickEdit = true
-      }
-    },
-    isChangeField () {
-      this.errors = []
-      this.isChange = true
-    },
-    saveChanges () {
-      if (this.checkCorrectness()) {
-        const changeTask = {
-          id: this.getTaskById().id,
-          name: this.newName,
-          description: this.newDescription,
-          date: this.newDate,
-          status: this.newStatus
-        } as ITask
-        this.$store.commit('tasks/saveChanges', changeTask)
-        this.$emit('close')
-      }
-      this.isChange = false
-    },
-    getTaskById (): ITask {
-      return this.$store.getters['tasks/getTaskById'](this.id)
-    },
-    checkCorrectness: function () : boolean {
-      if (!this.checkCorrectnessDate) {
-        this.errors.push('Chose correct date')
-      }
-      if (!this.checkCorrectnessName) {
-        this.errors.push('Add Task Name')
-      }
-      if (!this.checkCorrectnessDescription) {
-        this.errors.push('Add Task Description')
-      }
-      return this.errors.length === 0
-    }
-  },
-  computed: {
-    checkCorrectnessDate () : boolean {
-      const date1 = Date.now()
-      const date2 = Date.parse(this.newDate)
-      const difference = (date2 - date1) / 86400000
-      return difference > -1 || this.newDate === this.getTaskById().date
-    },
-    checkCorrectnessName () : boolean {
-      return this.newName !== ''
-    },
-    checkCorrectnessDescription () : boolean {
-      return this.newDescription !== ''
-    },
-    ...mapState({
-      tasks (state: any): ITask {
-        return state.tasks.tasks
-      }
-    })
   }
 })
 </script>

@@ -22,40 +22,40 @@ aside
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import UserProfile from '@/components/UserProfile.vue'
-import { mapState } from 'vuex'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: { UserProfile },
-  data () {
-    return {
-      userImage: require('@/assets/user-photo.jpg'),
-      userName: 'Jean Gonzales',
-      userWork: 'Product Owner',
-      completedTaskCount: 372,
-      openTaskCount: 11,
-      imageId: 3
-    }
-  },
-  methods: {
-    addTask () {
+  setup () {
+    const userName = 'Jean Gonzales'
+    const userWork = 'Product Owner'
+    const completedTaskCount = ref(372)
+    const openTaskCount = ref(11)
+    const store = useStore()
+    const notification = computed(() => {
+      return store.state.activity.notification
+    })
+    const addTask = () => {
       if (confirm('Are you sure you want to change the number of tasks?')) {
-        if (this.openTaskCount > 0) {
-          this.completedTaskCount++
-          this.openTaskCount--
+        if (openTaskCount.value > 0) {
+          completedTaskCount.value++
+          openTaskCount.value--
         } else {
           alert('You have no open tasks.')
         }
       }
     }
-  },
-  computed: {
-    ...mapState({
-      notification (state: any): number {
-        return state.activity.notification
-      }
-    })
+    return {
+      userImage: require('@/assets/user-photo.jpg'),
+      userName,
+      userWork,
+      completedTaskCount,
+      openTaskCount,
+      addTask,
+      notification
+    }
   }
 })
 </script>

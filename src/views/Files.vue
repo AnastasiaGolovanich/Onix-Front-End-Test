@@ -7,13 +7,18 @@ section(class="news")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Files',
-  computed: {
-    attachments () {
-      return this.$store.getters['activity/getAttachments']
+  setup () {
+    const store = useStore()
+    const attachments = computed(() => {
+      return store.getters['activity/getAttachments']
+    })
+    return {
+      attachments
     }
   }
 })
