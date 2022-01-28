@@ -15,16 +15,16 @@ export default function useAddNewTask (id: Ref<number>, name: Ref<string>, descr
   const addNewTask = () => {
     errors.value = []
     const newTask = {
-      id: id,
-      name: name,
-      description: description,
-      date: date,
-      createDate: addCreateDate
+      id: id.value,
+      name: name.value,
+      description: description.value,
+      date: date.value,
+      createDate: addCreateDate.value
     }
     id.value = getLastId.value + 1
     if (name.value && description.value && (new Date(date.value) > new Date())) {
       createDate = addCreateDate
-      store.commit('tasks/addNewTask', newTask)
+      store.dispatch('tasks/addNewTaskToAPI', newTask)
       id.value = 1 + id.value
       name = ref('')
       description = ref('')
@@ -32,7 +32,6 @@ export default function useAddNewTask (id: Ref<number>, name: Ref<string>, descr
       emit('close')
     } else {
       if (!name.value) {
-        console.log(2)
         errors.value.push('Add Task Name')
       }
       if (!description.value) {

@@ -18,7 +18,7 @@ export default function useSaveChanges (getTaskById: any, newName: Ref<string>, 
         date: newDate.value,
         status: newStatus.value
       } as ITask
-      store.commit('tasks/saveChanges', changeTask)
+      store.dispatch('tasks/updateTaskInAPI', changeTask)
       emit('close')
     }
     isChange.value = false

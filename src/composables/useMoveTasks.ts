@@ -21,7 +21,7 @@ export default function useMoveTasks (store: any) {
         taskId: itemId,
         status: categoryId
       }
-      store.commit('tasks/changeStatus', changeStatus)
+      store.dispatch('tasks/changeTaskStatusInAPI', changeStatus)
     }
   }
   return {

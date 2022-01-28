@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { IAttributes } from '@/types/IAttributes'
 import { useStore } from 'vuex'
 import { ITask } from '@/types/ITask'
@@ -11,9 +11,11 @@ export default function useCalendar () {
   const masks = {
     weekdays: 'WWW'
   }
-  const attributes = ref<IAttributes []>([])
+  const attributes = ref<IAttributes []>([]) // NOT REACTIVE!
   const store = useStore()
-  const tasks = store.state.tasks.tasks
+  const tasks = computed(() => {
+    return store.getters['tasks/getTasks']
+  }).value
   const takeAttr = () => {
     tasks.forEach((task: ITask) => {
       attributes.value.push({

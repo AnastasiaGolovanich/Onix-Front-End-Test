@@ -9,10 +9,10 @@ aside
     h2(class="visually-hidden") User Statistic
     div
       p(class="count" v-on:click="addTask") {{ completedTaskCount }}
-      router-link(to="" class="title") Completed ITask
+      router-link(to="" class="title") Completed Task
     div
       p(class="count") {{ openTaskCount }}
-      router-link(to="/tasks" class="title") Open ITask
+      router-link(to="/tasks" class="title") Open Task
   nav
     p(class="menu") Menu
     ul

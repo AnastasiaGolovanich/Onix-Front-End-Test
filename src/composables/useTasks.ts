@@ -1,14 +1,16 @@
 import { useStore } from 'vuex'
-import { ITask } from '@/types/ITask'
+import { computed } from 'vue'
 
 export default function useTasks () {
   const store = useStore()
-  const tasks: ITask = store.state.tasks.tasks
   const removeTask = (index : number) => {
-    store.commit('tasks/removeTask', index)
+    store.dispatch('tasks/deleteTaskFromAPI', index)
   }
   return {
-    tasks,
+    store,
+    tasks: computed(() => {
+      return store.getters['tasks/getTasks']
+    }),
     removeTask
   }
 }

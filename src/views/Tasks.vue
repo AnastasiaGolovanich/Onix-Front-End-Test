@@ -13,19 +13,20 @@ section(class="news")
           div
             p(class="message" :style="task.delay") {{task.name}}
             p(class="sub-message" :style="task.delay") {{task.description}}
-        button(@click="removeTask(index)" class="remove-button")
+        button(@click="removeTask(task.id)" class="remove-button")
           fa(:icon="['fas', 'trash-alt']")/
       task-details-modal(v-if="isModalVisible" @close="closeModal" :id="taskIndex")
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
 import useTasks from '@/composables/useTasks'
 import useModalForm from '@/composables/useModalForm'
 import useShowTaskDetails from '@/composables/useShowTaskDetails'
 import useTasksAnimation from '@/composables/useTasksAnimation'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },

@@ -16,7 +16,7 @@ section(class="news")
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import TaskItem from '@/components/TaskItem.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
 import useFilterTable from '@/composables/useFilterTable'
@@ -32,12 +32,14 @@ export default defineComponent({
     const dateFrom = ref('')
     const dateTo = ref('')
     const { store, tasks, generateTable } = useFilterTable(search, dateFrom, dateTo)
-    const { countTasksByStatus, tableCol } = useShowTable(tasks)
+    const { countTasksByStatus, tableCol } = useShowTable(tasks.value)
     const { onDragStart, onDrop } = useMoveTasks(store)
     const { showTaskDetails, closeModal, taskIndex, isModalVisible } = useShowTaskDetails()
     return {
       tableCol,
-      tasks,
+      tasks: computed(() => {
+        return store.getters['tasks/getTasks']
+      }),
       search,
       dateTo,
       dateFrom,

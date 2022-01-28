@@ -18,17 +18,19 @@ section(class="news")
 
 <script lang="ts">
 
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 export default defineComponent({
   setup () {
     const store = useStore()
-    const messages = store.state.activity.messages
+    // const messages = store.state.activity.messages
     const addNotification = (index: number) => {
       store.commit('activity/addNotification', index)
     }
     return {
-      messages,
+      messages: computed(() => {
+        return store.getters['activity/getMessages']
+      }),
       addNotification
     }
   }

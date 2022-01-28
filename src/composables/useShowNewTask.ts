@@ -1,7 +1,6 @@
 import { onMounted, ref } from 'vue'
 import { Status } from '@/constants/Status'
 import { useStore } from 'vuex'
-import { ITask } from '@/types/ITask'
 
 export default function useShowNewTask (props: any, { emit }: any) {
   const isClickEdit = ref<boolean>(false) // { value: boolean}
@@ -11,8 +10,9 @@ export default function useShowNewTask (props: any, { emit }: any) {
   const newStatus = ref<Status>(Status.todo) // { value: Status}
   const showEditButton = ref<boolean>(true) // { value: boolean}
   const store = useStore()
+  store.dispatch('tasks/getTaskByIdFromAPI', props.id)
   const getTaskById = () => {
-    return store.getters['tasks/getTaskById'](props.id) as ITask
+    return store.getters['tasks/getTaskById'](props.id)
   }
   const showNewTask = () => {
     newName.value = getTaskById().name
