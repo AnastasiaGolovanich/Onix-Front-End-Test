@@ -1,4 +1,4 @@
-export  interface IAttributes {
+export interface IAttributes {
   id: number,
   customData: {
     title: string,

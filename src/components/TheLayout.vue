@@ -19,6 +19,7 @@ export default defineComponent({
   setup () {
     const store = useStore()
     store.dispatch('tasks/getTaskFromAPI')
+    store.dispatch('activity/getMessagesFromAPI')
   }
 })
 </script>

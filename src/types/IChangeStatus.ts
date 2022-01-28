@@ -1,6 +1,6 @@
 import { Status } from '@/constants/Status'
 
-export  interface IChangeStatus {
+export interface IChangeStatus {
   taskId: number
   status: Status
 }
