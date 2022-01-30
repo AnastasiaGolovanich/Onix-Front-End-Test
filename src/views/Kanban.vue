@@ -12,17 +12,18 @@ section(class="news")
         p(class="col-headline") {{col.headline}} - {{countTasksByStatus(col.status)}}
         div(v-for="item in generateTable(col.status)" :key="item.id" @dragstart="onDragStart($event, item)" draggable="true")
           task-item(:name="item.name" :date="item.date" :status="item.status" @click="showTaskDetails(item.id)")
-          task-details-modal(v-if="isModalVisible" @close="closeModal" :tasks="tasks" :id="taskIndex")
+          task-details-modal(v-if="isModalVisible" @close="closeModal" :id="taskIndex")
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import TaskItem from '@/components/TaskItem.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
 import useFilterTable from '@/composables/useFilterTable'
 import useShowTable from '@/composables/useShowTable'
 import useMoveTasks from '@/composables/useMoveTasks'
 import useShowTaskDetails from '@/composables/useShowTaskDetails'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Kanban',
@@ -31,15 +32,15 @@ export default defineComponent({
     const search = ref('')
     const dateFrom = ref('')
     const dateTo = ref('')
-    const { store, tasks, generateTable } = useFilterTable(search, dateFrom, dateTo)
+    const store = useStore()
+    store.dispatch('tasks/getTaskFromAPI')
+    const { tasks, generateTable } = useFilterTable(search, dateFrom, dateTo)
     const { countTasksByStatus, tableCol } = useShowTable(tasks.value)
     const { onDragStart, onDrop } = useMoveTasks(store)
     const { showTaskDetails, closeModal, taskIndex, isModalVisible } = useShowTaskDetails()
     return {
       tableCol,
-      tasks: computed(() => {
-        return store.getters['tasks/getTasks']
-      }),
+      tasks,
       search,
       dateTo,
       dateFrom,

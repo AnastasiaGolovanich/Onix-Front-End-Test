@@ -5,6 +5,7 @@ import { computed, Ref } from 'vue'
 
 export default function useFilterTable (search: Ref<string>, dateFrom: Ref<string>, dateTo: Ref<string>) {
   const store = useStore()
+  store.dispatch('tasks/getTaskFromAPI')
   const tasks = computed(() => {
     return store.getters['tasks/getTasks']
   })
@@ -28,7 +29,6 @@ export default function useFilterTable (search: Ref<string>, dateFrom: Ref<strin
     })
   }
   return {
-    store,
     tasks,
     generateTable
   }

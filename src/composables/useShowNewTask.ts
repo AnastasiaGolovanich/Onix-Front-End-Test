@@ -10,7 +10,10 @@ export default function useShowNewTask (props: any, { emit }: any) {
   const newStatus = ref<Status>(Status.todo) // { value: Status}
   const showEditButton = ref<boolean>(true) // { value: boolean}
   const store = useStore()
-  store.dispatch('tasks/getTaskByIdFromAPI', props.id)
+  store.dispatch('tasks/getTaskByIdFromAPI', props.id).then(() => {
+    getTaskById()
+    showNewTask()
+  })
   const getTaskById = () => {
     return store.getters['tasks/getTaskById'](props.id)
   }
@@ -26,12 +29,10 @@ export default function useShowNewTask (props: any, { emit }: any) {
     }
   }
   const close = () => {
-    emit('close')
     isClickEdit.value = false
+    return emit('close')
   }
   onMounted(() => {
-    getTaskById()
-    showNewTask()
     if (newStatus.value === Status.done || props.isEdit) {
       showEditButton.value = false
     }

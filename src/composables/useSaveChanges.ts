@@ -16,10 +16,13 @@ export default function useSaveChanges (getTaskById: any, newName: Ref<string>, 
         name: newName.value,
         description: newDescription.value,
         date: newDate.value,
-        status: newStatus.value
+        status: newStatus.value,
+        createDate: '2022-01-01'
       } as ITask
       store.dispatch('tasks/updateTaskInAPI', changeTask)
-      emit('close')
+        .then(() => {
+          emit('close')
+        })
     }
     isChange.value = false
   }

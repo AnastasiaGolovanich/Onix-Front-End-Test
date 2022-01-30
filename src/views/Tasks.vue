@@ -6,7 +6,7 @@ section(class="news")
     button(class="show-modal-button" @click="showModal") Add New Task
     form-modal(v-show="isModalFormVisible" @close="closeModalForm" @click="isClickButton = true")
     ul
-      li(v-for="(task, index) in tasks" :key="task.id" :id="task.id" :ref="setItemRef")
+      li(v-for="task in tasks" :key="task.id" :id="task.id" :ref="setItemRef")
         div(class="fixed-time" @click="showTaskDetails(task.id)")
           p(class="icons")
             fa(:icon="['fas', 'asterisk']")/

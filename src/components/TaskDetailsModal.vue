@@ -58,6 +58,7 @@ export default defineComponent({
     const { newName, newDescription, newDate, newStatus, isClickEdit, showEditButton, showTextArea, close, getTaskById, Status, store } = useShowNewTask(props, { emit })
     const { errors, isChange, isChangeField, saveChanges } = useSaveChanges(getTaskById, newName, newDescription, newDate, newStatus, store, { emit })
     return {
+      emit,
       errors,
       getTaskById,
       newName,

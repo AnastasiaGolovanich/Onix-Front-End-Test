@@ -1,6 +1,7 @@
 import { useStore } from 'vuex'
 import { ITask } from '@/types/ITask'
 import { computed, Ref, ref } from 'vue'
+import { Status } from '@/constants/Status'
 
 export default function useAddNewTask (id: Ref<number>, name: Ref<string>, description: Ref<string>, date: Ref<string>, createDate: Ref<string>, { emit }: any, errors: Ref<Array<string>>) {
   const isClickButton = false
@@ -14,16 +15,17 @@ export default function useAddNewTask (id: Ref<number>, name: Ref<string>, descr
   })
   const addNewTask = () => {
     errors.value = []
+    id.value = getLastId.value + 1
     const newTask = {
       id: id.value,
       name: name.value,
       description: description.value,
       date: date.value,
-      createDate: addCreateDate.value
+      createDate: addCreateDate.value,
+      status: Status.todo,
+      delay: 'animation-delay:0s'
     }
-    id.value = getLastId.value + 1
     if (name.value && description.value && (new Date(date.value) > new Date())) {
-      createDate = addCreateDate
       store.dispatch('tasks/addNewTaskToAPI', newTask)
       id.value = 1 + id.value
       name = ref('')
