@@ -3,6 +3,7 @@ import { computed } from 'vue'
 
 export default function useTasks () {
   const store = useStore()
+  store.dispatch('tasks/getTaskFromAPI')
   const removeTask = (index : number) => {
     store.dispatch('tasks/deleteTaskFromAPI', index)
   }

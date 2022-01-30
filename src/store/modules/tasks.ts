@@ -2,7 +2,7 @@ import { Module } from 'vuex'
 import { Status } from '@/constants/Status'
 import { ITask } from '@/types/ITask'
 import { IChangeStatus } from '@/types/IChangeStatus'
-import axios from 'axios'
+import { TasksApi } from '@/service/tasksApi'
 
 const store: Module<any, any> = {
   namespaced: true,
@@ -49,6 +49,8 @@ const store: Module<any, any> = {
           task.description = changeTask.description
           task.date = changeTask.date
           task.status = changeTask.status
+          task.delay = changeTask.delay
+          task.createDate = changeTask.createDate
         }
       })
     },
@@ -64,26 +66,19 @@ const store: Module<any, any> = {
   },
   actions: {
     getTaskFromAPI ({ commit }) {
-      axios.get('https://bubenchik.getsandbox.com:443/tasks')
-        .then((tasks) => {
-          commit('setTasksToState', tasks.data)
-        }).catch((error) => {
-          console.log(error)
-        })
+      return TasksApi.getTasks().then((response) => {
+        commit('setTasksToState', response)
+        return response
+      })
     },
     getTaskByIdFromAPI ({ commit }, id) {
-      axios.get<any, any, ITask>('https://bubenchik.getsandbox.com:443/tasks/' + id)
-        .then((response) => {
-          commit('setTaskById', response.data)
-        })
-    },
-    deleteTaskFromAPI ({ commit }, id) {
-      axios.delete('https://bubenchik.getsandbox.com:443/tasks/' + id, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      return TasksApi.getTaskById(id).then((response) => {
+        commit('setTaskById', response)
       })
-        .then((response) => {
+    },
+    deleteTaskFromAPI ({ commit, dispatch }, id) {
+      return TasksApi.deleteTask(id)
+        .then(() => {
           commit('removeTask', id)
         })
         .catch((error) => {
@@ -91,7 +86,7 @@ const store: Module<any, any> = {
         })
     },
     updateTaskInAPI ({ commit }, task) {
-      axios.put('https://bubenchik.getsandbox.com:443/tasks/' + task.id, task)
+      return TasksApi.updateTask(task)
         .then(() => {
           commit('saveChanges', task)
         })
@@ -100,7 +95,7 @@ const store: Module<any, any> = {
         })
     },
     addNewTaskToAPI ({ commit }, task) {
-      axios.post('https://bubenchik.getsandbox.com:443/tasks', task)
+      return TasksApi.createTask(task)
         .then(() => {
           commit('addNewTask', task)
         })
@@ -109,9 +104,10 @@ const store: Module<any, any> = {
         })
     },
     changeTaskStatusInAPI ({ commit }, changeStatus) {
-      axios.patch('https://bubenchik.getsandbox.com:443/tasks/' + changeStatus.taskId, { status: changeStatus.status })
-        .then(() => {
+      return TasksApi.patchTask(changeStatus.taskId, { status: changeStatus.status })
+        .then((res) => {
           commit('changeStatus', changeStatus)
+          return res
         })
         .catch((error) => {
           console.log(error)

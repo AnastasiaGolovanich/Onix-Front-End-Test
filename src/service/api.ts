@@ -1,18 +1,28 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 
-// export const tasks = axios.get('https://bubenchik.getsandbox.com:443/tasks')
-//   .then((tasks) => {
-//     console.log('in useTasks')
-//     return tasks.data.tasks
-//   }).catch((error) => {
-//     console.log(error)
-//     return error
-//   })
-export default async function tasks () {
-  try {
-    const response = await axios.get('https://bubenchik.getsandbox.com:443/tasks')
+const instance = axios.create({
+  baseURL: 'https://bubenchik.getsandbox.com:443/',
+  timeout: 1000
+})
+instance.interceptors.response.use(
+  (response) => {
     return response.data
-  } catch (error) {
-    console.error(error)
+  }
+)
+export const ApiService = {
+  get (resource: any, config?: AxiosRequestConfig) {
+    return instance.get(resource, config)
+  },
+  post (resource: any, data: any, config?: AxiosRequestConfig) {
+    return instance.post(resource, data, config)
+  },
+  put (resource: any, data: any, config?: AxiosRequestConfig) {
+    return instance.put(resource, data, config)
+  },
+  patch (resource: any, data: any, config?: AxiosRequestConfig) {
+    return instance.patch(resource, data, config)
+  },
+  delete (resource: any, config?: AxiosRequestConfig) {
+    return instance.delete(resource, config)
   }
 }
