@@ -50,12 +50,15 @@ div(class="modal-shadow" @click.self="close")
 import { defineComponent } from 'vue'
 import useShowNewTask from '@/composables/useShowNewTask'
 import useSaveChanges from '@/composables/useSaveChanges'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'TaskDetailsModal',
   props: ['id', 'isEdit'],
   setup (props, { emit }) {
-    const { newName, newDescription, newDate, newStatus, isClickEdit, showEditButton, showTextArea, close, getTaskById, Status, store } = useShowNewTask(props, { emit })
+    const store = useStore()
+    store.dispatch('tasks/getTaskFromAPI')
+    const { newName, newDescription, newDate, newStatus, isClickEdit, showEditButton, showTextArea, close, getTaskById, Status } = useShowNewTask(props, { emit })
     const { errors, isChange, isChangeField, saveChanges } = useSaveChanges(getTaskById, newName, newDescription, newDate, newStatus, store, { emit })
     return {
       emit,

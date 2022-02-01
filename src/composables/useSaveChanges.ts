@@ -17,7 +17,7 @@ export default function useSaveChanges (getTaskById: any, newName: Ref<string>, 
         description: newDescription.value,
         date: newDate.value,
         status: newStatus.value,
-        createDate: '2022-01-01'
+        createDate: getTaskById().createDate
       } as ITask
       store.dispatch('tasks/updateTaskInAPI', changeTask)
         .then(() => {

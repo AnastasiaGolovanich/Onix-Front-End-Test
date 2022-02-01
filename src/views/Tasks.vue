@@ -19,7 +19,7 @@ section(class="news")
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import FormModal from '@/components/FormModal.vue'
 import TaskDetailsModal from '@/components/TaskDetailsModal.vue'
 import useTasks from '@/composables/useTasks'
@@ -31,17 +31,20 @@ import { useStore } from 'vuex'
 export default defineComponent({
   components: { FormModal, TaskDetailsModal },
   setup () {
+    const store = useStore()
+    store.dispatch('tasks/getTaskFromAPI')
     const isClickButton = ref(false) // { value: boolean }
-    const { tasks, removeTask } = useTasks()
-    const { itemRefs, addAnimation, addTaskFlickerAnimation, setItemRef } = useTasksAnimation(isClickButton)
+    const { removeTask } = useTasks(store)
+    const { itemRefs, addAnimation, setItemRef } = useTasksAnimation(isClickButton)
     const { showModal, closeModalForm, isModalFormVisible } = useModalForm()
     const { showTaskDetails, closeModal, taskIndex, isModalVisible } = useShowTaskDetails()
     return {
       itemRefs,
       isClickButton,
-      tasks,
+      tasks: computed(() => {
+        return store.getters['tasks/getTasks']
+      }),
       addAnimation,
-      addTaskFlickerAnimation,
       setItemRef,
       removeTask,
       isModalVisible,

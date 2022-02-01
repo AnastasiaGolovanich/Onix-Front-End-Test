@@ -1,4 +1,4 @@
-import { onBeforeUnmount, onMounted, onUpdated, Ref, ref } from 'vue'
+import { onBeforeUnmount, onMounted, Ref, ref } from 'vue'
 
 export default function useTasksAnimation (isClickButton: Ref<boolean>) {
   const itemRefs = ref<Array<HTMLElement>>([]) // { value: [] }
@@ -13,16 +13,6 @@ export default function useTasksAnimation (isClickButton: Ref<boolean>) {
       }
     }
   }
-  const addTaskFlickerAnimation = () => {
-    const index = itemRefs.value.length - 1
-    if (isClickButton.value) {
-      const taskBlock = itemRefs.value[index]
-      if (taskBlock) {
-        taskBlock.classList.add('task-flicker')
-      }
-      isClickButton.value = false
-    }
-  }
   const setItemRef = (el: HTMLElement) => {
     if (el) {
       itemRefs.value.push(el)
@@ -32,11 +22,9 @@ export default function useTasksAnimation (isClickButton: Ref<boolean>) {
   onBeforeUnmount(() => {
     itemRefs.value = []
   })
-  onUpdated(addTaskFlickerAnimation)
   return {
     itemRefs,
     addAnimation,
-    addTaskFlickerAnimation,
     setItemRef
   }
 }

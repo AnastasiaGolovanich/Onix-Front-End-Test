@@ -23,7 +23,7 @@ import { useStore } from 'vuex'
 export default defineComponent({
   setup () {
     const store = useStore()
-    // const messages = store.state.activity.messages
+    store.dispatch('activity/getMessagesFromAPI')
     const addNotification = (index: number) => {
       store.commit('activity/addNotification', index)
     }

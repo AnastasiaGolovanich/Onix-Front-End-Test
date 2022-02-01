@@ -1,22 +1,24 @@
 import { ApiService } from '@/service/api'
-
+const url = {
+  tasks: 'tasks'
+}
 export const TasksApi = {
   getTasks () {
-    return ApiService.get('tasks')
+    return ApiService.get(url.tasks)
   },
   getTaskById (id: number) {
-    return ApiService.get('tasks/' + id)
+    return ApiService.get(url.tasks + '/' + id)
   },
   createTask (data: any) {
-    return ApiService.post('tasks', data)
+    return ApiService.post(url.tasks, data)
   },
   updateTask (data: any) {
-    return ApiService.put('tasks', data)
+    return ApiService.put(url.tasks, data)
   },
   patchTask (id: number, data:any) {
-    return ApiService.patch('tasks/' + id, data)
+    return ApiService.patch(url.tasks + '/' + id, data)
   },
   deleteTask (id: number) {
-    return ApiService.delete('tasks/' + id)
+    return ApiService.delete(url.tasks + '/' + id)
   }
 }
