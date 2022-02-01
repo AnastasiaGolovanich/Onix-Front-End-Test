@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { Status } from '@/constants/Status'
 import { useStore } from 'vuex'
 
@@ -48,6 +48,9 @@ export default function useShowNewTask (props: any, { emit }: any) {
     showTextArea,
     close,
     Status,
-    store
+    store,
+    tasks: computed(() => {
+      return store.getters['tasks/getTasks']
+    })
   }
 }

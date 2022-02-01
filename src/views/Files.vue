@@ -14,11 +14,14 @@ export default defineComponent({
   name: 'Files',
   setup () {
     const store = useStore()
-    const attachments = computed(() => {
-      return store.getters['activity/getAttachments']
-    })
+    store.dispatch('activity/getMessagesFromAPI')
     return {
-      attachments
+      messages: computed(() => {
+        return store.getters['activity/getMessages']
+      }),
+      attachments: computed(() => {
+        return store.getters['activity/getAttachments']
+      })
     }
   }
 })

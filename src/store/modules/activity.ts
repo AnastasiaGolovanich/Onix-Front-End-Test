@@ -4,6 +4,7 @@ import { IChangeStatus } from '@/types/IChangeStatus'
 import { ITask } from '@/types/ITask'
 import { Status } from '@/constants/Status'
 import axios from 'axios'
+import { MessagesApi } from '@/service/messagesApi'
 
 const store: Module<any, any> = {
   namespaced: true,
@@ -17,6 +18,7 @@ const store: Module<any, any> = {
       return state.messages
     },
     getAttachments (state) {
+      state.messages[2].attachments = [require('@/assets/comment-1.jpg'), require('@/assets/comment-2.jpg'), require('@/assets/comment-3.jpg'), require('@/assets/comment-4.jpg')]
       const attachments = [] as Array<string>
       state.messages.forEach((message:IMessages) => {
         if (message.attachments) {
@@ -32,27 +34,17 @@ const store: Module<any, any> = {
     setMessagesToState: (state, messages) => {
       state.messages = messages.messages
     },
-    changeStatus (state, status: IChangeStatus) {
-      state.tasks.forEach(function (task : ITask) {
-        if (task.id === status.taskId) {
-          if (task.status !== Status.done) {
-            task.status = status.status
-          }
-        }
-      })
-    },
     addNotification (state, index: number) {
       state.notification = index
     }
   },
   actions: {
     getMessagesFromAPI ({ commit }) {
-      axios.get('https://bubenchik.getsandbox.com:443/messages')
-        .then((messages) => {
-          commit('setMessagesToState', messages.data)
-        }).catch((error) => {
-          console.log(error)
-        })
+      return MessagesApi.getMessages().then((messages) => {
+        commit('setMessagesToState', messages)
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
 }

@@ -7,6 +7,7 @@ import { TasksApi } from '@/service/tasksApi'
 const store: Module<any, any> = {
   namespaced: true,
   state: {
+    task: {} as ITask,
     tasks: [
     ] as ITask[]
   },
@@ -26,7 +27,7 @@ const store: Module<any, any> = {
       state.tasks = tasks.tasks
     },
     setTaskById: (state, task) => {
-      state.task = task.tasks[0]
+      state.task = task.taskId[0]
     },
     addNewTask (state, newTask: ITask) {
       state.tasks.push({

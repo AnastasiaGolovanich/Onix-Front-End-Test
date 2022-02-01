@@ -2,7 +2,7 @@ import { Status } from '@/constants/Status'
 import { ITableCol } from '@/types/ITableCol'
 import { ITask } from '@/types/ITask'
 
-export default function useShowTable (tasks: ITask[]) {
+export default function useShowTable (tasks: any) {
   const tableCol = [
     {
       id: 1,
@@ -22,7 +22,7 @@ export default function useShowTable (tasks: ITask[]) {
   ] as ITableCol[]
   const countTasksByStatus = (taskStatus : Status) => {
     let count = 0 as number
-    tasks.forEach(function (task : ITask) {
+    tasks.value.forEach(function (task : ITask) {
       if (task.status === taskStatus) {
         count++
       }
