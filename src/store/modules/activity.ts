@@ -1,9 +1,5 @@
 import { Module } from 'vuex'
 import { IMessages } from '@/types/IMessages'
-import { IChangeStatus } from '@/types/IChangeStatus'
-import { ITask } from '@/types/ITask'
-import { Status } from '@/constants/Status'
-import axios from 'axios'
 import { MessagesApi } from '@/service/messagesApi'
 
 const store: Module<any, any> = {
@@ -14,11 +10,15 @@ const store: Module<any, any> = {
   },
   getters: {
     getMessages (state) {
-      state.messages[2].attachments = [require('@/assets/comment-1.jpg'), require('@/assets/comment-2.jpg'), require('@/assets/comment-3.jpg'), require('@/assets/comment-4.jpg')]
+      if (state.messages.length > 1) {
+        state.messages[2].attachments = [require('@/assets/comment-1.jpg'), require('@/assets/comment-2.jpg'), require('@/assets/comment-3.jpg'), require('@/assets/comment-4.jpg')]
+      }
       return state.messages
     },
     getAttachments (state) {
-      state.messages[2].attachments = [require('@/assets/comment-1.jpg'), require('@/assets/comment-2.jpg'), require('@/assets/comment-3.jpg'), require('@/assets/comment-4.jpg')]
+      if (state.messages.length > 1) {
+        state.messages[2].attachments = [require('@/assets/comment-1.jpg'), require('@/assets/comment-2.jpg'), require('@/assets/comment-3.jpg'), require('@/assets/comment-4.jpg')]
+      }
       const attachments = [] as Array<string>
       state.messages.forEach((message:IMessages) => {
         if (message.attachments) {
