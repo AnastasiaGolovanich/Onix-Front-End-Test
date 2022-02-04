@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HelloWorld.vue renders props.msg when passed 1`] = `
+<section
+  class="news"
+  msg="new message"
+>
+  <div
+    class="current-page"
+  >
+    <img
+      alt="page not found"
+    />
+    <h1
+      class="not-found"
+    >
+      Not Found
+    </h1>
+    <p
+      class="not-found"
+    >
+      Oops we couldn't find that page. Try going 
+      <router-link
+        to="[object Object]"
+      >
+        home
+      </router-link>
+    </p>
+  </div>
+</section>
+`;
